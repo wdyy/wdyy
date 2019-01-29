@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_186"
+        android:background="@mipmap/bg_two_hdpi"/>
+
+    <ImageView
+        android:id="@+id/activity_cinema_detail_img"
+        android:layout_width="@dimen/dp_60"
+        android:layout_height="@dimen/dp_60"
+        android:src="@color/colorAccent"
+        android:layout_marginTop="@dimen/dp_10"
+        android:layout_marginLeft="@dimen/dp_24"
+        android:layout_marginRight="@dimen/dp_24"
+        android:layout_marginBottom="@dimen/dp_24"
+        />
+
+    <LinearLayout
+        android:id="@+id/activity_cinema_detail_ll"
+        android:layout_width="@dimen/dp_200"
+        android:layout_height="@dimen/dp_60"
+        android:layout_toRightOf="@id/activity_cinema_detail_img"
+        android:layout_marginTop="@dimen/dp_10"
+        android:orientation="vertical">
+        <TextView
+            android:id="@+id/activity_cinema_recommend_detail_text_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/sp_14"
+            android:textColor="#fff"
+            android:text="ffff"/>
+
+        <TextView
+            android:id="@+id/activity_cinema_recommend_detail_text_address"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/sp_12"
+            android:textColor="#fff"
+            android:layout_marginTop="@dimen/dp_10"
+            android:text="ffff" />
+
+
+    </LinearLayout>
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@mipmap/com_icon_navigation_default"
+        android:layout_toRightOf="@id/activity_cinema_detail_ll"
+        android:layout_marginTop="@dimen/dp_40"/>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/activity_cinema_recommend_detail_recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_280"
+        android:layout_marginLeft="@dimen/dp_24"
+        android:layout_marginRight="@dimen/dp_24"
+        android:layout_alignParentBottom="true"/>
+
+    <ImageView
+        android:id="@+id/activity_cinema_detail_img_back"
+        android:layout_width="@dimen/dp_60"
+        android:layout_height="@dimen/dp_60"
+        android:src="@mipmap/icon_my_default"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="@dimen/dp_24"
+        android:layout_marginLeft="@dimen/dp_24"/>
+
+    <recycler.coverflow.RecyclerCoverFlow
+        android:id="@+id/success_movie_banner"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_220"
+        android:layout_marginTop="@dimen/dp_85"
+        />
+
+</RelativeLayout>

@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:background="@drawable/item_cinama_recommend"
+    >
+
+    <RelativeLayout
+        android:id="@+id/my_rv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/dp_10">
+
+        <TextView
+            android:id="@+id/item_cinema_detail_text_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/sp_12"
+            android:textColor="#666666"
+            android:text="ffff"/>
+
+        <TextView
+            android:id="@+id/item_cinema_detail_text_startTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/sp_20"
+            android:textColor="#333333"
+            android:layout_marginTop="@dimen/dp_20"
+            android:textStyle="bold"
+            android:text="17:06"/>
+
+        <TextView
+            android:id="@+id/item_cinema_detail_text_-"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/sp_20"
+            android:textColor="#666666"
+            android:layout_marginTop="@dimen/dp_20"
+            android:layout_toRightOf="@id/item_cinema_detail_text_startTime"
+            android:text=" —— "/>
+
+        <TextView
+            android:id="@+id/item_cinema_detail_text_endTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/sp_14"
+            android:textColor="#666666"
+            android:layout_marginTop="@dimen/dp_23"
+            android:layout_toRightOf="@id/item_cinema_detail_text_-"
+            android:textStyle="bold"
+            android:text="17:06"/>
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:layout_marginLeft="@dimen/dp_10"
+        android:layout_toRightOf="@id/my_rv"
+        android:layout_marginTop="@dimen/dp_12"
+        >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/sp_18"
+            android:textColor="#666666"
+            android:layout_toRightOf="@id/item_cinema_detail_text_-"
+            android:text="￥"/>
+
+        <TextView
+            android:id="@+id/item_cinema_detail_text_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/sp_32"
+            android:textColor="#b11450"
+            android:layout_toRightOf="@id/item_cinema_detail_text_-"
+            android:text="30"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/sp_12"
+            android:textColor="#b11450"
+            android:layout_toRightOf="@id/item_cinema_detail_text_-"
+            android:layout_marginTop="@dimen/dp_5"
+            android:text=".0"/>
+
+
+    </LinearLayout>
+
+    <ImageView
+        android:layout_width="@dimen/dp_24"
+        android:layout_height="@dimen/dp_24"
+        android:layout_marginRight="@dimen/dp_3"
+        android:layout_marginTop="@dimen/dp_22"
+        android:src="@mipmap/com_icon_next_default"
+        android:layout_alignParentRight="true"/>
+</RelativeLayout>

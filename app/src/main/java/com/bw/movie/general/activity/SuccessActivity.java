@@ -8,7 +8,7 @@ import android.widget.ImageView;
 
 import com.bw.movie.R;
 import com.bw.movie.base.BaseActivity;
-import com.bw.movie.cinema.CinemaFragment;
+import com.bw.movie.fragment.CinemaFragment;
 import com.bw.movie.my.MineFragment;
 import com.bw.movie.movie.fragment.MovieFragment;
 
