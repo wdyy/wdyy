@@ -4,28 +4,16 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentManager;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RadioButton;
-import android.widget.RadioGroup;
 
 import com.bw.movie.R;
-import com.bw.movie.apis.Apis;
 import com.bw.movie.base.BaseActivity;
-import com.bw.movie.bean.moviebean.HotMovieBean;
-import com.bw.movie.bean.moviebean.LoadingMovieBean;
-import com.bw.movie.bean.moviebean.WaitMovieBean;
-import com.bw.movie.cinema.CinemaFragment;
 import com.bw.movie.movie.fragment.HotMovieFragment;
 import com.bw.movie.movie.fragment.LoadingMovieFragment;
-import com.bw.movie.movie.fragment.MovieFragment;
 import com.bw.movie.movie.fragment.WillMovieFragment;
-import com.bw.movie.my.MineFragment;
-
-import java.util.HashMap;
-import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;

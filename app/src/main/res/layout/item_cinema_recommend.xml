@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/item_cinama_recommend"
+    >
+
+    <ImageView
+        android:id="@+id/item_cinema_recommend_img"
+        android:layout_width="@dimen/dp_70"
+        android:layout_height="@dimen/dp_70"
+        android:layout_margin="@dimen/dp_10"
+        android:src="@color/colorAccent"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_70"
+        android:layout_marginTop="@dimen/dp_10"
+        android:layout_marginRight="@dimen/dp_20"
+        android:layout_marginLeft="@dimen/dp_10"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/item_cinema_recommend_text_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/sp_14"
+            android:textColor="#333"
+            android:text="ffff"/>
+
+        <TextView
+            android:id="@+id/item_cinema_recommend_text_address"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_35"
+            android:textSize="@dimen/sp_12"
+            android:textColor="#333"
+            android:text="ffff"
+            android:layout_below="@id/item_cinema_recommend_text_name"/>
+
+        <TextView
+            android:id="@+id/item_cinema_recommend_text_distance"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/sp_12"
+            android:textColor="#333"
+            android:text="ffff"
+            android:layout_below="@id/item_cinema_recommend_text_address"/>
+
+        <ImageView
+            android:id="@+id/item_cinema_recommend_img_xin"
+            android:layout_width="@dimen/dp_16"
+            android:layout_height="@dimen/dp_16"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentBottom="true"
+            android:src="@mipmap/com_icon_collection_default"
+            android:layout_marginRight="@dimen/dp_2"
+            />
+    </RelativeLayout>
+
+
+</LinearLayout>

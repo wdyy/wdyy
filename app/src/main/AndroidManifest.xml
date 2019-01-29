@@ -23,7 +23,10 @@
         <activity android:name=".general.activity.LoginActivity" />
         <activity android:name=".general.activity.SuccessActivity" />
         <activity android:name=".movie.activity.MovieDetailsActivity" />
-        <activity android:name=".movie.activity.FilmDetailsActivity"></activity>
+        <activity android:name=".movie.activity.FilmDetailsActivity"/>
+        <activity android:name=".fragment.activity.CinemaDetailActivity"/>
+        <activity android:name=".fragment.activity.CinemaSeatTableActivity"/>
+
     </application>
 
 </manifest>
