@@ -25,7 +25,6 @@ public class IPrecenterImpl implements IPrecenter{  //MVP-P
             @Override
             public void onSuccess(Object data) {
 
-                Log.e("hzjhzj",data+"");
                 mIView.onSuccess(data);
             }
 
