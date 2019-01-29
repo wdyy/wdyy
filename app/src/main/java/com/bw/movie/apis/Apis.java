@@ -72,6 +72,8 @@ public class Apis {
     public static final String URL_FIND_MOVIE_SCHEDULE_LIST="movie/v1/findMovieScheduleList?cinemasId=%s&movieId=%s";
     //影院评论
     public static final String URL_CINEMA_COMMENT="cinema/v1/verify/cinemaComment";
+    //查询影院用户评论列表
+    public static final String URL_CINEMA_All_COMMENT="cinema/v1/findAllCinemaComment?cinemaId=%s&page=1&count=10";
 
 
 }

@@ -27,8 +27,10 @@ public class MainActivity extends AppCompatActivity {
                 handler.removeMessages(1);
                 if (start){
                     startActivity(new Intent(MainActivity.this,LoginActivity.class));
+                    finish();
                 }else {
                     startActivity(new Intent(MainActivity.this,GuideActivity.class));
+                    finish();
                 }
             }
             handler.sendEmptyMessageDelayed(1,2000);

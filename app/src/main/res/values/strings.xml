@@ -7,4 +7,5 @@
 
     <string name="reg_fail_toast">注册失败!</string>
     <string name="reg_success_toast">注册成功!</string>
+    <string name="text_no">xxx</string>
 </resources>

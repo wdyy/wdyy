@@ -6,7 +6,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_467"
+        android:layout_height="@dimen/dp_500"
         app:layout_constraintTop_toTopOf="parent"
         android:background="@drawable/shape_popup_bg"
         >
@@ -53,6 +53,7 @@
             />
 
         <ImageView
+            android:id="@+id/cinema_detail_img_dismiss"
             android:layout_width="@dimen/dp_24"
             android:layout_height="@dimen/dp_24"
             android:src="@mipmap/com_icon_down_default"
@@ -61,7 +62,7 @@
             android:layout_marginLeft="@dimen/dp_60"/>
 
 
-        <android.support.v4.view.ViewPager
+        <FrameLayout
             android:id="@+id/cinema_detail_viewPager"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -70,7 +71,7 @@
             android:layout_marginRight="@dimen/dp_24"
             android:layout_marginBottom="@dimen/dp_5">
 
-        </android.support.v4.view.ViewPager>
+        </FrameLayout>
 
         <!--<fragment
             android:id="@+id/cinema_pw_fragment"
