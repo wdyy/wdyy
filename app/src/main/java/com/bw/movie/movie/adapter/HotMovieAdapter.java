@@ -13,6 +13,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.bw.movie.R;
 import com.bw.movie.bean.moviebean.HotMovieBean;
+import com.bw.movie.fragment.adapter.RecommendAdapter;
 import com.bw.movie.movie.activity.FilmDetailsActivity;
 import com.facebook.drawee.view.SimpleDraweeView;
 
@@ -50,10 +51,41 @@ public class HotMovieAdapter extends RecyclerView.Adapter<HotMovieAdapter.ViewHo
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder viewHolder, final int i) {
+    public void onBindViewHolder(@NonNull final ViewHolder viewHolder, final int i) {
         viewHolder.movie_child_item_name.setText(mList.get(i).getName());
         viewHolder.movie_child_item_message.setText(mList.get(i).getSummary());
         viewHolder.movie_child_item_image.setImageURI(mList.get(i).getImageUrl());
+        final int id = mList.get(i).getId();
+        final int followMovie = mList.get(i).getFollowMovie();
+        if (followMovie==1){
+            viewHolder.movie_child_item_gz.setImageResource(R.mipmap.com_icon_collection_selected);
+        }else {
+            viewHolder.movie_child_item_gz.setImageResource(R.mipmap.com_icon_collection_default);
+        }
+
+        viewHolder.movie_child_item_gz.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (followMovie==1){
+
+                    mList.get(i).setFollowMovie(2);
+
+                    if (mOnImgClickListener!=null){
+                        mOnImgClickListener.onImgCancelClick(id);
+                    }
+                    viewHolder.movie_child_item_gz.setImageResource(R.mipmap.com_icon_collection_default);
+                    notifyDataSetChanged();
+                }else {
+                    mList.get(i).setFollowMovie(1);
+
+                    if (mOnImgClickListener!=null){
+                        mOnImgClickListener.onImgClick(id);
+                    }
+                    viewHolder.movie_child_item_gz.setImageResource(R.mipmap.com_icon_collection_selected);
+                    notifyDataSetChanged();
+                }
+            }
+        });
 
         viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -83,5 +115,16 @@ public class HotMovieAdapter extends RecyclerView.Adapter<HotMovieAdapter.ViewHo
             super(itemView);
             ButterKnife.bind(this,itemView);
         }
+    }
+    public interface OnImgClickListener{
+        void onImgClick(int id);
+        void onImgCancelClick(int id);
+    }
+
+    private OnImgClickListener mOnImgClickListener;
+
+
+    public void setOnImgClickListener(OnImgClickListener onImgClickListener) {
+        mOnImgClickListener = onImgClickListener;
     }
 }

@@ -8,6 +8,8 @@ package com.bw.movie.apis;
 public class Apis {
     //登录
     public static final String URL_LOGIN="user/v1/login";
+    //微信登录
+    public static final String URL_WX="user/v1/weChatBindingLogin";
     //注册
     public static final String URL_REGISTER="user/v1/registerUser";
     //轮播图
@@ -29,7 +31,7 @@ public class Apis {
     //取消关注电影
     public static final String URL_CANCLE_FLLOW_MOVIE="movie/v1/verify/cancelFollowMovie?movieId=%s";
     //查询影片评论
-    public static final String URL_QUERY_COMMENT="movie/v1/findAllMovieComment?movieId=%s&page=1&count=5";
+    public static final String URL_QUERY_COMMENT="movie/v1/findAllMovieComment?movieId=%s&page=1&count=10";
     //添加用户对影片的评论
     public static final String URL_INSERT_COMMENT="movie/v1/verify/movieComment?id=%s&commentContent=%s";
     //查询影片评论回复

@@ -8,10 +8,12 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bw.movie.R;
 import com.bw.movie.apis.Apis;
 import com.bw.movie.base.BaseActivity;
+import com.bw.movie.bean.RegisterBean;
 import com.bw.movie.bean.moviebean.MovieCommentDetailsBean;
 import com.bw.movie.bean.moviebean.MovieDetailsBean;
 import com.bw.movie.movie.adapter.FilmCosplayAdapter;
@@ -51,6 +53,7 @@ public class FilmDetailsActivity extends BaseActivity {
     private int mId;
     private MovieDetailsBean mBean;
     private MovieCommentDetailsBean mCommentDetailsBean;
+    private int mFollowMovie;
 
     @Override
     public void initView() {
@@ -69,7 +72,7 @@ public class FilmDetailsActivity extends BaseActivity {
     }
 
     @OnClick({R.id.film_button_details,R.id.film_button_notice,R.id.film_button_stills,R.id.film_button_comment
-            ,R.id.film_button_return,R.id.film_button_buy})
+            ,R.id.film_button_return,R.id.film_button_buy,R.id.film_details_image_gz})
     public void onFilmButton(View view){
         switch (view.getId()){
             case R.id.film_button_details:
@@ -85,16 +88,27 @@ public class FilmDetailsActivity extends BaseActivity {
                 windowStills.bottomwindow(film_button_stills);
                 break;
             case R.id.film_button_comment:
-
                 PopuWindowComment windowComment = new PopuWindowComment(this,mCommentDetailsBean);
                 windowComment.bottomwindow(film_button_comment);
-
                 break;
             case R.id.film_button_return:
                 finish();
                 break;
             case R.id.film_button_buy:
                 break;
+            case R.id.film_details_image_gz:
+                Xin();
+                break;
+        }
+    }
+
+    public void Xin(){
+        if (mFollowMovie == 1){
+            doNetRequestData(String.format(Apis.URL_CANCLE_FLLOW_MOVIE,mId),null,RegisterBean.class,"get");
+            film_details_image_gz.setImageResource(R.mipmap.com_icon_collection_default);
+        }else {
+            doNetRequestData(String.format(Apis.URL_FOLLOW_MOVIE,mId),null,RegisterBean.class,"get");
+            film_details_image_gz.setImageResource(R.mipmap.com_icon_collection_selected);
         }
     }
     @Override
@@ -109,12 +123,24 @@ public class FilmDetailsActivity extends BaseActivity {
             film_details_title.setText(mBean.getResult().getName());
             film_details_image.setImageURI(mBean.getResult().getImageUrl());
             film_details_image_bg.setImageURI(mBean.getResult().getImageUrl());
+            mFollowMovie = mBean.getResult().getFollowMovie();
+            if (mFollowMovie ==1){
+                film_details_image_gz.setImageResource(R.mipmap.com_icon_collection_selected);
+            }else {
+                film_details_image_gz.setImageResource(R.mipmap.com_icon_collection_default);
+            }
+
 
             Map<String,String> map1 = new HashMap<>();
             doNetRequestData(String.format(Apis.URL_QUERY_COMMENT,mId),map1,MovieCommentDetailsBean.class,"get");
 
         }else if (data instanceof MovieCommentDetailsBean){
             mCommentDetailsBean = (MovieCommentDetailsBean) data;
+        }else if (data instanceof RegisterBean){
+
+            RegisterBean registerBean= (RegisterBean) data;
+            Toast.makeText(this,registerBean.getMessage(),Toast.LENGTH_SHORT).show();
+
         }
     }
 
