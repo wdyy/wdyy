@@ -4,11 +4,16 @@ import android.content.Intent;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.view.ViewPager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
@@ -25,6 +30,8 @@ import com.bw.movie.bean.CinemaMovieListBean;
 import com.bw.movie.bean.CinemaMovieScheduleBean;
 import com.bw.movie.bean.CinemaPopupDetailsBean;
 import com.bw.movie.bean.CinemaSeatTableDetailBean;
+import com.bw.movie.fragment.CinemaPopupCommentFragment;
+import com.bw.movie.fragment.CinemaPopupDetailFragment;
 import com.bw.movie.fragment.adapter.BannerAdapter;
 import com.bw.movie.fragment.adapter.CinemaDetailListAdapter;
 import com.bw.movie.util.SpaceItemDecoration;
@@ -72,6 +79,8 @@ public class CinemaDetailActivity extends BaseActivity {
     private Boolean bo=true;
     private int mMovieId;
     private String mName;
+    private View pop;
+    private FragmentManager mManager;
 
     @Override
     public void initView() {
@@ -89,6 +98,14 @@ public class CinemaDetailActivity extends BaseActivity {
         doNetRequestData(String.format(Apis.URL_FIND_CINEMA_INFO,cinemasId),null,CinemaDetailBean.class,"get");
     }
 
+    @Override
+    public <T extends View> T findViewById(int id) {
+        if (id == R.id.cinema_detail_viewPager && pop !=null){
+            return pop.findViewById(id);
+        }
+        return super.findViewById(id);
+    }
+
     @OnClick(R.id.activity_cinema_detail_ll)
     public void onLinearClickListener(){  //弹框点击事件
 
@@ -103,26 +120,8 @@ public class CinemaDetailActivity extends BaseActivity {
         final TextView textView_comment = inflate.findViewById(R.id.cinema_pw_text_comment);
         final TextView textView_detail_line = inflate.findViewById(R.id.cinema_pw_text_detail_line);
         final TextView textView_comment_line = inflate.findViewById(R.id.cinema_pw_text_comment_line);
+        final ImageView imageView = inflate.findViewById(R.id.cinema_detail_img_dismiss);
 
-
-        textView_detail.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                textView_detail_line.setVisibility(View.VISIBLE);
-                textView_comment_line.setVisibility(View.INVISIBLE);
-            }
-        });
-
-        textView_comment.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                textView_comment_line.setVisibility(View.VISIBLE);
-                textView_detail_line.setVisibility(View.INVISIBLE);
-            }
-        });
-
-        //CinemaPopupActivity popupActivity = new CinemaPopupActivity();
 
         popupWindow = new PopupWindow(inflate,
                 ViewGroup.LayoutParams.MATCH_PARENT,
@@ -137,29 +136,43 @@ public class CinemaDetailActivity extends BaseActivity {
         popupWindow.showAtLocation(mLinearLayout, Gravity.LEFT | Gravity.BOTTOM, 0, -location[1]);
 
 
-        /*final ViewPager viewPager = inflate.findViewById(R.id.cinema_detail_viewPager);
-        viewPager.setAdapter(new FragmentPagerAdapter(getSupportFragmentManager()) {
+       pop=inflate;
+
+
+        mManager = getSupportFragmentManager();
+        mManager.beginTransaction().replace(R.id.cinema_detail_viewPager,new CinemaPopupDetailFragment()).commit();
+
+
+        textView_detail.setOnClickListener(new View.OnClickListener() {
             @Override
-            public Fragment getItem(int position) {
-                Fragment fragment=null;
+            public void onClick(View view) {
 
-                switch (position){
-                    case 0:
-                        fragment = new CinemaPopupDetailFragment();
-                        break;
+                textView_detail_line.setVisibility(View.VISIBLE);
+                textView_comment_line.setVisibility(View.INVISIBLE);
 
-                    case 1:
-                        fragment = new CinemaPopupCommentFragment();
-                        break;
-                }
-                return fragment;
+                mManager.beginTransaction().replace(R.id.cinema_detail_viewPager,new CinemaPopupDetailFragment()).commit();
+
+
             }
+        });
 
+        textView_comment.setOnClickListener(new View.OnClickListener() {
             @Override
-            public int getCount() {
-                return 2;
+            public void onClick(View view) {
+                textView_comment_line.setVisibility(View.VISIBLE);
+                textView_detail_line.setVisibility(View.INVISIBLE);
+
+                mManager.beginTransaction().replace(R.id.cinema_detail_viewPager,new CinemaPopupCommentFragment()).commit();
+
             }
-        });*/
+        });
+
+        imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                popupWindow.dismiss();
+            }
+        });
 
     }
 

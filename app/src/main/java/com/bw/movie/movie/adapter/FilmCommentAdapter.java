@@ -52,7 +52,7 @@ public class FilmCommentAdapter extends XRecyclerView.Adapter<FilmCommentAdapter
         viewHolder.film_comment_button_message.setText(mList.get(i).getCommentContent());
 
         Date date = new Date();
-        SimpleDateFormat time = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        SimpleDateFormat time = new SimpleDateFormat("MM-dd HH:mm");
         String format = time.format(date);
         viewHolder.film_comment_button_time.setText(format);
 

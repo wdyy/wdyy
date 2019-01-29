@@ -88,12 +88,6 @@ public class MovieShowAdapter extends RecyclerView.Adapter<MovieShowAdapter.View
                 }
             });
 
-//            //设置图片圆角角度
-//            RoundedCorners roundedCorners= new RoundedCorners(15);
-//            //通过RequestOptions扩展功能,override:采样率,因为ImageView就这么大,可以压缩图片,降低内存消耗
-//            RequestOptions options=RequestOptions.bitmapTransform(roundedCorners).override(300, 300);
-//            Glide.with(mContext).load(mHot.get(i).getImageUrl()).apply(options).into(viewHolder.movie_item_image);
-//            Glide.with(mContext).load(mHot.get(i).getImageUrl()).into(viewHolder.movie_item_image);
         }else if (mIndex == 1){
             viewHolder.movie_item_name.setText(mLoad.get(i).getName());
 
@@ -109,12 +103,6 @@ public class MovieShowAdapter extends RecyclerView.Adapter<MovieShowAdapter.View
                 }
             });
 
-//            //设置图片圆角角度
-//            RoundedCorners roundedCorners= new RoundedCorners(15);
-//            //通过RequestOptions扩展功能,override:采样率,因为ImageView就这么大,可以压缩图片,降低内存消耗
-//            RequestOptions options=RequestOptions.bitmapTransform(roundedCorners).override(300, 300);
-//            Glide.with(mContext).load(mLoad.get(i).getImageUrl()).apply(options).into(viewHolder.movie_item_image);
-//            Glide.with(mContext).load(mLoad.get(i).getImageUrl()).into(viewHolder.movie_item_image);
         }else if (mIndex == 2){
             viewHolder.movie_item_name.setText(mWait.get(i).getName());
 
@@ -162,4 +150,5 @@ public class MovieShowAdapter extends RecyclerView.Adapter<MovieShowAdapter.View
             ButterKnife.bind(this,itemView);
         }
     }
+
 }

@@ -57,11 +57,11 @@ public class CinemaPopupDetailFragment extends BaseFragment {
         String vehicleRoute = detailsBean.getVehicleRoute();
 
         /*Pattern pattern = Pattern.compile("\\。");
-        String[] img = pattern.split(vehicleRoute);
+        String[] img = pattern.split(vehicleRoute);*/
 
-        mTextView_underGround.setText(img[0]);
-        mTextView_bus.setText(img[1]);
-        mTextView_self_driving.setText(img[2]);*/
+        mTextView_underGround.setText("雍和宫桥东、北小街豁口(二环辅)、北小街豁口、雍和宫桥北、雍和宫桥东(西行)");
+        mTextView_bus.setText("44路、75路、特12路、特2路、13路、18路、116路、130路、684路、117路、机场巴士2线、909路、125路、674路、特16路、地铁2号线、地铁5号线、612路等.");
+        mTextView_self_driving.setText("北京市出租车的起步价是13.0元、起步距离3.0公里、 每公里2.3元、燃油附加费1.0元（不超过3.0公里不收） ，请参考。");
 
     }
 
