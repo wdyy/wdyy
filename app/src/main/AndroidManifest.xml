@@ -36,6 +36,9 @@
         <activity android:name=".my.feedback.MyFeedbackActivity" />
         <activity android:name=".my.updateuserinfo.MyUpdateInfoActivity" />
         <activity android:name=".my.updateuserpwd.MyUpdatePwdActivity"/>
+        <activity android:name=".movie.activity.FilmDetailsActivity" />
+        <activity android:name=".fragment.activity.CinemaDetailActivity" />
+        <activity android:name=".fragment.activity.CinemaSeatTableActivity" />
         <activity android:name=".wxapi.WXEntryActivity"
             android:exported="true"></activity>
     </application>
