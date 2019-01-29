@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">WDCinema</string>
+    <string name="login_fail_toast">登录失败!</string>
+    <string name="login_success_toast">登录成功!</string>
+    <string name="not_NetWork">请检查网络设备!</string>
+    <string name="login_phone_pwd_isEmpty">输入不能为空!</string>
+</resources>

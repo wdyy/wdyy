@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:fresco="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="@dimen/dp_158"
+    android:layout_height="@dimen/dp_223">
+    <RelativeLayout
+        android:layout_width="@dimen/dp_158"
+        android:layout_height="@dimen/dp_223"
+        >
+        <com.facebook.drawee.view.SimpleDraweeView
+            android:id="@+id/movie_banner_image"
+            android:layout_width="@dimen/dp_158"
+            android:layout_height="@dimen/dp_223"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            fresco:roundedCornerRadius="@dimen/dp_8" />
+
+        <RelativeLayout
+            android:background="@drawable/movie_item_shape"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_40"
+            android:layout_alignParentBottom="true"
+            >
+            <TextView
+                android:id="@+id/movie_banner_title"
+                android:layout_marginTop="@dimen/dp_5"
+                android:layout_centerHorizontal="true"
+                android:layout_marginLeft="@dimen/dp_10"
+                android:layout_marginRight="@dimen/dp_10"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#fff"
+                android:text="lalal"
+                android:maxLength="5"
+                android:textSize="@dimen/sp_12"
+                android:ellipsize="end"
+                />
+
+        </RelativeLayout>
+    </RelativeLayout>
+</RelativeLayout>

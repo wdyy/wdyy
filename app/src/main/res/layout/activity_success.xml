@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".general.activity.MainActivity">
+    <FrameLayout
+        android:id="@+id/three_frag"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentTop="true"
+        ></FrameLayout>
+
+    <RelativeLayout
+        android:background="@drawable/details_buttom_bg"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_100"
+        android:layout_alignParentBottom="true"
+        >
+    </RelativeLayout>
+        <ImageView
+            android:id="@+id/success_button_movie"
+            android:layout_width="@dimen/dp_60"
+            android:layout_height="@dimen/dp_60"
+            android:layout_alignParentBottom="true"
+            android:layout_marginLeft="@dimen/dp_40"
+            android:layout_marginBottom="@dimen/dp_19"
+            android:src="@mipmap/com_icon_film_fault_hdpi" />
+        <ImageView
+            android:id="@+id/success_button_movies"
+            android:layout_width="@dimen/dp_70"
+            android:layout_height="@dimen/dp_70"
+            android:layout_marginLeft="@dimen/dp_35"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="@dimen/dp_15"
+            android:src="@mipmap/com_icon_film_selected_hdpi"
+            />
+
+        <ImageView
+            android:id="@+id/success_button_cinema"
+            android:layout_width="@dimen/dp_60"
+            android:layout_height="@dimen/dp_60"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginLeft="@dimen/dp_40"
+            android:layout_marginBottom="@dimen/dp_19"
+            android:src="@mipmap/com_icon_cinema_default_hdpi" />
+        <ImageView
+            android:id="@+id/success_button_cinemas"
+            android:layout_width="@dimen/dp_70"
+            android:layout_height="@dimen/dp_70"
+            android:layout_centerHorizontal="true"
+            android:layout_marginLeft="@dimen/dp_40"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="@dimen/dp_15"
+            android:src="@mipmap/com_icon_cinema_selected_hdpi"
+            android:visibility="invisible"
+            />
+
+        <ImageView
+            android:id="@+id/success_button_mine"
+            android:layout_width="@dimen/dp_60"
+            android:layout_height="@dimen/dp_60"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginRight="@dimen/dp_45"
+            android:layout_marginBottom="@dimen/dp_19"
+            android:src="@mipmap/com_icon_my_default_hdip" />
+        <ImageView
+            android:id="@+id/success_button_mines"
+            android:layout_width="@dimen/dp_70"
+            android:layout_height="@dimen/dp_70"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="@dimen/dp_40"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="@dimen/dp_15"
+            android:src="@mipmap/com_icon_my_selected_hdpi"
+            android:visibility="invisible"
+            />
+
+</RelativeLayout>
