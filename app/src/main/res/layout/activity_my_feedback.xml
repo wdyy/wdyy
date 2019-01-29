@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".my.fragment.feedback.MyFeedbackActivity">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="意见反馈"
+            android:layout_marginTop="@dimen/dp_30"
+            android:layout_gravity="center"
+            android:textSize="@dimen/dp_20"/>
+        <LinearLayout
+            android:id="@+id/yijianlinear"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <EditText
+                android:background="@drawable/my_option_shape"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="写下您对产品的感受吧!工作人员会在第一时间处理"
+                android:layout_marginTop="@dimen/dp_40"
+                android:layout_marginLeft="@dimen/dp_30"
+                android:layout_marginRight="@dimen/dp_30"
+                android:padding="@dimen/dp_20"
+                android:id="@+id/my_option_info"/>
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/my_option_tj"
+                android:text="提交"
+                android:layout_marginTop="@dimen/dp_40"
+                android:layout_gravity="right"
+                android:background="@drawable/my_option_button"
+                android:layout_marginRight="@dimen/dp_10"
+                />
+        </LinearLayout>
+
+        <ViewStub
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout="@layout/option_back_item"
+            android:id="@+id/viewsub_loading" />
+    </LinearLayout>
+
+    <ImageView
+        android:layout_width="@dimen/dp_60"
+        android:layout_height="@dimen/dp_60"
+        android:layout_marginBottom="@dimen/dp_20"
+        android:layout_gravity="bottom"
+        android:layout_marginLeft="@dimen/dp_20"
+        android:layout_marginTop="@dimen/dp_200"
+        android:src="@drawable/idea_activity_back"
+        android:layout_alignParentBottom="true"
+        android:id="@+id/my_back"/>
+</RelativeLayout>
