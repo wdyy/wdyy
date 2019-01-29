@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".my.updateuserpwd.MyUpdatePwdActivity">
+
+
+    <EditText
+        android:id="@+id/update_oldpwd"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_35"
+        android:layout_marginLeft="@dimen/dp_30"
+        android:layout_marginTop="@dimen/dp_100"
+        android:layout_marginRight="@dimen/dp_30"
+        android:background="@drawable/shape"
+        android:hint="请输入老密码"
+        android:paddingLeft="@dimen/dp_10"
+        android:textColor="#333" />
+
+    <EditText
+        android:id="@+id/update_newPwd"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_35"
+        android:layout_marginLeft="@dimen/dp_30"
+        android:layout_marginTop="@dimen/dp_20"
+        android:layout_marginRight="@dimen/dp_30"
+        android:background="@drawable/shape"
+        android:hint="请输入新密码"
+        android:paddingLeft="@dimen/dp_10"
+        android:textColor="#333" />
+
+    <EditText
+        android:id="@+id/update_recoverpwd"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_35"
+        android:layout_marginLeft="@dimen/dp_30"
+        android:layout_marginTop="@dimen/dp_20"
+        android:layout_marginRight="@dimen/dp_30"
+        android:background="@drawable/shape"
+        android:hint="重复新密码"
+        android:paddingLeft="@dimen/dp_10"
+        android:textColor="#333" />
+
+    <Button
+        android:id="@+id/updatePwdback"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="@dimen/dp_200"
+        android:background="@drawable/my_option_button"
+        android:text="修改密码返回" />
+
+    <ImageView
+        android:id="@+id/myinfo_back"
+        android:layout_width="@dimen/dp_60"
+        android:layout_height="@dimen/dp_60"
+        android:layout_alignParentBottom="true"
+        android:layout_marginLeft="30dp"
+        android:layout_marginBottom="30dp"
+        android:src="@drawable/idea_activity_back" />
+
+</LinearLayout>
