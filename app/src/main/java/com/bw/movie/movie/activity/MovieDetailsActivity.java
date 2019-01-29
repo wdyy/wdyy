@@ -126,6 +126,6 @@ public class MovieDetailsActivity extends BaseActivity {
 
     @Override
     public void fail(String error) {
-
+        showShortToast(error);
     }
 }
