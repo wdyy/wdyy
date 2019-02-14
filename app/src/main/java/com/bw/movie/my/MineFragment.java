@@ -1,6 +1,7 @@
 package com.bw.movie.my;
 
 import android.content.Intent;
+import android.graphics.Rect;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -11,6 +12,7 @@ import com.bw.movie.R;
 import com.bw.movie.base.BaseFragment;
 import com.bw.movie.general.activity.LoginActivity;
 import com.bw.movie.my.feedback.MyFeedbackActivity;
+import com.bw.movie.my.latest.MyLatestVersionActivity;
 import com.bw.movie.my.userInfo.MyInfoActivity;
 import com.bw.movie.my.userfollow.MyFollowActivity;
 import com.bw.movie.my.userticket.MyTicketActivity;
@@ -88,9 +90,21 @@ public class MineFragment extends BaseFragment {
             default:
                 break;
             case R.id.laba:
+                startActivity(new Intent(getActivity(), MySoundActivity.class));
                 break;
             case R.id.myicon:
-                startActivity(new Intent(getActivity(), LoginActivity.class));
+                Intent intent = new Intent(getContext(), ScaleImageActivity.class);
+                //创建一个Rect,报错当前imageview的位置信息
+                Rect rect = new Rect();
+                //将位置信息赋给rect
+                mMyicon.getGlobalVisibleRect(rect);
+                intent.setSourceBounds(rect);
+                //跳转
+                startActivity(intent);
+                //屏蔽activity跳转的默认专场效果
+                getActivity().overridePendingTransition(0, 0);
+
+
                 break;
             case R.id.nickname:
                 break;
@@ -113,8 +127,10 @@ public class MineFragment extends BaseFragment {
                 startActivity(new Intent(getActivity(), MyFeedbackActivity.class));
                 break;
             case R.id.my_geng:
+                startActivity(new Intent(getActivity(), MyLatestVersionActivity.class));
                 break;
             case R.id.login_edit:
+                startActivity(new Intent(getActivity(), LoginActivity.class));
                 break;
         }
     }

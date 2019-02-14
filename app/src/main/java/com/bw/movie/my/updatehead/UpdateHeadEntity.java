@@ -1,11 +1,11 @@
-package com.bw.movie.my.updatehead.bean;
+package com.bw.movie.my.updatehead;
 
 import com.bw.movie.base.BaseEntity;
 
 /**
- *  郭佳兴
- *  修改头像bean类
-* */
+ * 郭佳兴
+ * 修改头像bean类
+ */
 public class UpdateHeadEntity extends BaseEntity {
 
     private String headPath;

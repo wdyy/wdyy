@@ -34,7 +34,7 @@ import butterknife.OnTouch;
  * Date: 2019/1/23 16:08
  * Description: 登录页
  */
-public class LoginActivity extends BaseActivity{
+public class LoginActivity extends BaseActivity {
 
     @BindView(R.id.login_edit_phone)   //手机号
             TextView mTextView_phone;
@@ -55,8 +55,8 @@ public class LoginActivity extends BaseActivity{
             Button mButton_login;
 
     @BindView(R.id.login_img_dsf)
-            ImageView mImageView;
-    private boolean b=true;
+    ImageView mImageView;
+    private boolean b = true;
     private IPrecenterImpl mIPrecenter;
     private SharedPreferences mPreferences;
 
@@ -78,13 +78,13 @@ public class LoginActivity extends BaseActivity{
         boolean auto = mPreferences.getBoolean("auto", false);
         String String_phone = mPreferences.getString("phone", null);
         String String_pwd = mPreferences.getString("pwd", null);
-        if (check){
+        if (check) {
             mTextView_phone.setText(String_phone);
             mTextView_pwd.setText(String_pwd);
             mCheckBox_rememberPwd.setChecked(true);
         }
-        if (auto){
-            startActivity(new Intent(LoginActivity.this,SuccessActivity.class));
+        if (auto) {
+            startActivity(new Intent(LoginActivity.this, SuccessActivity.class));
         }
 
     }
@@ -94,27 +94,27 @@ public class LoginActivity extends BaseActivity{
         return R.layout.activity_login;
     }
 
-    @OnClick({R.id.login_btn_login,R.id.login_img_dsf})
-    public void onLoginButtonClickListener(View view){
-        switch (view.getId()){
+    @OnClick({R.id.login_btn_login, R.id.login_img_dsf})
+    public void onLoginButtonClickListener(View view) {
+        switch (view.getId()) {
             case R.id.login_btn_login:
                 //登录按钮监听
 
                 String phone = mTextView_phone.getText().toString().trim();
                 String pwd = mTextView_pwd.getText().toString().trim();
 
-                if (phone.isEmpty()||pwd.isEmpty()){
+                if (phone.isEmpty() || pwd.isEmpty()) {
 
-                    showShortToast(R.string.login_phone_pwd_isEmpty+"");
-                }else {
+                    showShortToast(R.string.login_phone_pwd_isEmpty + "");
+                } else {
 
                     String jmPwd = EncryptUtil.encrypt(pwd);
 
                     Map<String, String> map = new HashMap<>();
-                    map.put("phone",phone);
-                    map.put("pwd",jmPwd);
+                    map.put("phone", phone);
+                    map.put("pwd", jmPwd);
 
-                    doNetRequestData(Apis.URL_LOGIN,map,LoginBean.class,"post");
+                    doNetRequestData(Apis.URL_LOGIN, map, LoginBean.class, "post");
 
                     //  mIPrecenter.startRequestData(Apis.URL_LOGIN,map,LoginBean.class,"post");
                 }
@@ -131,15 +131,16 @@ public class LoginActivity extends BaseActivity{
                     WeiXinUtil.reg(LoginActivity.this).sendReq(req);
                 }
                 break;
-                default:
-                    break;
+
+            default:
+                break;
         }
     }
 
     @OnTouch(R.id.login_img_show)            //明文密文
-    public boolean onTouch(View v, MotionEvent event){
+    public boolean onTouch(View v, MotionEvent event) {
 
-        switch (event.getAction()){
+        switch (event.getAction()) {
             case MotionEvent.ACTION_DOWN:
                 mTextView_pwd.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
                 break;
@@ -158,24 +159,24 @@ public class LoginActivity extends BaseActivity{
         LoginBean loginBean = (LoginBean) data;
 
         String message = loginBean.getMessage();
-        if (message.equals("登陆成功")){
-            if (mCheckBox_rememberPwd.isChecked()){  //保存账号密码
+        if (message.equals("登陆成功")) {
+            if (mCheckBox_rememberPwd.isChecked()) {  //保存账号密码
                 SharedPreferences.Editor edit = mPreferences.edit();
-                edit.putString("phone",mTextView_phone.getText().toString().trim());
-                edit.putString("pwd",mTextView_pwd.getText().toString().trim());
-                edit.putBoolean("check",true);
+                edit.putString("phone", mTextView_phone.getText().toString().trim());
+                edit.putString("pwd", mTextView_pwd.getText().toString().trim());
+                edit.putBoolean("check", true);
                 edit.commit();
 
-            }else {
+            } else {
 
             }
 
-            if (mCheckBox_autoLogin.isChecked()){  //自动登录
+            if (mCheckBox_autoLogin.isChecked()) {  //自动登录
                 SharedPreferences.Editor edit = mPreferences.edit();
-                edit.putBoolean("auto",true);
+                edit.putBoolean("auto", true);
                 edit.commit();
 
-            }else {
+            } else {
 
             }
             LoginBean.ResultBean beanResult = loginBean.getResult();
@@ -186,26 +187,26 @@ public class LoginActivity extends BaseActivity{
 
             SharedPreferences.Editor edit = mPreferences.edit();  //保存用户的sessionId
 
-            edit.putString("sessionId",sessionId);
-            edit.putString("userId",userId+"");
-            edit.putString("headPic",headPic);
-            edit.putString("nickName",nickName);
+            edit.putString("sessionId", sessionId);
+            edit.putString("userId", userId + "");
+            edit.putString("headPic", headPic);
+            edit.putString("nickName", nickName);
             edit.commit();
 
-            startActivity(new Intent(LoginActivity.this,SuccessActivity.class));
-            Toast.makeText(LoginActivity.this,R.string.login_success_toast,Toast.LENGTH_SHORT).show();
+            startActivity(new Intent(LoginActivity.this, SuccessActivity.class));
+            Toast.makeText(LoginActivity.this, R.string.login_success_toast, Toast.LENGTH_SHORT).show();
             finish();
-        }else {
-            Toast.makeText(LoginActivity.this,R.string.login_fail_toast,Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(LoginActivity.this, R.string.login_fail_toast, Toast.LENGTH_SHORT).show();
         }
 
     }
 
     @Override
     public void fail(String error) {
-    //    Toast.makeText(LoginActivity.this,"fa",Toast.LENGTH_SHORT).show();
+        //    Toast.makeText(LoginActivity.this,"fa",Toast.LENGTH_SHORT).show();
         //showShortToast(R.string.not_NetWork+"");
-        Toast.makeText(LoginActivity.this,error,Toast.LENGTH_SHORT).show();
+        Toast.makeText(LoginActivity.this, error, Toast.LENGTH_SHORT).show();
     }
 
     @Override

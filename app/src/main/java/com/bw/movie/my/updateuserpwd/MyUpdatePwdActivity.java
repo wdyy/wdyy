@@ -1,6 +1,7 @@
 package com.bw.movie.my.updateuserpwd;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
@@ -42,10 +43,6 @@ public class MyUpdatePwdActivity extends BaseActivity {
 
     @Override
     public void initData() {
-
-        Map<String, String> map = new HashMap<>();
-
-        doNetRequestData(MineUrlConstant.UPDATEPWD, map, UpdatePwdEntity.class, "post");
     }
 
     @Override
@@ -55,20 +52,24 @@ public class MyUpdatePwdActivity extends BaseActivity {
 
     @Override
     public void success(Object data) {
-
+        UpdatePwdEntity updatePwdEntity = (UpdatePwdEntity) data;
+        String message = updatePwdEntity.getMessage();
+        Toast.makeText(getApplicationContext(), message, Toast.LENGTH_LONG).show();
     }
 
     @Override
     public void fail(String error) {
-
+        Toast.makeText(getApplicationContext(), "修改失败!", Toast.LENGTH_LONG).show();
     }
 
     @OnClick({R.id.updatePwdback, R.id.myinfo_back})
     public void onClick(View v) {
-
-        String oldPwd = mUpdateOldpwd.getText().toString();
-        String newPwd = mUpdateNewPwd.getText().toString();
-        String copyPwd = mUpdateRecoverpwd.getText().toString();
+        SharedPreferences swl = getSharedPreferences("swl", MODE_PRIVATE);
+        swl.getString("pwd", "");
+        //   mUpdateOldpwd.setText("");
+        String oldPwd = mUpdateOldpwd.getText().toString().trim();
+        String newPwd = mUpdateNewPwd.getText().toString().trim();
+        String copyPwd = mUpdateRecoverpwd.getText().toString().trim();
 
         String oldPwd1 = EncryptUtil.encrypt(oldPwd);
         String newPwd1 = EncryptUtil.encrypt(newPwd);
@@ -78,15 +79,15 @@ public class MyUpdatePwdActivity extends BaseActivity {
                 break;
             case R.id.updatePwdback:
 
-                if (TextUtils.isEmpty(newPwd) && TextUtils.isEmpty(copyPwd)){
-                    Toast.makeText(this,"新密码为空",Toast.LENGTH_SHORT).show();
+                if (TextUtils.isEmpty(newPwd) && TextUtils.isEmpty(copyPwd)) {
+                    Toast.makeText(this, "新密码为空", Toast.LENGTH_SHORT).show();
                     return;
-                }else {
-                    Map<String,String> map  = new HashMap<>();
-                    map.put("oldpwd",oldPwd1);
-                    map.put("newpwd",newPwd1);
-                    map.put("copypwd",copyPwd1);
-                    doNetRequestData(MineUrlConstant.UPDATEPWD,map,UpdatePwdEntity.class,"post");
+                } else {
+                    Map<String, String> map = new HashMap<>();
+                    map.put("oldPwd", oldPwd1);
+                    map.put("newPwd", newPwd1);
+                    map.put("newPwd2", copyPwd1);
+                    doNetRequestData(MineUrlConstant.UPDATEPWD, map, UpdatePwdEntity.class, "post");
                     startActivity(new Intent(this, LoginActivity.class));
                     finish();
                 }
