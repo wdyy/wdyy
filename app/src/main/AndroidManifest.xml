@@ -29,6 +29,15 @@
         <activity android:name=".general.activity.LoginActivity" />
         <activity android:name=".general.activity.SuccessActivity" />
         <activity android:name=".movie.activity.MovieDetailsActivity" />
+        <activity android:name=".movie.activity.FilmDetailsActivity"/>
+        <activity android:name=".fragment.activity.CinemaDetailActivity"/>
+        <activity android:name=".fragment.activity.CinemaSeatTableActivity"/>
+        <activity android:name=".my.userInfo.MyInfoActivity" />
+        <activity android:name=".my.userfollow.MyFollowActivity" />
+        <activity android:name=".my.userticket.MyTicketActivity" />
+        <activity android:name=".my.feedback.MyFeedbackActivity" />
+        <activity android:name=".my.updateuserinfo.MyUpdateInfoActivity" />
+        <activity android:name=".my.updateuserpwd.MyUpdatePwdActivity"/>
         <activity android:name=".movie.activity.FilmDetailsActivity" />
         <activity android:name=".fragment.activity.CinemaDetailActivity" />
         <activity android:name=".fragment.activity.CinemaSeatTableActivity" />

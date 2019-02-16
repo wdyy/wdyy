@@ -65,13 +65,16 @@ public class RecommendAdapter extends RecyclerView.Adapter<RecommendAdapter.View
 
         final int followCinema = list.get(position).getFollowCinema();
 
-
         if (followCinema==1){
             holder.mImageView_xin.setImageResource(R.mipmap.com_icon_collection_selected);
         }else {
             holder.mImageView_xin.setImageResource(R.mipmap.com_icon_collection_default);
         }
-
+            if (followCinema==1){
+                holder.mImageView_xin.setImageResource(R.mipmap.com_icon_collection_selected);
+            }else {
+                holder.mImageView_xin.setImageResource(R.mipmap.com_icon_collection_default);
+            }
 
         holder.mImageView_xin.setOnClickListener(new View.OnClickListener() {
             @Override
