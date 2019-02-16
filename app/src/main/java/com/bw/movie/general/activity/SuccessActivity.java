@@ -1,10 +1,13 @@
 package com.bw.movie.general.activity;
 
+import android.app.FragmentManager;
 import android.support.annotation.Nullable;
-import android.support.v4.app.FragmentManager;
+//import android.support.v4.app.FragmentManager;
 import android.os.Bundle;
+import android.support.v4.app.FragmentTransaction;
 import android.view.KeyEvent;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -32,15 +35,21 @@ public class SuccessActivity extends BaseActivity {
     ImageView mSuccess_button_mine;
     @BindView(R.id.success_button_mines)
     ImageView mSuccess_button_mines;
-    private FragmentManager mManager;
+    private android.support.v4.app.FragmentManager mManager;
+    private MovieFragment mMovieFragment;
+    private CinemaFragment mCinemaFragment;
+    private MineFragment mMineFragment;
 
     private long exitTime = 0;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mMovieFragment = new MovieFragment();
+        mCinemaFragment = new CinemaFragment();
+        mMineFragment = new MineFragment();
         mManager = getSupportFragmentManager();
-        mManager.beginTransaction().replace(R.id.three_frag,new MovieFragment()).commit();
+        mManager.beginTransaction().add(R.id.three_frag,mMovieFragment,mMovieFragment.getClass().getName()).commit();
     }
 
     @Override
@@ -72,6 +81,8 @@ public class SuccessActivity extends BaseActivity {
     @Override
     public void initData() {
         ButterKnife.bind(this);
+        //防止底部导航栏顶起
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
     }
     @OnClick({R.id.success_button_movie,R.id.success_button_cinema,R.id.success_button_mine})
     public void onButtonClick(View view){
@@ -84,8 +95,12 @@ public class SuccessActivity extends BaseActivity {
                 mSuccess_button_mine.setVisibility(View.VISIBLE);
                 mSuccess_button_mines.setVisibility(View.INVISIBLE);
 
-                mManager = getSupportFragmentManager();
-                mManager.beginTransaction().replace(R.id.three_frag,new MovieFragment()).commit();
+                android.support.v4.app.FragmentManager movie = getSupportFragmentManager();
+                FragmentTransaction transactionFilm = movie.beginTransaction();
+                transactionFilm.hide(mMineFragment);
+                transactionFilm.hide(mCinemaFragment);
+                transactionFilm.show(mMovieFragment);
+                transactionFilm.commit();
                 break;
             case R.id.success_button_cinema:
                 mSuccess_button_movie.setVisibility(View.VISIBLE);
@@ -95,8 +110,15 @@ public class SuccessActivity extends BaseActivity {
                 mSuccess_button_mine.setVisibility(View.VISIBLE);
                 mSuccess_button_mines.setVisibility(View.INVISIBLE);
 
-                mManager = getSupportFragmentManager();
-                mManager.beginTransaction().replace(R.id.three_frag,new CinemaFragment()).commit();
+                android.support.v4.app.FragmentManager cinema = getSupportFragmentManager();
+                FragmentTransaction transactionCinema = cinema.beginTransaction();
+                if (cinema.findFragmentByTag(mCinemaFragment.getClass().getName()) == null) {
+                    transactionCinema.add(R.id.three_frag, mCinemaFragment, mCinemaFragment.getClass().getName());
+                }
+                transactionCinema.hide(mMovieFragment);
+                transactionCinema.hide(mMineFragment);
+                transactionCinema.show(mCinemaFragment);
+                transactionCinema.commit();
                 break;
             case R.id.success_button_mine:
                 mSuccess_button_movie.setVisibility(View.VISIBLE);
@@ -106,8 +128,15 @@ public class SuccessActivity extends BaseActivity {
                 mSuccess_button_mine.setVisibility(View.INVISIBLE);
                 mSuccess_button_mines.setVisibility(View.VISIBLE);
 
-                mManager = getSupportFragmentManager();
-                mManager.beginTransaction().replace(R.id.three_frag,new MineFragment()).commit();
+                android.support.v4.app.FragmentManager mine = getSupportFragmentManager();
+                FragmentTransaction transactionMine = mine.beginTransaction();
+                if (mine.findFragmentByTag(mMineFragment.getClass().getName()) == null) {
+                    transactionMine.add(R.id.three_frag, mMineFragment, mMineFragment.getClass().getName());
+                }
+                transactionMine.hide(mMovieFragment);
+                transactionMine.hide(mCinemaFragment);
+                transactionMine.show(mMineFragment);
+                transactionMine.commit();
                 break;
         }
     }
@@ -136,4 +165,5 @@ public class SuccessActivity extends BaseActivity {
     public void fail(String error) {
 
     }
+
 }

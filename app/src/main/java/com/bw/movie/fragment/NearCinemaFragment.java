@@ -59,7 +59,7 @@ public class NearCinemaFragment extends BaseFragment {
             RecommendAdapter adapter = new RecommendAdapter(getActivity(), result);
             recyclerView.setAdapter(adapter);
             if (bo){
-                recyclerView.addItemDecoration(new SpaceItemDecoration(16));
+                recyclerView.addItemDecoration(new SpaceItemDecoration(14));
                 bo=false;
             }
 

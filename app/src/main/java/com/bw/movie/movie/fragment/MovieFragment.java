@@ -87,25 +87,28 @@ public class MovieFragment extends BaseFragment {
                 HotMovieBean hotMovieBean = (HotMovieBean) data;
                 MovieShowAdapter showAdapter = new MovieShowAdapter(getActivity(),0);
                 movie_recycle_hot.setLayoutManager(new LinearLayoutManager(getActivity(),LinearLayoutManager.HORIZONTAL,false));
-                showAdapter.setHotData(hotMovieBean.getResult());
                 movie_recycle_hot.setAdapter(showAdapter);
+                showAdapter.setHotData(hotMovieBean.getResult());
+
                 Map<String,String> map = new HashMap<>();
                 doNetRequestData(Apis.URL_MOVIE_LOADING,map,LoadingMovieBean.class,"get");
             }else if (data instanceof LoadingMovieBean){
                 LoadingMovieBean loadingMovieBean = (LoadingMovieBean) data;
                 MovieShowAdapter showAdapter = new MovieShowAdapter(getActivity(),1);
                 movie_recycle_loading.setLayoutManager(new LinearLayoutManager(getActivity(),LinearLayoutManager.HORIZONTAL,false));
+                movie_recycle_loading.setAdapter(showAdapter);
                 showAdapter.setLoadData(loadingMovieBean.getResult());
                 bannerAdapter.setData(loadingMovieBean.getResult());
-                movie_recycle_loading.setAdapter(showAdapter);
+
                 Map<String,String> map = new HashMap<>();
                 doNetRequestData(Apis.URL_MOVIE_WAIT,map,WaitMovieBean.class,"get");
             }else if (data instanceof WaitMovieBean){
                 WaitMovieBean waitMovieBean = (WaitMovieBean) data;
                 MovieShowAdapter showAdapter = new MovieShowAdapter(getActivity(),2);
                 movie_recycle_wait.setLayoutManager(new LinearLayoutManager(getActivity(),LinearLayoutManager.HORIZONTAL,false));
-                showAdapter.setWaitData(waitMovieBean.getResult());
                 movie_recycle_wait.setAdapter(showAdapter);
+                showAdapter.setWaitData(waitMovieBean.getResult());
+
             }
     }
 

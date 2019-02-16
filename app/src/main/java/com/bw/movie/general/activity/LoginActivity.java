@@ -8,6 +8,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -17,6 +18,8 @@ import com.bw.movie.base.BaseActivity;
 import com.bw.movie.bean.LoginBean;
 import com.bw.movie.precenter.IPrecenterImpl;
 import com.bw.movie.util.EncryptUtil;
+import com.bw.movie.util.WeiXinUtil;
+import com.tencent.mm.opensdk.modelmsg.SendAuth;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -50,9 +53,13 @@ public class LoginActivity extends BaseActivity{
 
     @BindView(R.id.login_btn_login)          //登录按钮
             Button mButton_login;
+
+    @BindView(R.id.login_img_dsf)
+            ImageView mImageView;
     private boolean b=true;
     private IPrecenterImpl mIPrecenter;
     private SharedPreferences mPreferences;
+    private boolean mCheck;
 
     @Override
     public void initView() {
@@ -68,11 +75,11 @@ public class LoginActivity extends BaseActivity{
 
         mPreferences = getSharedPreferences("swl", MODE_PRIVATE);
 
-        boolean check = mPreferences.getBoolean("check", false);
+         mCheck = mPreferences.getBoolean("check", false);
         boolean auto = mPreferences.getBoolean("auto", false);
         String String_phone = mPreferences.getString("phone", null);
         String String_pwd = mPreferences.getString("pwd", null);
-        if (check){
+        if (mCheck){
             mTextView_phone.setText(String_phone);
             mTextView_pwd.setText(String_pwd);
             mCheckBox_rememberPwd.setChecked(true);
@@ -84,30 +91,64 @@ public class LoginActivity extends BaseActivity{
     }
 
     @Override
+    protected void onStart() {
+        super.onStart();
+        if (mCheck){
+            String String_phone = mPreferences.getString("phone", null);
+            String String_pwd = mPreferences.getString("pwd", null);
+            mTextView_phone.setText(String_phone);
+            mTextView_pwd.setText(String_pwd);
+        }
+    }
+
+    @Override
     public int getContent() {
         return R.layout.activity_login;
     }
 
-    @OnClick(R.id.login_btn_login)
-    public void onLoginButtonClickListener(){  //登录按钮监听
+    @OnClick({R.id.login_btn_login,R.id.login_img_dsf,R.id.login_text_over})
+    public void onLoginButtonClickListener(View view){
+        switch (view.getId()){
+            case R.id.login_btn_login:
+                //登录按钮监听
 
-        String phone = mTextView_phone.getText().toString().trim();
-        String pwd = mTextView_pwd.getText().toString().trim();
+                String phone = mTextView_phone.getText().toString().trim();
+                String pwd = mTextView_pwd.getText().toString().trim();
 
-        if (phone.isEmpty()||pwd.isEmpty()){
+                if (phone.isEmpty()||pwd.isEmpty()){
 
-            showShortToast(R.string.login_phone_pwd_isEmpty+"");
-        }else {
+                    showShortToast(R.string.login_phone_pwd_isEmpty+"");
+                }else {
 
-            String jmPwd = EncryptUtil.encrypt(pwd);
+                    String jmPwd = EncryptUtil.encrypt(pwd);
 
-            Map<String, String> map = new HashMap<>();
-            map.put("phone",phone);
-            map.put("pwd",jmPwd);
+                    Map<String, String> map = new HashMap<>();
+                    map.put("phone",phone);
+                    map.put("pwd",jmPwd);
 
-            doNetRequestData(Apis.URL_LOGIN,map,LoginBean.class,"post");
+                    doNetRequestData(Apis.URL_LOGIN,map,LoginBean.class,"post");
 
-            //  mIPrecenter.startRequestData(Apis.URL_LOGIN,map,LoginBean.class,"post");
+                    //  mIPrecenter.startRequestData(Apis.URL_LOGIN,map,LoginBean.class,"post");
+                }
+                break;
+            case R.id.login_img_dsf:
+                //微信登录
+                if (!WeiXinUtil.success(this)) {
+                    Toast.makeText(this, "请先安装应用", Toast.LENGTH_SHORT).show();
+                } else {
+                    //  验证
+                    SendAuth.Req req = new SendAuth.Req();
+                    req.scope = "snsapi_userinfo";
+                    req.state = "wechat_sdk_demo_test";
+                    WeiXinUtil.reg(LoginActivity.this).sendReq(req);
+                }
+                break;
+
+            case R.id.login_text_over:
+                startActivity(new Intent(LoginActivity.this,SuccessActivity.class));
+                break;
+                default:
+                    break;
         }
     }
 
@@ -125,6 +166,13 @@ public class LoginActivity extends BaseActivity{
         }
         return true;
     }
+
+    @OnClick(R.id.login_text_register)
+    public void onTextRegister(){
+
+        startActivity(new Intent(LoginActivity.this,RegisterActivity.class));
+    }
+
 
 
     @Override
@@ -167,7 +215,7 @@ public class LoginActivity extends BaseActivity{
             edit.putString("nickName",nickName);
             edit.commit();
 
-            startActivity(new Intent(LoginActivity.this,SuccessActivity.class));
+            //startActivity(new Intent(LoginActivity.this,SuccessActivity.class));
             Toast.makeText(LoginActivity.this,R.string.login_success_toast,Toast.LENGTH_SHORT).show();
             finish();
         }else {

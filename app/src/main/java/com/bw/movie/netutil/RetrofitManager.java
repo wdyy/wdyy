@@ -27,7 +27,7 @@ import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
 public class RetrofitManager {
-    private final String BASE_URL = "http://172.17.8.100/movieApi/";
+    private final String BASE_URL = "http://mobile.bwstudent.com/movieApi/";
     private static RetrofitManager instance;
 
     public static synchronized RetrofitManager getInstance() {
@@ -54,7 +54,7 @@ public class RetrofitManager {
                 //取出保存的userId,sessionId
                 SharedPreferences swl = BaseApplication.getApplication().getSharedPreferences("swl", Context.MODE_PRIVATE);
                 String sessionId = swl.getString("sessionId", "");
-                String userId = swl.getString("userId", "");
+                String userId = swl.getString("userId", "0");
 
                 //重新构造请求
                 Request.Builder newBuilder = original.newBuilder();

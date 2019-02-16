@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/dp_180"
+    android:background="#fff"
+    >
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="选择支付方式"
+        android:textSize="@dimen/sp_16"
+        android:textColor="#666666"
+        android:layout_marginTop="@dimen/dp_14"
+        android:layout_marginLeft="@dimen/dp_24"/>
+
+    <ImageView
+        android:id="@+id/fragment_pay_img_cancel"
+        android:layout_width="@dimen/dp_24"
+        android:layout_height="@dimen/dp_24"
+        android:src="@mipmap/com_icon_down_default"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="@dimen/dp_10"
+        android:layout_marginRight="@dimen/dp_24"/>
+
+    <ImageView
+        android:id="@+id/fragment_pay_img_wx"
+        android:layout_width="@dimen/dp_24"
+        android:layout_height="@dimen/dp_24"
+        android:src="@mipmap/pay_icon_weixin_default"
+        android:layout_marginTop="@dimen/dp_60"
+        android:layout_marginLeft="@dimen/dp_24"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="微信支付"
+        android:textSize="@dimen/sp_14"
+        android:textColor="#666666"
+        android:layout_marginTop="@dimen/dp_63"
+        android:layout_marginLeft="@dimen/dp_20"
+        android:layout_toRightOf="@id/fragment_pay_img_wx"
+        />
+
+    <ImageView
+        android:id="@+id/fragment_pay_img_zfb"
+        android:layout_width="@dimen/dp_24"
+        android:layout_height="@dimen/dp_24"
+        android:src="@mipmap/pay_icon_zhifubao_default"
+        android:layout_marginTop="@dimen/dp_100"
+        android:layout_marginLeft="@dimen/dp_24"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="支付宝"
+        android:textSize="@dimen/sp_14"
+        android:textColor="#666666"
+        android:layout_marginTop="@dimen/dp_103"
+        android:layout_marginLeft="@dimen/dp_20"
+        android:layout_toRightOf="@id/fragment_pay_img_zfb"
+        />
+    
+    <RadioGroup
+        android:id="@+id/fragment_pay_group"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="@dimen/dp_60"
+        android:layout_marginRight="@dimen/dp_24"
+        >
+
+        <RadioButton
+            android:id="@+id/fragment_pay_button_wx"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="true"/>
+
+        <RadioButton
+            android:id="@+id/fragment_pay_button_zfb"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_10"/>
+
+    </RadioGroup>
+
+    <TextView
+        android:id="@+id/fragment_pat_text_pay"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_40"
+        android:text=""
+        android:textSize="@dimen/sp_16"
+        android:textColor="#fff"
+        android:layout_alignParentBottom="true"
+        android:gravity="center"
+        android:background="@drawable/shape_pay_btn"
+        />
+
+</RelativeLayout>

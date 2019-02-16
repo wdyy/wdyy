@@ -12,7 +12,7 @@ import com.bw.movie.R;
 
 public class MainActivity extends AppCompatActivity {
 
-    private int t=3;
+    //private int t=3;
     boolean start;
     private SharedPreferences mPreferences;
 
@@ -22,18 +22,18 @@ public class MainActivity extends AppCompatActivity {
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
 
-            t=0;
+           /* t=0;
             if (t==0){
-                handler.removeMessages(1);
+                handler.removeMessages(1);*/
                 if (start){
-                    startActivity(new Intent(MainActivity.this,LoginActivity.class));
+                    startActivity(new Intent(MainActivity.this,SuccessActivity.class));
                     finish();
                 }else {
                     startActivity(new Intent(MainActivity.this,GuideActivity.class));
                     finish();
                 }
-            }
-            handler.sendEmptyMessageDelayed(1,2000);
+            //}
+            handler.sendEmptyMessageDelayed(1,4000);
         }
     };
     @Override

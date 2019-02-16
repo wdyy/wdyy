@@ -57,7 +57,7 @@ public class CinemaDetailListAdapter extends RecyclerView.Adapter<CinemaDetailLi
         holder.mTextView_startName.setText(list.get(position).getBeginTime());
         holder.mTextView_endTime.setText(list.get(position).getEndTime()+" end");
         holder.mTextView_price.setText(list.get(position).getSeatsTotal()+"");
-        final int id = list.get(position).getId();
+
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -66,6 +66,7 @@ public class CinemaDetailListAdapter extends RecyclerView.Adapter<CinemaDetailLi
                 String endTime = list.get(position).getEndTime();
                 String hall = list.get(position).getScreeningHall();
                 int seatsTotal = list.get(position).getSeatsTotal();
+                int id = list.get(position).getId();
 
                 mOnImgClickListener.onItemClick(id,beginTime,endTime,hall,seatsTotal);
 

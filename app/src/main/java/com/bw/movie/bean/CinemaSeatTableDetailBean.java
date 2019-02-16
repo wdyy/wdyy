@@ -7,7 +7,7 @@ package com.bw.movie.bean;
  */
 public class CinemaSeatTableDetailBean {
 
-    private int cinemasId;
+    private int scheduleId;
     private String MovieName;
     private String beginTime;
     private String endTime;
@@ -15,7 +15,7 @@ public class CinemaSeatTableDetailBean {
     private int seatsTotal;
 
     public CinemaSeatTableDetailBean(int cinemasId, String movieName, String beginTime, String endTime, String hall, int seatsTotal) {
-        this.cinemasId = cinemasId;
+        this.scheduleId = cinemasId;
         MovieName = movieName;
         this.beginTime = beginTime;
         this.endTime = endTime;
@@ -23,8 +23,8 @@ public class CinemaSeatTableDetailBean {
         this.seatsTotal = seatsTotal;
     }
 
-    public int getCinemasId() {
-        return cinemasId;
+    public int getScheduleId() {
+        return scheduleId;
     }
 
     public String getMovieName() {
