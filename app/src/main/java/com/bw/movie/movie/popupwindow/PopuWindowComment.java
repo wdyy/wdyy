@@ -13,6 +13,7 @@ import android.widget.ImageView;
 import android.widget.PopupMenu;
 import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 import com.bw.movie.R;
 import com.bw.movie.apis.Apis;
@@ -20,6 +21,9 @@ import com.bw.movie.bean.moviebean.MovieCommentDetailsBean;
 import com.bw.movie.bean.moviebean.MovieDetailsBean;
 import com.bw.movie.movie.adapter.FilmCommentAdapter;
 import com.bw.movie.netutil.RetrofitManager;
+import com.bw.movie.precenter.IPrecenter;
+import com.bw.movie.precenter.IPrecenterImpl;
+import com.bw.movie.view.IView;
 import com.google.gson.Gson;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
 
@@ -28,15 +32,17 @@ import java.util.Map;
 
 
 /**
- * Author: 王帅
+ * Author: 邵文龙
  * Date: 2019/1/26 20:10
  * Description: ${DESCRIPTION}
  */
-public class PopuWindowComment {
+public class PopuWindowComment implements IView {
     private PopupWindow popupWindow;
 
+    private ImageView film_comment_button_prise;
     private Context context;
     private MovieCommentDetailsBean resultBean;
+    private MovieCommentDetailsBean mDetailsBean;
 
     public PopuWindowComment(Context context, MovieCommentDetailsBean resultBean) {
         this.context = context;
@@ -66,6 +72,7 @@ public class PopuWindowComment {
     }
 
     private void setButtonListeners(RelativeLayout inflate) {
+        final IPrecenterImpl iPrecenter = new IPrecenterImpl(this);
         RecyclerView film_comment_recycle = inflate.findViewById(R.id.film_comment_recycle);
         //收起
         ImageView film_details_button_down = inflate.findViewById(R.id.film_details_button_down);
@@ -79,7 +86,30 @@ public class PopuWindowComment {
         FilmCommentAdapter commentAdapter = new FilmCommentAdapter(context,resultBean.getResult());
         film_comment_recycle.setLayoutManager(new LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false));
         film_comment_recycle.setAdapter(commentAdapter);
+        commentAdapter.setImageClick(new FilmCommentAdapter.onImageClickListener() {
+            @Override
+            public void onImageClick(int commentId) {
+                Map<String,String> map = new HashMap<>();
+                iPrecenter.startRequestData(String.format(Apis.URL_MOVIE_COMMENT_PRISE,commentId),map,MovieCommentDetailsBean.class,"post");
+            }
+
+            @Override
+            public void onImageClickAgain(int commentId) {
+                Toast.makeText(context,"不能重复点赞",Toast.LENGTH_SHORT).show();
+            }
+        });
 
     }
 
+    @Override
+    public void onSuccess(Object data) {
+            if (data instanceof MovieCommentDetailsBean){
+                mDetailsBean = (MovieCommentDetailsBean) data;
+            }
+    }
+
+    @Override
+    public void onFail(String error) {
+
+    }
 }

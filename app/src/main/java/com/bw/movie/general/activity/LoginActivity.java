@@ -59,6 +59,7 @@ public class LoginActivity extends BaseActivity{
     private boolean b=true;
     private IPrecenterImpl mIPrecenter;
     private SharedPreferences mPreferences;
+    private boolean mCheck;
 
     @Override
     public void initView() {
@@ -74,11 +75,11 @@ public class LoginActivity extends BaseActivity{
 
         mPreferences = getSharedPreferences("swl", MODE_PRIVATE);
 
-        boolean check = mPreferences.getBoolean("check", false);
+        mCheck = mPreferences.getBoolean("check", false);
         boolean auto = mPreferences.getBoolean("auto", false);
         String String_phone = mPreferences.getString("phone", null);
         String String_pwd = mPreferences.getString("pwd", null);
-        if (check){
+        if (mCheck){
             mTextView_phone.setText(String_phone);
             mTextView_pwd.setText(String_pwd);
             mCheckBox_rememberPwd.setChecked(true);
@@ -92,6 +93,12 @@ public class LoginActivity extends BaseActivity{
     @Override
     public int getContent() {
         return R.layout.activity_login;
+    }
+
+    @OnClick(R.id.login_text_register)
+    public void onTextRegister(){
+
+        startActivity(new Intent(LoginActivity.this,RegisterActivity.class));
     }
 
     @OnClick({R.id.login_btn_login,R.id.login_img_dsf})
@@ -150,6 +157,17 @@ public class LoginActivity extends BaseActivity{
         }
         return true;
     }
+    @Override
+    protected void onStart() {
+        super.onStart();
+        if (mCheck){
+            String String_phone = mPreferences.getString("phone", null);
+            String String_pwd = mPreferences.getString("pwd", null);
+            mTextView_phone.setText(String_phone);
+            mTextView_pwd.setText(String_pwd);
+        }
+    }
+
 
 
     @Override
