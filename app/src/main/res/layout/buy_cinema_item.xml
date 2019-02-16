@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="@dimen/dp_10"
+    android:background="@drawable/shape_cinema_recommend_item"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:fresco="http://schemas.android.com/tools">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/dp_10"
+        android:layout_marginTop="@dimen/dp_10"
+        android:layout_marginBottom="@dimen/dp_10"
+        android:layout_marginRight="@dimen/dp_20"
+        >
+        <com.facebook.drawee.view.SimpleDraweeView
+            android:id="@+id/buy_cinema_image"
+            android:layout_width="@dimen/dp_70"
+            android:layout_height="@dimen/dp_70"
+            fresco:placeholderImage="@mipmap/icon"
+            app:roundedCornerRadius="@dimen/dp_3"
+            />
+        <TextView
+            android:id="@+id/buy_cinema_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/buy_cinema_image"
+            android:layout_marginLeft="@dimen/dp_20"
+            android:textColor="#333333"
+            android:textSize="@dimen/sp_14"
+            />
+        <TextView
+            android:id="@+id/buy_cinema_address"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/buy_cinema_name"
+            android:layout_alignLeft="@id/buy_cinema_name"
+            android:layout_marginTop="@dimen/dp_10"
+            android:textColor="#333333"
+            android:textSize="@dimen/sp_12"
+            />
+        <TextView
+            android:id="@+id/buy_cinema_meter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/buy_cinema_address"
+            android:layout_alignLeft="@id/buy_cinema_name"
+            android:layout_marginTop="@dimen/dp_10"
+            />
+    </RelativeLayout>
+
+
+</LinearLayout>

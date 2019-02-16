@@ -27,7 +27,7 @@ import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
 public class RetrofitManager {
-    private final String BASE_URL = "http://172.17.8.100/movieApi/";
+    private final String BASE_URL = "http://mobile.bwstudent.com/movieApi/";
     private static RetrofitManager instance;
 
     public static synchronized RetrofitManager getInstance() {

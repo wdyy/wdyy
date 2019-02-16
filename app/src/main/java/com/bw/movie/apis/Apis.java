@@ -45,9 +45,9 @@ public class Apis {
     //根据影院ID查询该影院当前排期的电影列表
     public static final String URL_QUERY_BYCINEMAID_MOVIE="movie/v1/findAllMovieComment?cinemaId=%s";
     //根据电影ID和影院ID查询电影排期列表
-    public static final String URL_QUERY_BYFILMID_BYCINEMAID_MOVIE="movie/v1/verify/movieComment?cinemasId=%s&movieId=%s";
+    public static final String URL_QUERY_BYFILMID_BYCINEMAID_MOVIE="movie/v1/findMovieScheduleList?cinemasId=%s&movieId=%s";
     //根据电影ID查询当前排片该电影的影院列表
-    public static final String URL_QUERY_FILMID_CINEMA="movie/v1/findCommentReply?movieId=%s";
+    public static final String URL_QUERY_FILMID_CINEMA="movie/v1/findCinemasListByMovieId?movieId=%s";
     //购票下单
     public static final String URL_BUY="movie/v1/verify/commentReply?commentId=%s&replyContent=%s";
     //支付
@@ -72,6 +72,8 @@ public class Apis {
     public static final String URL_FIND_MOVIE_SCHEDULE_LIST="movie/v1/findMovieScheduleList?cinemasId=%s&movieId=%s";
     //影院评论
     public static final String URL_CINEMA_COMMENT="cinema/v1/verify/cinemaComment";
+    //查询影院用户评论列表
+    public static final String URL_CINEMA_All_COMMENT="cinema/v1/findAllCinemaComment?cinemaId=%s&page=1&count=10";
 
 
 }

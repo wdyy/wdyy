@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <item android:drawable="@drawable/shapebutton" android:state_checked="true" />
+    <item android:drawable="@drawable/shapebutton2" />
+
+    <!--切换按钮 背景 -->
+
+
+</selector>

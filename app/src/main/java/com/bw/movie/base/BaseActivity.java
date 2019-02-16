@@ -10,6 +10,7 @@ import android.widget.Toast;
 import com.bw.movie.R;
 import com.bw.movie.custom.Loading_view;
 import com.bw.movie.precenter.IPrecenterImpl;
+import com.bw.movie.util.NetworkUtil;
 import com.bw.movie.view.IView;
 
 import java.util.Map;
@@ -63,6 +64,7 @@ public abstract class BaseActivity extends AppCompatActivity implements IView{
 //            }
 //        }, 2000);
 
+        int networkType = NetworkUtil.getNetworkType(this);
 
         mPrecenter.startRequestData(url,map,clazz,type);
     }
