@@ -59,10 +59,12 @@ public class CinemaSeatTableActivity extends BaseActivity {
     public SeatTable seatTableView;
     @BindView(R.id.item_cinema_detail_img_x)
     ImageView mImageView_x;
-    private int mSeatsTotal;
-    int totalPrice = 0;
-    int num = 0;
-    private int mScheduleId;
+
+    public SeatTable seatTableView;
+    double totalPrice=0;
+    private String mHall;
+    private double mPrice;
+
 
     @Override
     public void initView() {
@@ -75,7 +77,7 @@ public class CinemaSeatTableActivity extends BaseActivity {
         EventBus.getDefault().register(this);
 
         seatTableView = (SeatTable) findViewById(R.id.seatView);
-        seatTableView.setScreenName("8号厅荧幕");//设置屏幕名称
+        seatTableView.setScreenName(mHall);//设置屏幕名称
         seatTableView.setMaxSelected(3);//设置最多选中
 
         seatTableView.setSeatChecker(new SeatTable.SeatChecker() {
@@ -98,8 +100,9 @@ public class CinemaSeatTableActivity extends BaseActivity {
 
             @Override
             public void checked(int row, int column) {
-                num++;
-                totalPrice += mSeatsTotal;
+
+                totalPrice+=mPrice;
+
 
                 mTextView_price.setText(totalPrice + "");
 
@@ -107,8 +110,9 @@ public class CinemaSeatTableActivity extends BaseActivity {
 
             @Override
             public void unCheck(int row, int column) {
-                num--;
-                totalPrice -= mSeatsTotal;
+
+                totalPrice-=mPrice;
+
 
                 mTextView_price.setText(totalPrice + "");
             }
@@ -157,9 +161,11 @@ public class CinemaSeatTableActivity extends BaseActivity {
 
         mTextView_beginTime.setText(detailsBean.getBeginTime());
         mTextView_endTime.setText(detailsBean.getEndTime());
-        mTextView_hall.setText(detailsBean.getHall());
-        mSeatsTotal = detailsBean.getSeatsTotal();
-        mScheduleId = detailsBean.getScheduleId();
+
+        mHall = detailsBean.getHall();
+        mTextView_hall.setText(mHall);
+        mPrice = detailsBean.getPrice();
+
 
     }
 

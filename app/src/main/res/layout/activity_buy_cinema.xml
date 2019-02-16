@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:layout_marginLeft="@dimen/dp_24"
+    android:layout_marginRight="@dimen/dp_24"
+    tools:context=".movie.activity.BuyCinemaActivity">
+
+    <TextView
+        android:id="@+id/buy_movie_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="铁血战士"
+        android:layout_marginTop="@dimen/dp_20"
+        android:textStyle="bold"
+        android:textColor="#333333"
+        android:textSize="@dimen/sp_18"
+        />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="选择合适的影院"
+        android:textColor="#b11450"
+        android:textSize="@dimen/sp_10"
+        android:layout_marginTop="@dimen/dp_10"
+        />
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/buy_cinema_recycle"
+        android:layout_marginTop="@dimen/dp_10"
+        android:layout_marginBottom="@dimen/dp_10"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"></android.support.v7.widget.RecyclerView>
+
+</LinearLayout>
