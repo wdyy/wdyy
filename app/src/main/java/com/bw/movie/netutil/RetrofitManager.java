@@ -54,7 +54,7 @@ public class RetrofitManager {
                 //取出保存的userId,sessionId
                 SharedPreferences swl = BaseApplication.getApplication().getSharedPreferences("swl", Context.MODE_PRIVATE);
                 String sessionId = swl.getString("sessionId", "");
-                String userId = swl.getString("userId", "");
+                String userId = swl.getString("userId", "0");
 
                 //重新构造请求
                 Request.Builder newBuilder = original.newBuilder();

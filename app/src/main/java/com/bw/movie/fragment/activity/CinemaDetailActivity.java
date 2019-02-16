@@ -95,7 +95,10 @@ public class CinemaDetailActivity extends BaseActivity {
         cinemasId = intent.getIntExtra("Id", 0);
 
 
-        doNetRequestData(String.format(Apis.URL_FIND_CINEMA_INFO,cinemasId),null,CinemaDetailBean.class,"get");
+            doNetRequestData(String.format(Apis.URL_FIND_CINEMA_INFO,cinemasId),null,CinemaDetailBean.class,"get");
+
+
+
     }
 
     @Override
@@ -194,12 +197,15 @@ public class CinemaDetailActivity extends BaseActivity {
         if (data instanceof CinemaDetailBean){   //详情数据
             CinemaDetailBean cinemaDetailBean = (CinemaDetailBean) data;
             result = cinemaDetailBean.getResult();
-            Glide.with(CinemaDetailActivity.this).load(result.getLogo()).into(mImageView);
 
-            mTextView_name.setText(result.getName());
-            mTextView_address.setText(result.getAddress());
 
-            doNetRequestData(String.format(Apis.URL_FIND_MOVIE_LIST,cinemasId),null,CinemaMovieListBean.class,"get");
+                Glide.with(CinemaDetailActivity.this).load(result.getLogo()).into(mImageView);
+
+                mTextView_name.setText(result.getName());
+                mTextView_address.setText(result.getAddress());
+
+                doNetRequestData(String.format(Apis.URL_FIND_MOVIE_LIST,cinemasId),null,CinemaMovieListBean.class,"get");
+
 
 
 
@@ -207,30 +213,33 @@ public class CinemaDetailActivity extends BaseActivity {
             CinemaMovieListBean cinemaMovieListBean = (CinemaMovieListBean) data;
             List<CinemaMovieListBean.ResultBean> result = cinemaMovieListBean.getResult();
 
-            final BannerAdapter bannerAdapter = new BannerAdapter(this);
-            bannerAdapter.setData(result);
-            mRecyclerCoverFlow.setAdapter(bannerAdapter);
+            if (result.size()!=0){
+                final BannerAdapter bannerAdapter = new BannerAdapter(this);
+                bannerAdapter.setData(result);
+                mRecyclerCoverFlow.setAdapter(bannerAdapter);
 
-            CinemaBannerSaveIdNameBean movieId1 = bannerAdapter.getMovieId(0);
-             mMovieId = movieId1.getId();
-             mName = movieId1.getName();
+                CinemaBannerSaveIdNameBean movieId1 = bannerAdapter.getMovieId(0);
+                mMovieId = movieId1.getId();
+                mName = movieId1.getName();
 
-            //根据电影ID和影院ID查询电影排期列表
-            doNetRequestData(String.format(Apis.URL_FIND_MOVIE_SCHEDULE_LIST,cinemasId,mMovieId),null,CinemaMovieScheduleBean.class,"get");
+                //根据电影ID和影院ID查询电影排期列表
+                doNetRequestData(String.format(Apis.URL_FIND_MOVIE_SCHEDULE_LIST,cinemasId,mMovieId),null,CinemaMovieScheduleBean.class,"get");
 
-            mRecyclerCoverFlow.setOnItemSelectedListener(new CoverFlowLayoutManger.OnSelected() {
-                @Override
-                public void onItemSelected(int position) {
+                mRecyclerCoverFlow.setOnItemSelectedListener(new CoverFlowLayoutManger.OnSelected() {
+                    @Override
+                    public void onItemSelected(int position) {
 
-                    CinemaBannerSaveIdNameBean movieId1 = bannerAdapter.getMovieId(position);
-                    mMovieId = movieId1.getId();
-                    mName = movieId1.getName();
-                    Toast.makeText(CinemaDetailActivity.this,mName,Toast.LENGTH_SHORT).show();
+                        CinemaBannerSaveIdNameBean movieId1 = bannerAdapter.getMovieId(position);
+                        mMovieId = movieId1.getId();
+                        mName = movieId1.getName();
+                        Toast.makeText(CinemaDetailActivity.this,mName,Toast.LENGTH_SHORT).show();
 
-                    doNetRequestData(String.format(Apis.URL_FIND_MOVIE_SCHEDULE_LIST,cinemasId,mMovieId),null,CinemaMovieScheduleBean.class,"get");
+                        doNetRequestData(String.format(Apis.URL_FIND_MOVIE_SCHEDULE_LIST,cinemasId,mMovieId),null,CinemaMovieScheduleBean.class,"get");
 
-                }
-            });
+                    }
+                });
+            }
+
 
         }else if (data instanceof CinemaMovieScheduleBean){   //List数据
             CinemaMovieScheduleBean cinemaDetailBean = (CinemaMovieScheduleBean) data;
@@ -250,7 +259,11 @@ public class CinemaDetailActivity extends BaseActivity {
                 @Override
                 public void onItemClick(int id, String beginTime, String endTime, String hall, double price) {
 
+
+                    CinemaSeatTableDetailBean detailBean = new CinemaSeatTableDetailBean(id, mName, beginTime, endTime, hall,seatsTotal);
+
                     CinemaSeatTableDetailBean detailBean = new CinemaSeatTableDetailBean(cinemasId, mName, beginTime, endTime, hall,price);
+
                     EventBus.getDefault().postSticky(detailBean);
 
                     startActivity(new Intent(CinemaDetailActivity.this,CinemaSeatTableActivity.class));

@@ -1,7 +1,9 @@
 package com.bw.movie.general.activity;
 
 import android.app.DatePickerDialog;
+
 import android.content.Intent;
+
 import android.content.SharedPreferences;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -127,6 +129,7 @@ public class RegisterActivity extends BaseActivity {
         datePicker.show();
 
     }
+
 
     @Override
     public void success(Object data) {

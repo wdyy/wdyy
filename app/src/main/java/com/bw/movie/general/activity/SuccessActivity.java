@@ -1,13 +1,16 @@
 package com.bw.movie.general.activity;
 
+import android.app.FragmentManager;
 import android.support.annotation.Nullable;
-import android.support.v4.app.FragmentManager;
+//import android.support.v4.app.FragmentManager;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.WindowManager;
+
 import android.widget.FrameLayout;
+
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -37,7 +40,9 @@ public class SuccessActivity extends BaseActivity {
     ImageView mSuccess_button_mine;
     @BindView(R.id.success_button_mines)
     ImageView mSuccess_button_mines;
+
     private FragmentManager mManager;
+
     private MovieFragment mMovieFragment;
     private CinemaFragment mCinemaFragment;
     private MineFragment mMineFragment;
@@ -97,7 +102,11 @@ public class SuccessActivity extends BaseActivity {
                 mSuccess_button_mine.setVisibility(View.VISIBLE);
                 mSuccess_button_mines.setVisibility(View.INVISIBLE);
 
+
+                android.support.v4.app.FragmentManager movie = getSupportFragmentManager();
+
                 FragmentManager movie = getSupportFragmentManager();
+
                 FragmentTransaction transactionFilm = movie.beginTransaction();
                 transactionFilm.hide(mMineFragment);
                 transactionFilm.hide(mCinemaFragment);
@@ -112,7 +121,11 @@ public class SuccessActivity extends BaseActivity {
                 mSuccess_button_mine.setVisibility(View.VISIBLE);
                 mSuccess_button_mines.setVisibility(View.INVISIBLE);
 
+
+                android.support.v4.app.FragmentManager cinema = getSupportFragmentManager();
+
                 FragmentManager cinema = getSupportFragmentManager();
+
                 FragmentTransaction transactionCinema = cinema.beginTransaction();
                 if (cinema.findFragmentByTag(mCinemaFragment.getClass().getName()) == null) {
                     transactionCinema.add(R.id.three_frag, mCinemaFragment, mCinemaFragment.getClass().getName());
@@ -130,7 +143,11 @@ public class SuccessActivity extends BaseActivity {
                 mSuccess_button_mine.setVisibility(View.INVISIBLE);
                 mSuccess_button_mines.setVisibility(View.VISIBLE);
 
+
+                android.support.v4.app.FragmentManager mine = getSupportFragmentManager();
+
                 FragmentManager mine = getSupportFragmentManager();
+
                 FragmentTransaction transactionMine = mine.beginTransaction();
                 if (mine.findFragmentByTag(mMineFragment.getClass().getName()) == null) {
                     transactionMine.add(R.id.three_frag, mMineFragment, mMineFragment.getClass().getName());
@@ -167,4 +184,5 @@ public class SuccessActivity extends BaseActivity {
     public void fail(String error) {
 
     }
+
 }

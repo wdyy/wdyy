@@ -14,8 +14,10 @@ public class CinemaSeatTableDetailBean {
     private String hall;
     private double price;
 
+
     public CinemaSeatTableDetailBean(int scheduleId, String movieName, String beginTime, String endTime, String hall, double price) {
         this.scheduleId = scheduleId;
+
         MovieName = movieName;
         this.beginTime = beginTime;
         this.endTime = endTime;

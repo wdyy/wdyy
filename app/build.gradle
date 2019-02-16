@@ -7,6 +7,8 @@ android {
             keyPassword '123456'
             storeFile file('movie.keystore')
 
+            storeFile file('E:/wdyy/app/movie.keystore')
+
             storePassword '123456'
         }
     }
@@ -65,4 +67,5 @@ dependencies {
     implementation 'com.chenlittleping:recyclercoverflow:1.0.6'
     implementation 'fm.jiecao:jiecaovideoplayer:4.8.3'
     implementation 'com.tencent.mm.opensdk:wechat-sdk-android-with-mta:+'
+
 }

@@ -103,7 +103,7 @@ public class GuideActivity extends BaseActivity {
 
     @OnClick(R.id.activity_guide_into)
     public void onBtnClickListener(){
-        startActivity(new Intent(GuideActivity.this,LoginActivity.class));
+        startActivity(new Intent(GuideActivity.this,SuccessActivity.class));
 
     }
     @Override
