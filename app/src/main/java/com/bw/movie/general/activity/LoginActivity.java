@@ -75,7 +75,9 @@ public class LoginActivity extends BaseActivity{
 
         mPreferences = getSharedPreferences("swl", MODE_PRIVATE);
 
-         mCheck = mPreferences.getBoolean("check", false);
+
+        mCheck = mPreferences.getBoolean("check", false);
+
         boolean auto = mPreferences.getBoolean("auto", false);
         String String_phone = mPreferences.getString("phone", null);
         String String_pwd = mPreferences.getString("pwd", null);
@@ -106,7 +108,16 @@ public class LoginActivity extends BaseActivity{
         return R.layout.activity_login;
     }
 
+
     @OnClick({R.id.login_btn_login,R.id.login_img_dsf,R.id.login_text_over})
+
+    public void onTextRegister(){
+
+        startActivity(new Intent(LoginActivity.this,RegisterActivity.class));
+    }
+
+    @OnClick({R.id.login_btn_login,R.id.login_img_dsf})
+
     public void onLoginButtonClickListener(View view){
         switch (view.getId()){
             case R.id.login_btn_login:
@@ -166,6 +177,17 @@ public class LoginActivity extends BaseActivity{
         }
         return true;
     }
+    @Override
+    protected void onStart() {
+        super.onStart();
+        if (mCheck){
+            String String_phone = mPreferences.getString("phone", null);
+            String String_pwd = mPreferences.getString("pwd", null);
+            mTextView_phone.setText(String_phone);
+            mTextView_pwd.setText(String_pwd);
+        }
+    }
+
 
     @OnClick(R.id.login_text_register)
     public void onTextRegister(){

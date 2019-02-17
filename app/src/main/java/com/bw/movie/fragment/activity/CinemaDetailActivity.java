@@ -257,9 +257,13 @@ public class CinemaDetailActivity extends BaseActivity {
 
             listAdapter.setOnImgClickListener(new CinemaDetailListAdapter.OnImgClickListener() {//条目点击
                 @Override
-                public void onItemClick(int id, String beginTime, String endTime, String hall, int seatsTotal) {
+                public void onItemClick(int id, String beginTime, String endTime, String hall, double price) {
+
 
                     CinemaSeatTableDetailBean detailBean = new CinemaSeatTableDetailBean(id, mName, beginTime, endTime, hall,seatsTotal);
+
+                    CinemaSeatTableDetailBean detailBean = new CinemaSeatTableDetailBean(cinemasId, mName, beginTime, endTime, hall,price);
+
                     EventBus.getDefault().postSticky(detailBean);
 
                     startActivity(new Intent(CinemaDetailActivity.this,CinemaSeatTableActivity.class));

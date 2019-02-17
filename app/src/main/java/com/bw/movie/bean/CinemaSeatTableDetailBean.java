@@ -12,15 +12,17 @@ public class CinemaSeatTableDetailBean {
     private String beginTime;
     private String endTime;
     private String hall;
-    private int seatsTotal;
+    private double price;
 
-    public CinemaSeatTableDetailBean(int cinemasId, String movieName, String beginTime, String endTime, String hall, int seatsTotal) {
-        this.scheduleId = cinemasId;
+
+    public CinemaSeatTableDetailBean(int scheduleId, String movieName, String beginTime, String endTime, String hall, double price) {
+        this.scheduleId = scheduleId;
+
         MovieName = movieName;
         this.beginTime = beginTime;
         this.endTime = endTime;
         this.hall = hall;
-        this.seatsTotal = seatsTotal;
+        this.price = price;
     }
 
     public int getScheduleId() {
@@ -43,7 +45,7 @@ public class CinemaSeatTableDetailBean {
         return hall;
     }
 
-    public int getSeatsTotal() {
-        return seatsTotal;
+    public double getPrice() {
+        return price;
     }
 }
