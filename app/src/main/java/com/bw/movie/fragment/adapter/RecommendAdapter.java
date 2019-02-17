@@ -43,8 +43,8 @@ public class RecommendAdapter extends RecyclerView.Adapter<RecommendAdapter.View
     }
 
     public interface OnImgClickListener{
-        void onImgClick(int id);
-        void onImgCancelClick(int id);
+        void onImgClick(int id,ViewHolder holder,int position);
+        void onImgCancelClick(int id,ViewHolder holder,int position);
         void onItemClick(int id);
     }
 
@@ -65,11 +65,6 @@ public class RecommendAdapter extends RecyclerView.Adapter<RecommendAdapter.View
 
         final int followCinema = list.get(position).getFollowCinema();
 
-        if (followCinema==1){
-            holder.mImageView_xin.setImageResource(R.mipmap.com_icon_collection_selected);
-        }else {
-            holder.mImageView_xin.setImageResource(R.mipmap.com_icon_collection_default);
-        }
             if (followCinema==1){
                 holder.mImageView_xin.setImageResource(R.mipmap.com_icon_collection_selected);
             }else {
@@ -79,25 +74,20 @@ public class RecommendAdapter extends RecyclerView.Adapter<RecommendAdapter.View
         holder.mImageView_xin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                int followCinema = list.get(position).getFollowCinema();
 
                 if (followCinema==1){
 
-                    list.get(position).setFollowCinema(2);
-
                     if (mOnImgClickListener!=null){
-                        mOnImgClickListener.onImgCancelClick(id);
+                        mOnImgClickListener.onImgCancelClick(id,holder,position);
                     }
-                    holder.mImageView_xin.setImageResource(R.mipmap.com_icon_collection_default);
-                    notifyDataSetChanged();
+
                 }else {
-                    list.get(position).setFollowCinema(1);
 
                     if (mOnImgClickListener!=null){
-                        mOnImgClickListener.onImgClick(id);
+                        mOnImgClickListener.onImgClick(id,holder,position);
                     }
-                    holder.mImageView_xin.setImageResource(R.mipmap.com_icon_collection_selected);
-                    notifyDataSetChanged();
+
                 }
 
 
@@ -110,6 +100,16 @@ public class RecommendAdapter extends RecyclerView.Adapter<RecommendAdapter.View
                 mOnImgClickListener.onItemClick(id);
             }
         });
+    }
+
+    public void setImgClick(ViewHolder holder,int position){
+        list.get(position).setFollowCinema(1);
+        notifyItemChanged(position);
+    }
+
+    public void setImgCancelClick(ViewHolder holder,int position){
+        list.get(position).setFollowCinema(2);
+        notifyItemChanged(position);
     }
 
     @Override
