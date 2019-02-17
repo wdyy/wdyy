@@ -8,6 +8,7 @@ import android.net.NetworkInfo;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -40,6 +41,8 @@ public class RecommendFragment extends BaseFragment {
     RecyclerView recyclerView;
 
     private Boolean bo=true;
+    RecommendAdapter adapter;
+    private int p=0;
 
     @Override
     public void initView(View view) {
@@ -125,8 +128,17 @@ public class RecommendFragment extends BaseFragment {
                 //显示对话框
                 dialog.show();
 
-            }else {
+            }else if (registerBean.getMessage().equals("关注成功")){
 
+                adapter.setImgClick(null,p);
+
+                Toast.makeText(getActivity(),registerBean.getMessage(),Toast.LENGTH_SHORT).show();
+            }else if (registerBean.getMessage().equals("取消关注成功")){
+
+                adapter.setImgCancelClick(null,p);
+
+                Toast.makeText(getActivity(),registerBean.getMessage(),Toast.LENGTH_SHORT).show();
+            }else {
                 Toast.makeText(getActivity(),registerBean.getMessage(),Toast.LENGTH_SHORT).show();
             }
 
@@ -146,7 +158,7 @@ public class RecommendFragment extends BaseFragment {
         RecommendCinemaBean recommendBean = (RecommendCinemaBean) data;
         List<RecommendCinemaBean.ResultBean> result = recommendBean.getResult();
 
-        RecommendAdapter adapter = new RecommendAdapter(getActivity(), result);
+        adapter = new RecommendAdapter(getActivity(), result);
         recyclerView.setAdapter(adapter);
         if (bo){
             recyclerView.addItemDecoration(new SpaceItemDecoration(14));
@@ -157,17 +169,19 @@ public class RecommendFragment extends BaseFragment {
 
         adapter.setOnImgClickListener(new RecommendAdapter.OnImgClickListener() {
             @Override
-            public void onImgClick(int id) {  //关注
+            public void onImgClick(int id, RecommendAdapter.ViewHolder holder ,int position) {  //关注
                 //Toast.makeText(getActivity(),id+"关注",Toast.LENGTH_SHORT).show();
                 doNetRequestData(String.format(Apis.UEL_FOLLOW_CINEMA,id),null,RegisterBean.class,"get");
 
+                p=position;
             }
 
             @Override
-            public void onImgCancelClick(int id) {  //取消关注
+            public void onImgCancelClick(int id, RecommendAdapter.ViewHolder holder ,int position) {  //取消关注
                 //Toast.makeText(getActivity(),id+"取消",Toast.LENGTH_SHORT).show();
                 doNetRequestData(String.format(Apis.UEL_CANCEL_FOLLOW_CINEMA,id),null,RegisterBean.class,"get");
 
+                p=position;
             }
 
             @Override
@@ -180,5 +194,6 @@ public class RecommendFragment extends BaseFragment {
 
             }
         });
+
     }
 }
