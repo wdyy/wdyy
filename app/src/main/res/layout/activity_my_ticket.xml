@@ -1,9 +1,59 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".my.fragment.userticket.MyTicketActivity">
-
-</android.support.constraint.ConstraintLayout>
+    tools:context=".my.userticket.MyTicketActivity">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <RadioGroup
+            android:id="@+id/ticket_rg"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_marginTop="@dimen/dp_40"
+            android:orientation="horizontal">
+            <RadioButton
+                android:id="@+id/ticket_rb1"
+                android:layout_width="@dimen/dp_83"
+                android:layout_height="@dimen/dp_25"
+                android:button="@null"
+                android:gravity="center"
+                android:checked="true"
+                android:background="@drawable/attenrutton"
+                android:layout_marginRight="@dimen/dp_30"
+                android:textColor="@drawable/cinema_text_color"
+                android:text="待付款"/>
+            <RadioButton
+                android:id="@+id/ticket_rb2"
+                android:layout_width="@dimen/dp_83"
+                android:layout_height="@dimen/dp_25"
+                android:button="@null"
+                android:gravity="center"
+                android:checked="false"
+                android:background="@drawable/attenrutton1"
+                android:textColor="@drawable/cinema_text_color"
+                android:text="已付款"/>
+        </RadioGroup>
+        <FrameLayout
+            android:id="@+id/ticket_fragment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+        <android.support.v4.view.ViewPager
+            android:id="@+id/ticket_pager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+    </LinearLayout>
+    <ImageView
+        android:id="@+id/ticket_image"
+        android:layout_width="@dimen/dp_60"
+        android:layout_height="@dimen/dp_60"
+        android:layout_alignParentBottom="true"
+        android:layout_marginLeft="@dimen/dp_18"
+        android:layout_marginBottom="@dimen/dp_17"
+        android:background="@drawable/idea_activity_back"/>
+</RelativeLayout>

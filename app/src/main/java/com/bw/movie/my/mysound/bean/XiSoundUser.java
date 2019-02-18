@@ -1,23 +1,22 @@
-package com.bw.movie.my.updatehead.bean;
+package com.bw.movie.my.mysound.bean;
 
 import com.bw.movie.base.BaseEntity;
 
 /**
- *  郭佳兴
- *  修改头像bean类
-* */
-public class UpdateHeadEntity extends BaseEntity {
+ * 郭佳兴
+ */
+public class XiSoundUser extends BaseEntity {
 
-    private String headPath;
+    private int count;
     private String message;
     private String status;
 
-    public String getHeadPath() {
-        return headPath;
+    public int getCount() {
+        return count;
     }
 
-    public void setHeadPath(String headPath) {
-        this.headPath = headPath;
+    public void setCount(int count) {
+        this.count = count;
     }
 
     public String getMessage() {

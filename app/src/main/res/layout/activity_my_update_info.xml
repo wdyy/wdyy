@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -213,6 +212,7 @@
 
 
             <RelativeLayout
+                android:id="@+id/chongzhimima1"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dp_45">
 
@@ -222,14 +222,14 @@
                     android:layout_centerVertical="true"
                     android:text="重置密码" />
 
-               <ImageView
-                   android:id="@+id/chongzhimima"
-                   android:layout_width="24dp"
-                   android:layout_height="24dp"
-                   android:layout_alignParentRight="true"
-                   android:layout_centerVertical="true"
-                   android:layout_marginLeft="@dimen/dp_100"
-                   android:src="@drawable/com_icon_next_default_hdpi" />
+                <ImageView
+                    android:focusable="false"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/dp_100"
+                    android:src="@drawable/com_icon_next_default_hdpi" />
             </RelativeLayout>
         </LinearLayout>
 

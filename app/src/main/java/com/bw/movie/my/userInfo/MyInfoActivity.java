@@ -31,6 +31,7 @@ import butterknife.OnClick;
 
 /**
  * 用户信息
+ * 郭佳兴
  */
 public class MyInfoActivity extends BaseActivity {
     @BindView(R.id.my_headimage)
@@ -81,7 +82,6 @@ public class MyInfoActivity extends BaseActivity {
 
     @Override
     public void success(Object data) {
-
         if (data instanceof MyMessageEntity) {
             MyMessageEntity myMessageEntity = (MyMessageEntity) data;
             mResult = myMessageEntity.getResult();

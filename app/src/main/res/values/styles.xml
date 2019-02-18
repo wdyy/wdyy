@@ -7,18 +7,26 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
     </style>
-    <style name="My_CheckBox" parent="Widget.AppCompat.CompoundButton.CheckBox">
-        <item name="colorControlActivated">@color/colorPrimary</item>
-        <item name="colorControlNormal">#fff</item>
+
+    <style name="MyEditText" parent="Theme.AppCompat.Light">
+        <item name="colorControlNormal">@color/RED</item>
+        <item name="colorControlActivated">@color/RED</item>
     </style>
+
+
     <style name="MyCheckBox" parent="Base.Widget.AppCompat.CompoundButton.CheckBox">
         <item name="colorControlNormal">@color/white</item>
         <item name="colorControlActivated">@color/white</item>
+    </style>
+    <style name="My_CheckBox" parent="Widget.AppCompat.CompoundButton.CheckBox">
+        <item name="colorControlActivated">@color/colorPrimary</item>
+        <item name="colorControlNormal">#fff</item>
     </style>
     <style name="CustomDialog" parent="Theme.AppCompat.Dialog">
         <item name="android:backgroundDimEnabled">false</item>
         <item name="android:windowBackground">@android:color/transparent</item>
     </style>
+
     <style name="Popupwindow">
         <item name="android:windowEnterAnimation">@anim/window_out</item>
         <item name="android:windowExitAnimation">@anim/window_back</item>
