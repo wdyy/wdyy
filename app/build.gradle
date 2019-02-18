@@ -6,6 +6,8 @@ android {
             keyAlias 'bw_movie'
             keyPassword '123456'
             storeFile file('movie.keystore')
+          /*  storeFile file('E:/wdyy/app/movie.keystore')*/
+ 
             storePassword '123456'
         }
     }
@@ -48,7 +50,13 @@ android {
             }
         }
     }
-}
+
+    sourceSets {
+        main {
+            jniLibs.srcDirs = ['libs']
+        }
+    }
+    }
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
@@ -81,7 +89,12 @@ dependencies {
     implementation 'top.zibin:Luban:1.1.8'
 
     //信鸽普通版本jar，不包含厂商通道
-    implementation 'com.tencent.xinge:xinge:4.0.4-release'
-    //信鸽厂商通道版本jar，包含厂商通道(此版本已经集成厂商通道，无需另外导入厂商依赖包)
-    implementation 'com.tencent.xinge:xinge:4.0.4-otherpush-release'
+    implementation  'com.tencent.xinge:xinge:4.0.5-release'
+    //implementation'com.tencent.xinge:xinge:4.3.1-beta'
+    //jg包
+    implementation'com.tencent.jg:jg:1.1'
+    //wup包
+    implementation 'com.tencent.wup:wup:1.0.0.E-release'
+    //mid包，minSdkVersion 14
+    implementation 'com.tencent.mid:mid:4.0.7-Release'
 }

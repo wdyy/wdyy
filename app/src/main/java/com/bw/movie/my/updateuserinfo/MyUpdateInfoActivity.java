@@ -12,7 +12,6 @@ import android.support.annotation.RequiresApi;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.WindowManager;
-import android.widget.ImageView;
 import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -26,9 +25,11 @@ import com.bw.movie.my.updatehead.UpdateHeadEntity;
 import com.bw.movie.my.updateuserinfo.bean.UpDateUserInfoEntity;
 import com.bw.movie.my.updateuserpwd.MyUpdatePwdActivity;
 import com.bw.movie.my.userInfo.MyInfoActivity;
+import com.bw.movie.precenter.IPrecenterImpl;
 import com.bw.movie.util.ImageUtil;
 import com.bw.movie.util.LunBanUtil;
 import com.bw.movie.util.ToastUtil;
+import com.bw.movie.view.IView;
 import com.facebook.drawee.view.SimpleDraweeView;
 
 import java.io.File;
@@ -41,6 +42,10 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
+/**
+ * 修改用户信息
+ * 郭佳兴
+ */
 public class MyUpdateInfoActivity extends BaseActivity {
 
     @BindView(R.id.mtouxiang)
@@ -91,8 +96,6 @@ public class MyUpdateInfoActivity extends BaseActivity {
         gc.setTimeInMillis(Long.parseLong(s));
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
         mMriqi.setText(df.format(gc.getTime()));
-
-
     }
 
     @Override
@@ -236,15 +239,27 @@ public class MyUpdateInfoActivity extends BaseActivity {
     }
 
     public void getCamera(File file) {
-        Map<String, String> map = new HashMap<>();
+        Map<String, File> map = new HashMap<>();
+        map.put("file", file);
+        new IPrecenterImpl(new IView() {
+            @Override
+            public void onSuccess(Object data) {
+                if (data instanceof UpdateHeadEntity) {
+                    UpdateHeadEntity updateHeadEntity = (UpdateHeadEntity) data;
+                    if (!updateHeadEntity.getStatus().equals("0000")) {
+                        ToastUtil.Toast("上传失败");
+                    } else {
+                        String headPath = updateHeadEntity.getHeadPath();
+                        Uri uri = Uri.parse(headPath);
+                        mMtouxiang.setImageURI(uri);
+                    }
+                }
+            }
+            @Override
+            public void onFail(String error) {
 
-        UpdateHeadEntity updateHeadEntity = new UpdateHeadEntity();
-        if (!updateHeadEntity.getStatus().equals("0000")) {
-            ToastUtil.Toast("上传失败");
-        } else {
-            String headPath = updateHeadEntity.getHeadPath();
-            Uri uri = Uri.parse(headPath);
-            mMtouxiang.setImageURI(uri);
-        }
+            }
+        }).startRequestData(MineUrlConstant.UPLOADHEAD, null, UpdateHeadEntity.class, "getHead");
+
     }
 }

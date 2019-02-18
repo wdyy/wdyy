@@ -25,6 +25,10 @@ import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * 版本更新
+ * 郭佳兴
+ */
 public class MyLatestVersionActivity extends BaseActivity {
 
 

@@ -25,6 +25,7 @@ import butterknife.Unbinder;
 
 /**
  * 郭佳兴
+ * 关注的影片
  **/
 public class AtterionFilmFragment extends BaseFragment {
 
@@ -33,7 +34,7 @@ public class AtterionFilmFragment extends BaseFragment {
     Unbinder mUnbinder;
     @BindView(R.id.attenSwipeRefreshLayout2)
     SwipeRefreshLayout mSwipeRefreshLayout;
-    private Map<String, String> mMap;
+    private int page = 1;
 
     @Override
     public void initView(View view) {
@@ -44,13 +45,13 @@ public class AtterionFilmFragment extends BaseFragment {
     @Override
     public void initData(View view) {
 
-        mMap = new HashMap<>();
+
         doNetRequestData(MineUrlConstant.ATTENTIONFILM, null, MyAttFilmUser.class, "get");
 
         mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                doNetRequestData(MineUrlConstant.ATTENTIONFILM, null, MyAttFilmUser.class, "get");
+                doNetRequestData(MineUrlConstant.ATTENTIONFILM + page++, null, MyAttFilmUser.class, "get");
             }
         });
     }

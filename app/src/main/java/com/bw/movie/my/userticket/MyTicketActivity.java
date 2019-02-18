@@ -19,6 +19,10 @@ import com.bw.movie.my.userticket.unpaid.UnpaidFragment;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
+/**
+ * 购片记录
+ * 郭佳兴
+ */
 public class MyTicketActivity extends BaseActivity {
 
     @BindView(R.id.ticket_rb1)

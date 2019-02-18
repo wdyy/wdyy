@@ -75,8 +75,41 @@ public class IModelImpl implements IModel {
                         }
                     }
                 });
-
                 break;
+
+
+            case "getHead":
+
+                RetrofitManager.getInstance().post(url, map, new RetrofitManager.HttpListener() {
+                    @Override
+                    public void onSuccess(String data) {
+
+                        try {
+                            Object o = new Gson().fromJson(data, clazz);
+                            if (myCallBack != null) {
+                                myCallBack.onSuccess(o);
+                            }
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                            Log.d("sss", e.getMessage());
+                            if (myCallBack != null) {
+                                myCallBack.onFail(e.getMessage());
+                            }
+                        }
+
+                    }
+
+                    @Override
+                    public void onFail(String error) {
+                        Log.d("sss", error);
+                        if (myCallBack != null) {
+                            myCallBack.onFail(error);
+                        }
+                    }
+                });
+                break;
+
+
         }
 
     }

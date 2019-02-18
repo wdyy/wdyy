@@ -24,6 +24,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 /**
+ * 关注的影院
  * 郭佳兴
  **/
 public class AttentioncinemaFragment extends BaseFragment {
@@ -34,7 +35,7 @@ public class AttentioncinemaFragment extends BaseFragment {
     @BindView(R.id.attenSwipeRefreshLayout)
     SwipeRefreshLayout mSwipeRefreshLayout;
     private List<ResultBean> mResult;
-    private Map<String, String> mMap;
+    private int page = 1;
 
     @Override
     public void initView(View view) {
@@ -44,13 +45,13 @@ public class AttentioncinemaFragment extends BaseFragment {
     @Override
     public void initData(View view) {
         ButterKnife.bind(this, view);
-        mMap = new HashMap<>();
+
         doNetRequestData(MineUrlConstant.ATTENTIONCINEMA, null, AttCinemaUser.class, "get");
 
         mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                doNetRequestData(MineUrlConstant.ATTENTIONCINEMA, null, AttCinemaUser.class, "get");
+                doNetRequestData(MineUrlConstant.ATTENTIONCINEMA+page++, null, AttCinemaUser.class, "get");
             }
         });
     }

@@ -23,6 +23,10 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
+/**
+ * 修改密码
+ * 郭佳兴
+ */
 public class MyUpdatePwdActivity extends BaseActivity {
 
     @BindView(R.id.update_oldpwd)

@@ -191,6 +191,7 @@ public class LoginActivity extends BaseActivity {
             edit.putString("userId", userId + "");
             edit.putString("headPic", headPic);
             edit.putString("nickName", nickName);
+            edit.putString("ak", "0110010010000");
             edit.commit();
 
             startActivity(new Intent(LoginActivity.this, SuccessActivity.class));
