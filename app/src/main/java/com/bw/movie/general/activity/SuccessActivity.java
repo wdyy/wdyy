@@ -41,7 +41,7 @@ public class SuccessActivity extends BaseActivity {
     @BindView(R.id.success_button_mines)
     ImageView mSuccess_button_mines;
 
-    private FragmentManager mManager;
+    private android.support.v4.app.FragmentManager mManager;
 
     private MovieFragment mMovieFragment;
     private CinemaFragment mCinemaFragment;
@@ -105,7 +105,7 @@ public class SuccessActivity extends BaseActivity {
 
                 android.support.v4.app.FragmentManager movie = getSupportFragmentManager();
 
-                FragmentManager movie = getSupportFragmentManager();
+                //FragmentManager movie = getSupportFragmentManager();
 
                 FragmentTransaction transactionFilm = movie.beginTransaction();
                 transactionFilm.hide(mMineFragment);
@@ -124,7 +124,7 @@ public class SuccessActivity extends BaseActivity {
 
                 android.support.v4.app.FragmentManager cinema = getSupportFragmentManager();
 
-                FragmentManager cinema = getSupportFragmentManager();
+                //FragmentManager cinema = getSupportFragmentManager();
 
                 FragmentTransaction transactionCinema = cinema.beginTransaction();
                 if (cinema.findFragmentByTag(mCinemaFragment.getClass().getName()) == null) {
@@ -146,7 +146,7 @@ public class SuccessActivity extends BaseActivity {
 
                 android.support.v4.app.FragmentManager mine = getSupportFragmentManager();
 
-                FragmentManager mine = getSupportFragmentManager();
+                //FragmentManager mine = getSupportFragmentManager();
 
                 FragmentTransaction transactionMine = mine.beginTransaction();
                 if (mine.findFragmentByTag(mMineFragment.getClass().getName()) == null) {
