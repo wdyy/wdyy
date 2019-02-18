@@ -118,6 +118,7 @@ public class MineFragment extends BaseFragment {
                 String sessionId = mSwl.getString("sessionId", "");
                 if (sessionId.equals("")) {
                     ToastUtil.Toast("系统检测到您未登录,请先登录");
+                    startActivity(new Intent(getActivity(),LoginActivity.class));
                 } else {
                     Intent intent = new Intent(getContext(), ScaleImageActivity.class);
                     //创建一个Rect,报错当前imageview的位置信息

@@ -1,9 +1,11 @@
 package com.bw.movie.model;
 
+import android.content.Context;
 import android.util.Log;
 
 import com.bw.movie.callback.MyCallBack;
 import com.bw.movie.netutil.RetrofitManager;
+import com.bw.movie.util.FileUtils;
 import com.google.gson.Gson;
 
 import java.util.Map;
@@ -19,6 +21,8 @@ public class IModelImpl implements IModel {
                 RetrofitManager.getInstance().get(url, new RetrofitManager.HttpListener() {
                     @Override
                     public void onSuccess(String data) {
+
+
 
                         try {
 

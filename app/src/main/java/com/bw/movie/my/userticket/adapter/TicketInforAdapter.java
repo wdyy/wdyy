@@ -51,7 +51,7 @@ public class TicketInforAdapter extends RecyclerView.Adapter<TicketInforAdapter.
             GregorianCalendar gc = new GregorianCalendar();
             gc.setTimeInMillis(Long.parseLong(createTime));
             SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm");
-            ((MyTicketViewHolder) result).longText.setText(df.format(gc.getTime()));
+            myTicketViewHolder.longText.setText(df.format(gc.getTime()));
             if (result.get(i).getStatus() == 1) {
                 myTicketViewHolder.nopay.setText("待付款");
             } else if (result.get(i).getStatus() == 2) {

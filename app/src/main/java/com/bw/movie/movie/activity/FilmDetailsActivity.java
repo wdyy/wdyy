@@ -1,9 +1,7 @@
 package com.bw.movie.movie.activity;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -16,7 +14,6 @@ import com.bw.movie.base.BaseActivity;
 import com.bw.movie.bean.RegisterBean;
 import com.bw.movie.bean.moviebean.MovieCommentDetailsBean;
 import com.bw.movie.bean.moviebean.MovieDetailsBean;
-import com.bw.movie.movie.adapter.FilmCosplayAdapter;
 import com.bw.movie.movie.popupwindow.PopuWindowComment;
 import com.bw.movie.movie.popupwindow.PopuWindowDetails;
 import com.bw.movie.movie.popupwindow.PopuWindowNotice;
@@ -24,7 +21,6 @@ import com.bw.movie.movie.popupwindow.PopuWindowStills;
 import com.facebook.drawee.view.SimpleDraweeView;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import butterknife.BindView;
@@ -34,8 +30,6 @@ import butterknife.OnClick;
 public class FilmDetailsActivity extends BaseActivity {
 
 
-    @BindView(R.id.film_details_title)
-    TextView film_details_title;
     @BindView(R.id.film_details_image)
     SimpleDraweeView film_details_image;
     @BindView(R.id.film_details_image_bg)
@@ -50,6 +44,12 @@ public class FilmDetailsActivity extends BaseActivity {
     Button film_button_stills;
     @BindView(R.id.film_button_comment)
     Button film_button_comment;
+    @BindView(R.id.film_details_title)
+    TextView film_details_title;
+    @BindView(R.id.film_button_return)
+    ImageView film_button_return;
+    @BindView(R.id.film_button_buy)
+    Button film_button_buy;
     private int mId;
     private MovieDetailsBean mBean;
     private MovieCommentDetailsBean mCommentDetailsBean;
@@ -65,36 +65,40 @@ public class FilmDetailsActivity extends BaseActivity {
         ButterKnife.bind(this);
         Intent intent = getIntent();
         mId = intent.getIntExtra("id", 0);
-        Map<String,String> map = new HashMap<>();
-        doNetRequestData(String.format(Apis.URL_MOVIE_DETAILS,mId),map,MovieDetailsBean.class,"get");
+        Map<String, String> map = new HashMap<>();
+        doNetRequestData(String.format(Apis.URL_MOVIE_DETAILS, mId), map, MovieDetailsBean.class, "get");
 
 
     }
 
-    @OnClick({R.id.film_button_details,R.id.film_button_notice,R.id.film_button_stills,R.id.film_button_comment
-            ,R.id.film_button_return,R.id.film_button_buy,R.id.film_details_image_gz})
-    public void onFilmButton(View view){
-        switch (view.getId()){
+    @OnClick({R.id.film_button_details, R.id.film_button_notice, R.id.film_button_stills, R.id.film_button_comment
+            , R.id.film_button_return, R.id.film_button_buy, R.id.film_details_image_gz})
+    public void onFilmButton(View view) {
+        switch (view.getId()) {
             case R.id.film_button_details:
-                PopuWindowDetails windowDetails = new PopuWindowDetails(this,mBean);
+                PopuWindowDetails windowDetails = new PopuWindowDetails(this, mBean);
                 windowDetails.bottomwindow(film_button_details);
                 break;
             case R.id.film_button_notice:
-                PopuWindowNotice windowNotice = new PopuWindowNotice(this,mBean);
+                PopuWindowNotice windowNotice = new PopuWindowNotice(this, mBean);
                 windowNotice.bottomwindow(film_button_notice);
                 break;
             case R.id.film_button_stills:
-                PopuWindowStills windowStills = new PopuWindowStills(this,mBean);
+                PopuWindowStills windowStills = new PopuWindowStills(this, mBean);
                 windowStills.bottomwindow(film_button_stills);
                 break;
             case R.id.film_button_comment:
-                PopuWindowComment windowComment = new PopuWindowComment(this,mCommentDetailsBean);
+                PopuWindowComment windowComment = new PopuWindowComment(this, mCommentDetailsBean);
                 windowComment.bottomwindow(film_button_comment);
                 break;
             case R.id.film_button_return:
                 finish();
                 break;
             case R.id.film_button_buy:
+                Intent intent = new Intent(FilmDetailsActivity.this,BuyCinemaActivity.class);
+                intent.putExtra("movieId",mId);
+                intent.putExtra("moviename",mBean.getResult().getName());
+                startActivity(intent);
                 break;
             case R.id.film_details_image_gz:
                 Xin();
@@ -102,15 +106,16 @@ public class FilmDetailsActivity extends BaseActivity {
         }
     }
 
-    public void Xin(){
-        if (mFollowMovie == 1){
-            doNetRequestData(String.format(Apis.URL_CANCLE_FLLOW_MOVIE,mId),null,RegisterBean.class,"get");
+    public void Xin() {
+        if (mFollowMovie == 1) {
+            doNetRequestData(String.format(Apis.URL_CANCLE_FLLOW_MOVIE, mId), null, RegisterBean.class, "get");
             film_details_image_gz.setImageResource(R.mipmap.com_icon_collection_default);
-        }else {
-            doNetRequestData(String.format(Apis.URL_FOLLOW_MOVIE,mId),null,RegisterBean.class,"get");
+        } else {
+            doNetRequestData(String.format(Apis.URL_FOLLOW_MOVIE, mId), null, RegisterBean.class, "get");
             film_details_image_gz.setImageResource(R.mipmap.com_icon_collection_selected);
         }
     }
+
     @Override
     public int getContent() {
         return R.layout.activity_film_details;
@@ -118,28 +123,28 @@ public class FilmDetailsActivity extends BaseActivity {
 
     @Override
     public void success(Object data) {
-        if (data instanceof MovieDetailsBean){
+        if (data instanceof MovieDetailsBean) {
             mBean = (MovieDetailsBean) data;
             film_details_title.setText(mBean.getResult().getName());
             film_details_image.setImageURI(mBean.getResult().getImageUrl());
             film_details_image_bg.setImageURI(mBean.getResult().getImageUrl());
             mFollowMovie = mBean.getResult().getFollowMovie();
-            if (mFollowMovie ==1){
+            if (mFollowMovie == 1) {
                 film_details_image_gz.setImageResource(R.mipmap.com_icon_collection_selected);
-            }else {
+            } else {
                 film_details_image_gz.setImageResource(R.mipmap.com_icon_collection_default);
             }
 
 
-            Map<String,String> map1 = new HashMap<>();
-            doNetRequestData(String.format(Apis.URL_QUERY_COMMENT,mId),map1,MovieCommentDetailsBean.class,"get");
+            Map<String, String> map1 = new HashMap<>();
+            doNetRequestData(String.format(Apis.URL_QUERY_COMMENT, mId), map1, MovieCommentDetailsBean.class, "get");
 
-        }else if (data instanceof MovieCommentDetailsBean){
+        } else if (data instanceof MovieCommentDetailsBean) {
             mCommentDetailsBean = (MovieCommentDetailsBean) data;
-        }else if (data instanceof RegisterBean){
+        } else if (data instanceof RegisterBean) {
 
-            RegisterBean registerBean= (RegisterBean) data;
-            Toast.makeText(this,registerBean.getMessage(),Toast.LENGTH_SHORT).show();
+            RegisterBean registerBean = (RegisterBean) data;
+            Toast.makeText(this, registerBean.getMessage(), Toast.LENGTH_SHORT).show();
 
         }
     }
@@ -148,4 +153,6 @@ public class FilmDetailsActivity extends BaseActivity {
     public void fail(String error) {
 
     }
+
+
 }

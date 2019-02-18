@@ -1,17 +1,16 @@
-package com.bw.movie.bean;
+package com.bw.movie.bean.moviebean;
 
 import java.util.List;
 
 /**
- * Author: 范瑞旗
- * Date: 2019/1/27 16:52
- * Description: 根据电影ID和影院ID查询电影排期列表
+ * Author: 邵文龙
+ * Date: 2019/2/14 20:01
+ * Description: ${DESCRIPTION}
  */
-public class CinemaMovieScheduleBean {
-
+public class BuyTimeBean {
 
     /**
-     * result : [{"beginTime":"19:20","duration":"118分钟","endTime":"21:18","id":1,"screeningHall":"2号厅","seatsTotal":150,"seatsUseCount":50,"status":1},{"beginTime":"20:30","duration":"118分钟","endTime":"22:28","id":2,"screeningHall":"1号厅","seatsTotal":66,"seatsUseCount":15,"status":1},{"beginTime":"19:20","duration":"118分钟","endTime":"21:18","id":14,"screeningHall":"5号厅","seatsTotal":120,"seatsUseCount":70,"status":1}]
+     * result : [{"beginTime":"17:05","duration":"118分钟","endTime":"19:03","id":3,"price":0.13,"screeningHall":"3厅","seatsTotal":180,"seatsUseCount":10,"status":2},{"beginTime":"19:20","duration":"118分钟","endTime":"21:18","id":136,"price":0.13,"screeningHall":"2号厅","seatsTotal":150,"seatsUseCount":50,"status":2},{"beginTime":"20:30","duration":"118分钟","endTime":"22:28","id":137,"price":0.13,"screeningHall":"1号厅","seatsTotal":66,"seatsUseCount":15,"status":1},{"beginTime":"11:50","duration":"118分钟","endTime":"14:02","id":138,"price":0.13,"screeningHall":"4厅","seatsTotal":21,"seatsUseCount":19,"status":2}]
      * message : 查询成功
      * status : 0000
      */
@@ -46,14 +45,15 @@ public class CinemaMovieScheduleBean {
 
     public static class ResultBean {
         /**
-         * beginTime : 19:20
+         * beginTime : 17:05
          * duration : 118分钟
-         * endTime : 21:18
-         * id : 1
-         * screeningHall : 2号厅
-         * seatsTotal : 150
-         * seatsUseCount : 50
-         * status : 1
+         * endTime : 19:03
+         * id : 3
+         * price : 0.13
+         * screeningHall : 3厅
+         * seatsTotal : 180
+         * seatsUseCount : 10
+         * status : 2
          */
 
         private String beginTime;
@@ -98,6 +98,14 @@ public class CinemaMovieScheduleBean {
             this.id = id;
         }
 
+        public double getPrice() {
+            return price;
+        }
+
+        public void setPrice(double price) {
+            this.price = price;
+        }
+
         public String getScreeningHall() {
             return screeningHall;
         }
@@ -128,14 +136,6 @@ public class CinemaMovieScheduleBean {
 
         public void setStatus(int status) {
             this.status = status;
-        }
-
-        public double getPrice() {
-            return price;
-        }
-
-        public void setPrice(double price) {
-            this.price = price;
         }
     }
 }

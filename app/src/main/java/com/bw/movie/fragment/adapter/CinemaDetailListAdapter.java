@@ -41,7 +41,7 @@ public class CinemaDetailListAdapter extends RecyclerView.Adapter<CinemaDetailLi
     }
 
     public interface OnImgClickListener{
-        void onItemClick(int id, String beginTime, String endTime, String hall, int seatsTotal);
+        void onItemClick(int id, String beginTime, String endTime, String hall, double price);
     }
 
     private OnImgClickListener mOnImgClickListener;
@@ -56,7 +56,8 @@ public class CinemaDetailListAdapter extends RecyclerView.Adapter<CinemaDetailLi
         holder.mTextView_name.setText(list.get(position).getScreeningHall());
         holder.mTextView_startName.setText(list.get(position).getBeginTime());
         holder.mTextView_endTime.setText(list.get(position).getEndTime()+" end");
-        holder.mTextView_price.setText(list.get(position).getSeatsTotal()+"");
+
+        holder.mTextView_price.setText(list.get(position).getPrice()+"");
         final int id = list.get(position).getId();
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
@@ -65,9 +66,11 @@ public class CinemaDetailListAdapter extends RecyclerView.Adapter<CinemaDetailLi
                 String beginTime = list.get(position).getBeginTime();
                 String endTime = list.get(position).getEndTime();
                 String hall = list.get(position).getScreeningHall();
-                int seatsTotal = list.get(position).getSeatsTotal();
 
-                mOnImgClickListener.onItemClick(id,beginTime,endTime,hall,seatsTotal);
+                double price = list.get(position).getPrice();
+
+
+                mOnImgClickListener.onItemClick(id,beginTime,endTime,hall,price);
 
             }
         });

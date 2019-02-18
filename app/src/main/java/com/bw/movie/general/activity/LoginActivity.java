@@ -59,6 +59,7 @@ public class LoginActivity extends BaseActivity {
     private boolean b = true;
     private IPrecenterImpl mIPrecenter;
     private SharedPreferences mPreferences;
+    private boolean mCheck;
 
     @Override
     public void initView() {
@@ -74,11 +75,11 @@ public class LoginActivity extends BaseActivity {
 
         mPreferences = getSharedPreferences("swl", MODE_PRIVATE);
 
-        boolean check = mPreferences.getBoolean("check", false);
+        mCheck = mPreferences.getBoolean("check", false);
         boolean auto = mPreferences.getBoolean("auto", false);
         String String_phone = mPreferences.getString("phone", null);
         String String_pwd = mPreferences.getString("pwd", null);
-        if (check) {
+        if (mCheck) {
             mTextView_phone.setText(String_phone);
             mTextView_pwd.setText(String_pwd);
             mCheckBox_rememberPwd.setChecked(true);
@@ -90,11 +91,22 @@ public class LoginActivity extends BaseActivity {
     }
 
     @Override
+    protected void onStart() {
+        super.onStart();
+        if (mCheck) {
+            String String_phone = mPreferences.getString("phone", null);
+            String String_pwd = mPreferences.getString("pwd", null);
+            mTextView_phone.setText(String_phone);
+            mTextView_pwd.setText(String_pwd);
+        }
+    }
+
+    @Override
     public int getContent() {
         return R.layout.activity_login;
     }
 
-    @OnClick({R.id.login_btn_login, R.id.login_img_dsf})
+    @OnClick({R.id.login_btn_login, R.id.login_img_dsf, R.id.login_text_over, R.id.login_text_register})
     public void onLoginButtonClickListener(View view) {
         switch (view.getId()) {
             case R.id.login_btn_login:
@@ -132,6 +144,12 @@ public class LoginActivity extends BaseActivity {
                 }
                 break;
 
+            case R.id.login_text_over:
+                startActivity(new Intent(LoginActivity.this, SuccessActivity.class));
+                break;
+            case R.id.login_text_register:
+                startActivity(new Intent(getApplicationContext(), RegisterActivity.class));
+                break;
             default:
                 break;
         }
@@ -194,7 +212,7 @@ public class LoginActivity extends BaseActivity {
             edit.putString("ak", "0110010010000");
             edit.commit();
 
-            startActivity(new Intent(LoginActivity.this, SuccessActivity.class));
+            //startActivity(new Intent(LoginActivity.this,SuccessActivity.class));
             Toast.makeText(LoginActivity.this, R.string.login_success_toast, Toast.LENGTH_SHORT).show();
             finish();
         } else {
