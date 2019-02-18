@@ -260,7 +260,7 @@ public class CinemaDetailActivity extends BaseActivity {
                 public void onItemClick(int id, String beginTime, String endTime, String hall, double price) {
 
 
-                    CinemaSeatTableDetailBean detailBean = new CinemaSeatTableDetailBean(id, mName, beginTime, endTime, hall,seatsTotal);
+
 
                     CinemaSeatTableDetailBean detailBean = new CinemaSeatTableDetailBean(cinemasId, mName, beginTime, endTime, hall,price);
 

@@ -177,23 +177,7 @@ public class LoginActivity extends BaseActivity{
         }
         return true;
     }
-    @Override
-    protected void onStart() {
-        super.onStart();
-        if (mCheck){
-            String String_phone = mPreferences.getString("phone", null);
-            String String_pwd = mPreferences.getString("pwd", null);
-            mTextView_phone.setText(String_phone);
-            mTextView_pwd.setText(String_pwd);
-        }
-    }
 
-
-    @OnClick(R.id.login_text_register)
-    public void onTextRegister(){
-
-        startActivity(new Intent(LoginActivity.this,RegisterActivity.class));
-    }
 
 
 

@@ -1,5 +1,7 @@
 package com.bw.movie.movie.activity;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -14,6 +16,7 @@ import com.bw.movie.base.BaseActivity;
 import com.bw.movie.bean.RegisterBean;
 import com.bw.movie.bean.moviebean.MovieCommentDetailsBean;
 import com.bw.movie.bean.moviebean.MovieDetailsBean;
+import com.bw.movie.general.activity.LoginActivity;
 import com.bw.movie.movie.popupwindow.PopuWindowComment;
 import com.bw.movie.movie.popupwindow.PopuWindowDetails;
 import com.bw.movie.movie.popupwindow.PopuWindowNotice;
@@ -95,6 +98,8 @@ public class FilmDetailsActivity extends BaseActivity {
                 finish();
                 break;
             case R.id.film_button_buy:
+
+
                 Intent intent = new Intent(FilmDetailsActivity.this,BuyCinemaActivity.class);
                 intent.putExtra("movieId",mId);
                 intent.putExtra("moviename",mBean.getResult().getName());
@@ -124,6 +129,7 @@ public class FilmDetailsActivity extends BaseActivity {
     @Override
     public void success(Object data) {
         if (data instanceof MovieDetailsBean) {
+
             mBean = (MovieDetailsBean) data;
             film_details_title.setText(mBean.getResult().getName());
             film_details_image.setImageURI(mBean.getResult().getImageUrl());
@@ -144,6 +150,7 @@ public class FilmDetailsActivity extends BaseActivity {
         } else if (data instanceof RegisterBean) {
 
             RegisterBean registerBean = (RegisterBean) data;
+
             Toast.makeText(this, registerBean.getMessage(), Toast.LENGTH_SHORT).show();
 
         }

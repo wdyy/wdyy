@@ -60,10 +60,12 @@ public class CinemaSeatTableActivity extends BaseActivity {
     @BindView(R.id.item_cinema_detail_img_x)
     ImageView mImageView_x;
 
-    public SeatTable seatTableView;
+
     double totalPrice=0;
+    int num;
     private String mHall;
     private double mPrice;
+    private String mScheduleId;
 
 
     @Override

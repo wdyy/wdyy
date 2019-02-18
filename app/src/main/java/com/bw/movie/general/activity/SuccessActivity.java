@@ -1,8 +1,8 @@
 package com.bw.movie.general.activity;
 
-import android.app.FragmentManager;
+//import android.app.FragmentManager;
 import android.support.annotation.Nullable;
-//import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentManager;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
 import android.view.KeyEvent;
@@ -105,7 +105,7 @@ public class SuccessActivity extends BaseActivity {
 
                 android.support.v4.app.FragmentManager movie = getSupportFragmentManager();
 
-                FragmentManager movie = getSupportFragmentManager();
+               // FragmentManager movie = getSupportFragmentManager();
 
                 FragmentTransaction transactionFilm = movie.beginTransaction();
                 transactionFilm.hide(mMineFragment);
@@ -124,7 +124,7 @@ public class SuccessActivity extends BaseActivity {
 
                 android.support.v4.app.FragmentManager cinema = getSupportFragmentManager();
 
-                FragmentManager cinema = getSupportFragmentManager();
+              //  FragmentManager cinema = getSupportFragmentManager();
 
                 FragmentTransaction transactionCinema = cinema.beginTransaction();
                 if (cinema.findFragmentByTag(mCinemaFragment.getClass().getName()) == null) {
@@ -146,7 +146,7 @@ public class SuccessActivity extends BaseActivity {
 
                 android.support.v4.app.FragmentManager mine = getSupportFragmentManager();
 
-                FragmentManager mine = getSupportFragmentManager();
+              //  FragmentManager mine = getSupportFragmentManager();
 
                 FragmentTransaction transactionMine = mine.beginTransaction();
                 if (mine.findFragmentByTag(mMineFragment.getClass().getName()) == null) {

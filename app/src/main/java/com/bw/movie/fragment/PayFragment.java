@@ -36,7 +36,7 @@ public class PayFragment extends BaseFragment {
     RadioGroup PayGroup;
     @BindView(R.id.fragment_pat_text_pay)
     TextView PatTextPay;
-    private int mTotalPrices;
+    private double mTotalPrices;
     private String mOrderId;
 
     @Override
