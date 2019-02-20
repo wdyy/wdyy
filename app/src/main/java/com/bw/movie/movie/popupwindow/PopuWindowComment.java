@@ -1,14 +1,18 @@
 package com.bw.movie.movie.popupwindow;
 
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.drawable.BitmapDrawable;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.OrientationHelper;
 import android.support.v7.widget.RecyclerView;
 import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.PopupMenu;
 import android.widget.PopupWindow;
@@ -17,8 +21,11 @@ import android.widget.Toast;
 
 import com.bw.movie.R;
 import com.bw.movie.apis.Apis;
+import com.bw.movie.bean.RegisterBean;
 import com.bw.movie.bean.moviebean.MovieCommentDetailsBean;
 import com.bw.movie.bean.moviebean.MovieDetailsBean;
+import com.bw.movie.general.activity.LoginActivity;
+import com.bw.movie.movie.activity.FilmDetailsActivity;
 import com.bw.movie.movie.adapter.FilmCommentAdapter;
 import com.bw.movie.netutil.RetrofitManager;
 import com.bw.movie.precenter.IPrecenter;
@@ -38,15 +45,17 @@ import java.util.Map;
  */
 public class PopuWindowComment implements IView {
     private PopupWindow popupWindow;
-
-    private ImageView film_comment_button_prise;
     private Context context;
-    private MovieCommentDetailsBean resultBean;
     private MovieCommentDetailsBean mDetailsBean;
+    private int p=0;
+    private int movieId;
+    private FilmCommentAdapter mCommentAdapter;
+    private IPrecenterImpl mIPrecenter;
 
-    public PopuWindowComment(Context context, MovieCommentDetailsBean resultBean) {
+    public PopuWindowComment(Context context, MovieCommentDetailsBean detailsBean, int movieid) {
         this.context = context;
-        this.resultBean = resultBean;
+        mDetailsBean = detailsBean;
+        this.movieId = movieid;
     }
 
     public void bottomwindow(View view) {
@@ -71,9 +80,11 @@ public class PopuWindowComment implements IView {
         setButtonListeners(inflate);
     }
 
-    private void setButtonListeners(RelativeLayout inflate) {
-        final IPrecenterImpl iPrecenter = new IPrecenterImpl(this);
+    private void setButtonListeners(final RelativeLayout inflate) {
+        mIPrecenter = new IPrecenterImpl(this);
         RecyclerView film_comment_recycle = inflate.findViewById(R.id.film_comment_recycle);
+        //评论图片
+        ImageView comment_image = inflate.findViewById(R.id.comment_image);
         //收起
         ImageView film_details_button_down = inflate.findViewById(R.id.film_details_button_down);
         //收起按钮点击监听
@@ -83,19 +94,97 @@ public class PopuWindowComment implements IView {
                 popupWindow.dismiss();
             }
         });
-        FilmCommentAdapter commentAdapter = new FilmCommentAdapter(context,resultBean.getResult());
+        mCommentAdapter = new FilmCommentAdapter(context,mDetailsBean.getResult(),movieId);
         film_comment_recycle.setLayoutManager(new LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false));
-        film_comment_recycle.setAdapter(commentAdapter);
-        commentAdapter.setImageClick(new FilmCommentAdapter.onImageClickListener() {
+        film_comment_recycle.setAdapter(mCommentAdapter);
+        mCommentAdapter.setImageClick(new FilmCommentAdapter.onImageClickListener() {
             @Override
-            public void onImageClick(int commentId) {
+            public void onImgClick(int commentId, FilmCommentAdapter.ViewHolder holder, int position) {
                 Map<String,String> map = new HashMap<>();
-                iPrecenter.startRequestData(String.format(Apis.URL_MOVIE_COMMENT_PRISE,commentId),map,MovieCommentDetailsBean.class,"post");
+                map.put("commentId",commentId+"");
+                mIPrecenter.startRequestData(Apis.URL_MOVIE_COMMENT_PRISE,map,RegisterBean.class,"post");
+                p=position;
             }
 
             @Override
-            public void onImageClickAgain(int commentId) {
-                Toast.makeText(context,"不能重复点赞",Toast.LENGTH_SHORT).show();
+            public void onImgCancelClick(int commentId, FilmCommentAdapter.ViewHolder holder, int position) {
+                Map<String,String> map = new HashMap<>();
+                map.put("commentId",commentId+"");
+                mIPrecenter.startRequestData(Apis.URL_MOVIE_COMMENT_PRISE,map,RegisterBean.class,"post");
+
+                p=position;
+            }
+
+            @Override
+            public void onImgCommentClick(final int movied) {
+                LayoutInflater li = LayoutInflater.from(context);
+                View comment_edit_show = li.inflate(R.layout.comment_edit_show, null);
+                android.support.v7.app.AlertDialog.Builder builder = new android.support.v7.app.AlertDialog.Builder(context);
+                builder.setView(comment_edit_show);
+
+                final EditText comment_edit = comment_edit_show.findViewById(R.id.editTextDialogUserInput);
+
+                //点击对话框以外的区域是否让对话框消失
+                builder.setCancelable(true);
+                //设置正面按钮
+                builder.setPositiveButton("取消", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                    }
+                });
+                //设置反面按钮
+                builder.setNegativeButton("确定", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Map<String,String> map = new HashMap<>();
+                        map.put("movieId",movied+"");
+                        map.put("commentContent",comment_edit.getText().toString());
+                        mIPrecenter.startRequestData(Apis.URL_INSERT_COMMENT_REPLAY,map,RegisterBean.class,"post");
+
+
+                    }
+                });
+                android.support.v7.app.AlertDialog dialog = builder.create();
+                //显示对话框
+                dialog.show();
+            }
+        });
+
+        comment_image.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                LayoutInflater li = LayoutInflater.from(context);
+                View comment_edit_show = li.inflate(R.layout.comment_edit_show, null);
+                android.support.v7.app.AlertDialog.Builder builder = new android.support.v7.app.AlertDialog.Builder(context);
+                builder.setView(comment_edit_show);
+
+                final EditText comment_edit = comment_edit_show.findViewById(R.id.editTextDialogUserInput);
+
+                //点击对话框以外的区域是否让对话框消失
+                builder.setCancelable(true);
+                //设置正面按钮
+                builder.setPositiveButton("取消", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                    }
+                });
+                //设置反面按钮
+                builder.setNegativeButton("确定", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Map<String,String> map = new HashMap<>();
+                        map.put("movieId",movieId+"");
+                        map.put("commentContent",comment_edit.getText().toString());
+                        mIPrecenter.startRequestData(Apis.URL_INSERT_COMMENT,map,RegisterBean.class,"post");
+
+
+                    }
+                });
+                android.support.v7.app.AlertDialog dialog = builder.create();
+                //显示对话框
+                dialog.show();
             }
         });
 
@@ -105,6 +194,56 @@ public class PopuWindowComment implements IView {
     public void onSuccess(Object data) {
             if (data instanceof MovieCommentDetailsBean){
                 mDetailsBean = (MovieCommentDetailsBean) data;
+
+            }else if (data instanceof RegisterBean){
+                RegisterBean registerBean = (RegisterBean) data;
+                if (registerBean.getMessage().equals("请先登陆")){
+
+                /*LoginAlertDialog dialog = new LoginAlertDialog(getActivity());
+                dialog.alert();*/
+                    //LoginAlertDialog.alert(getActivity());
+                    android.support.v7.app.AlertDialog.Builder builder = new android.support.v7.app.AlertDialog.Builder(context);
+                    builder.setTitle("提示：");
+                    builder.setMessage("请先登录！");
+                    builder.setIcon(R.mipmap.ic_launcher_round);
+                    //点击对话框以外的区域是否让对话框消失
+                    builder.setCancelable(true);
+                    //设置正面按钮
+                    builder.setPositiveButton("取消", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+
+                        }
+                    });
+                    //设置反面按钮
+                    builder.setNegativeButton("确定", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+
+                            context.startActivity(new Intent(context,LoginActivity.class));
+
+                        }
+                    });
+                    android.support.v7.app.AlertDialog dialog = builder.create();
+                    //显示对话框
+                    dialog.show();
+                }else if (registerBean.getMessage().equals("点赞成功")){
+                    mCommentAdapter.setImgClick(null,p);
+                    mDetailsBean.getResult().get(p).setIsGreat(1);
+                    mDetailsBean.getResult().get(p).setGreatNum(mDetailsBean.getResult().get(p).getGreatNum()+1);
+                    Toast.makeText(context,registerBean.getMessage(),Toast.LENGTH_SHORT).show();
+                }else if (registerBean.getMessage().equals("不能重复点赞")){
+
+                    mCommentAdapter.setImgCancelClick(null,p);
+
+                    Toast.makeText(context,registerBean.getMessage(),Toast.LENGTH_SHORT).show();
+                }else if (registerBean.getMessage().equals("回复成功")){
+                    mIPrecenter.startRequestData(String.format(Apis.URL_QUERY_COMMENT,mDetailsBean.getResult().get(p).getCommentId()),null,MovieCommentDetailsBean.class,"get");
+                    Toast.makeText(context,registerBean.getMessage(),Toast.LENGTH_SHORT).show();
+                }else if (registerBean.getMessage().equals("评论成功")){
+                    mIPrecenter.startRequestData(String.format(Apis.URL_QUERY_COMMENT,mDetailsBean.getResult().get(p).getCommentId()),null,MovieCommentDetailsBean.class,"get");
+                    Toast.makeText(context,registerBean.getMessage(),Toast.LENGTH_SHORT).show();
+                }
             }
     }
 

@@ -18,7 +18,6 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-
 /**
  * Author: 范瑞旗
  * Date: 2019/1/23 14:08
@@ -56,7 +55,7 @@ public class GuideActivity extends BaseActivity {
 
             @Override
             public boolean isViewFromObject(@NonNull View view, @NonNull Object object) {
-                return view == object;
+                return view==object;
             }
 
             @NonNull
@@ -85,9 +84,9 @@ public class GuideActivity extends BaseActivity {
             @Override
             public void onPageSelected(int position) {
 
-                if (position == 3) {
+                if (position==3){
                     mButton.setVisibility(View.VISIBLE);
-                } else {
+                }else {
                     mButton.setVisibility(View.INVISIBLE);
                 }
             }
@@ -99,6 +98,7 @@ public class GuideActivity extends BaseActivity {
         });
 
 
+
     }
 
     @OnClick(R.id.activity_guide_into)
@@ -107,7 +107,6 @@ public class GuideActivity extends BaseActivity {
         finish();
 
     }
-
     @Override
     public int getContent() {
         return R.layout.activity_guide;

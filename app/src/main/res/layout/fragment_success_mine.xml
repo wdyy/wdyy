@@ -16,13 +16,13 @@
                 android:background="@mipmap/iconbeijing"
                 android:orientation="vertical">
 
-                <ImageView
-                    android:id="@+id/laba"
-                    android:layout_width="@dimen/dp_24"
-                    android:layout_height="@dimen/dp_24"
-                    android:layout_marginLeft="@dimen/dp_24"
-                    android:layout_marginTop="@dimen/dp_30"
-                    android:src="@mipmap/my_icon_laba_default_hdpi" />
+        <ImageView
+            android:id="@+id/laba"
+            android:layout_width="@dimen/dp_24"
+            android:layout_height="@dimen/dp_24"
+            android:layout_marginLeft="@dimen/dp_24"
+            android:layout_marginTop="@dimen/dp_30"
+            android:src="@mipmap/my_icon_laba_default_hdpi" />
 
                 <com.facebook.drawee.view.SimpleDraweeView
                     android:id="@+id/myicon"

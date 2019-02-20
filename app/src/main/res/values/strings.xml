@@ -1,9 +1,10 @@
 <resources>
-    <string name="app_name">WDCinema</string>
+    <string name="app_name">维度影院</string>
     <string name="login_fail_toast">登录失败!</string>
     <string name="login_success_toast">登录成功!</string>
     <string name="not_NetWork">请检查网络设备!</string>
     <string name="login_phone_pwd_isEmpty">输入不能为空!</string>
+    <string name="edit_phone_error">手机格式错误！</string>
 
     <string name="reg_success_toast">注册成功!</string>
     <string name="text_no">xxx</string>

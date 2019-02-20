@@ -34,6 +34,7 @@ import com.tencent.mm.opensdk.modelmsg.SendAuth;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.regex.Pattern;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -128,14 +129,25 @@ public class LoginActivity extends BaseActivity {
                 String phone = mTextView_phone.getText().toString().trim();
                 String pwd = mTextView_pwd.getText().toString().trim();
 
-                if (phone.isEmpty() || pwd.isEmpty()) {
+                String regex = "^(13[0-9]|14[5|7]|15[0|1|2|3|5|6|7|8|9]|16[1|6]|18[0|1|2|3|5|6|7|8|9])\\d{8}$";
+                boolean matches = Pattern.matches(regex, phone);
 
-                    showShortToast(R.string.login_phone_pwd_isEmpty + "");
-                } else {
+                if (phone.isEmpty()||pwd.isEmpty()){
+
+                    Toast.makeText(LoginActivity.this,R.string.login_phone_pwd_isEmpty,Toast.LENGTH_SHORT).show();
+
+                }else if (!matches){
+                    Toast.makeText(LoginActivity.this,R.string.edit_phone_error,Toast.LENGTH_SHORT).show();
+
+                }else{
 
                     String jmPwd = EncryptUtil.encrypt(pwd);
 
                     Map<String, String> map = new HashMap<>();
+                    map.put("phone",phone);
+                    map.put("pwd",jmPwd);
+
+                    doNetRequestData(Apis.URL_LOGIN,map,LoginBean.class,"post");
                     map.put("phone", phone);
                     map.put("pwd", jmPwd);
                     doNetRequestData(Apis.URL_LOGIN, map, LoginBean.class, "post");
@@ -210,7 +222,11 @@ public class LoginActivity extends BaseActivity {
         }
         return true;
     }
+    @OnClick(R.id.login_text_register)
+    public void onTextRegister(){
 
+        startActivity(new Intent(LoginActivity.this,RegisterActivity.class));
+    }
 
     @Override
     public void success(Object data) {
@@ -277,7 +293,11 @@ public class LoginActivity extends BaseActivity {
         //startActivity(new Intent(LoginActivity.this,SuccessActivity.class));
         Toast.makeText(LoginActivity.this, R.string.login_success_toast, Toast.LENGTH_SHORT).show();
         finish();
-    }
+            //startActivity(new Intent(LoginActivity.this,SuccessActivity.class));
+            Toast.makeText(LoginActivity.this,R.string.login_success_toast,Toast.LENGTH_SHORT).show();
+            finish();
+        }
+
 
     @Override
     public void fail(String error) {

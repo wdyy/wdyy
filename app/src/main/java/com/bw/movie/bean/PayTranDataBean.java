@@ -8,9 +8,9 @@ package com.bw.movie.bean;
 public class PayTranDataBean {
 
     private String orderId;
-    private int totalPrice;
+    private double totalPrice;
 
-    public PayTranDataBean(String orderId, int totalPrice) {
+    public PayTranDataBean(String orderId, double totalPrice) {
         this.orderId = orderId;
         this.totalPrice = totalPrice;
     }
@@ -19,7 +19,7 @@ public class PayTranDataBean {
         return orderId;
     }
 
-    public int getTotalPrice() {
+    public double getTotalPrice() {
         return totalPrice;
     }
 }
