@@ -23,6 +23,7 @@ import com.tencent.mm.opensdk.modelmsg.SendAuth;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.regex.Pattern;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -103,6 +104,12 @@ public class LoginActivity extends BaseActivity{
         }
     }
 
+    @OnClick(R.id.login_text_register)
+    public void onTextRegister(){
+
+        startActivity(new Intent(LoginActivity.this,RegisterActivity.class));
+    }
+
     @Override
     public int getContent() {
         return R.layout.activity_login;
@@ -117,10 +124,17 @@ public class LoginActivity extends BaseActivity{
                 String phone = mTextView_phone.getText().toString().trim();
                 String pwd = mTextView_pwd.getText().toString().trim();
 
+                String regex = "^(13[0-9]|14[5|7]|15[0|1|2|3|5|6|7|8|9]|16[1|6]|18[0|1|2|3|5|6|7|8|9])\\d{8}$";
+                boolean matches = Pattern.matches(regex, phone);
+
                 if (phone.isEmpty()||pwd.isEmpty()){
 
-                    showShortToast(R.string.login_phone_pwd_isEmpty+"");
-                }else {
+                    Toast.makeText(LoginActivity.this,R.string.login_phone_pwd_isEmpty,Toast.LENGTH_SHORT).show();
+
+                }else if (!matches){
+                    Toast.makeText(LoginActivity.this,R.string.edit_phone_error,Toast.LENGTH_SHORT).show();
+
+                }else{
 
                     String jmPwd = EncryptUtil.encrypt(pwd);
 

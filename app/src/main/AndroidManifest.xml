@@ -37,21 +37,27 @@
         <activity android:name=".my.userticket.MyTicketActivity" />
         <activity android:name=".my.feedback.MyFeedbackActivity" />
         <activity android:name=".my.updateuserinfo.MyUpdateInfoActivity" />
-
         <activity android:name=".my.updateuserpwd.MyUpdatePwdActivity"/>
-        <activity android:name=".movie.activity.FilmDetailsActivity" />
-        <activity android:name=".fragment.activity.CinemaDetailActivity" />
-        <activity android:name=".fragment.activity.CinemaSeatTableActivity" />
         <activity android:name=".general.activity.RegisterActivity"/>
         <activity android:name=".wxapi.WXEntryActivity"
-            android:exported="true"></activity>
-
-        <activity android:name=".my.updateuserpwd.MyUpdatePwdActivity" />
-        <activity android:name=".general.activity.RegisterActivity" />
+            android:exported="true"/>
  
         <activity android:name=".general.activity.NotNetActivity" />
         <activity android:name=".movie.activity.BuyCinemaActivity" />
         <activity android:name=".movie.activity.BuyTimeActivity" />
+        <activity android:name=".fragment.activity.CinemaSearchActivity"/>
+        <activity
+            android:name=".fragment.activity.WXPayEntryActivity"
+            android:exported="true"
+            android:launchMode="singleTop">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <data android:scheme="wxb3852e6a6b7d9516"/>
+            </intent-filter>
+        </activity>
+
+
 
     </application>
 

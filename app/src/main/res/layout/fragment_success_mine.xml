@@ -1,14 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.bw.movie.custom.CustomMy xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:orientation="vertical"
     android:layout_height="match_parent">
-    <LinearLayout
-        android:id="@+id/liner"
+
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_220"
-        android:background="@mipmap/iconbeijing"
+        android:layout_height="match_parent"
         android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/liner"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_220"
+            android:orientation="vertical"
+            android:background="@mipmap/iconbeijing">
+
 
         <ImageView
             android:id="@+id/laba"
@@ -42,7 +48,7 @@
             android:layout_marginTop="@dimen/dp_12"
             android:background="@drawable/cinema_shape_6"
             android:text="签到" />
-    </LinearLayout>
+        </LinearLayout>
 
     <LinearLayout
         android:id="@+id/liner2"
@@ -210,4 +216,5 @@
                 android:textColor="#000" />
         </LinearLayout>
     </LinearLayout>
-</LinearLayout>
+    </RelativeLayout>
+</com.bw.movie.custom.CustomMy>

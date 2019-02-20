@@ -5,13 +5,7 @@
     <color name="colorAccent">#D81B60</color>
     <color name="white">#fff</color>
     <color name="White">#FFF</color>
-    <color name="black">#333</color>
-    <color name="WHITE">#FFF</color>
-    <color name="RED">#F00</color>
 
 
-
-    <color name="bg">#DDDDDD</color>
     <!--文字颜色-->
-    <color name="color_txt">#9C9C9C</color>
 </resources>
