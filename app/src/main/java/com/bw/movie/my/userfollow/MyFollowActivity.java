@@ -18,6 +18,10 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
+/**
+ * 用户关注
+ * 郭佳兴
+ */
 public class MyFollowActivity extends BaseActivity {
 
 

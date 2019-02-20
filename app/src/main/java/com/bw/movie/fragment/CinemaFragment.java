@@ -2,6 +2,7 @@ package com.bw.movie.fragment;
 
 import android.animation.ObjectAnimator;
 import android.app.FragmentManager;
+import android.content.Intent;
 import android.graphics.Color;
 import android.support.v4.app.FragmentTransaction;
 import android.view.View;
@@ -9,9 +10,11 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.TextView;
 
 import com.bw.movie.R;
 import com.bw.movie.base.BaseFragment;
+import com.bw.movie.fragment.activity.CinemaSearchActivity;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -27,6 +30,9 @@ public class CinemaFragment extends BaseFragment {
 
     @BindView(R.id.cinema_search_edit)
     EditText editText_search;
+
+    @BindView(R.id.cinema_text_position)
+    TextView mTextView_position;
 
     @BindView(R.id.cinema_linearLayout_search)
     LinearLayout linearLayout;
@@ -61,29 +67,6 @@ public class CinemaFragment extends BaseFragment {
        // mManager.beginTransaction().replace(R.id.cinema_vp,new RecommendFragment()).commit();
 
         mManager.beginTransaction().add(R.id.cinema_vp,mRecommendFragment,mRecommendFragment.getClass().getName()).commit();
-
-        /*viewPager.setAdapter(new FragmentPagerAdapter(getFragmentManager()) {
-            @Override
-            public Fragment getItem(int position) {
-                Fragment fragment=null;
-
-                switch (position){
-                    case 0:
-                        fragment = new RecommendFragment();
-                        break;
-
-                    case 1:
-                        fragment = new NearCinemaFragment();
-                        break;
-                }
-                return fragment;
-            }
-
-            @Override
-            public int getCount() {
-                return 2;
-            }
-        });*/
 
         radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
@@ -125,24 +108,46 @@ public class CinemaFragment extends BaseFragment {
         });
     }
 
-    @OnClick(R.id.cinema_search_img)
-    public void onImgClickListener(){
+    @OnClick({R.id.cinema_search_img,R.id.cinema_search_text,R.id.cinema_img_position})
+    public void onTextClickListener(View view){
 
-        ObjectAnimator objectAnimator = ObjectAnimator.ofFloat(linearLayout, "translationX", 0f, -320f);
-//      设置移动时间
-        objectAnimator.setDuration(1000);
-//      开始动画
-        objectAnimator.start();
-    }
+        switch (view.getId()){
+            case R.id.cinema_search_img:
+                ObjectAnimator objectAnimator = ObjectAnimator.ofFloat(linearLayout, "translationX", 0f, -320f);
+                 //      设置移动时间
+                objectAnimator.setDuration(1000);
+                 //      开始动画
+                objectAnimator.start();
+                break;
 
-    @OnClick(R.id.cinema_search_text)
-    public void onTextClickListener(){
+            case R.id.cinema_search_text:
 
-        ObjectAnimator objectAnimator = ObjectAnimator.ofFloat(linearLayout, "translationX", -320f, 0f);
-//      设置移动时间
-        objectAnimator.setDuration(1000);
-//      开始动画
-        objectAnimator.start();
+                String cinemaName = editText_search.getText().toString().trim();
+
+                if (cinemaName.length()==0){
+                    ObjectAnimator objectAnimator1 = ObjectAnimator.ofFloat(linearLayout, "translationX", -320f, 0f);
+                    //      设置移动时间
+                    objectAnimator1.setDuration(1000);
+                    //      开始动画
+                    objectAnimator1.start();
+                }else {
+                    Intent intent = new Intent(getActivity(), CinemaSearchActivity.class);
+                    intent.putExtra("cinemaName",cinemaName);
+                    startActivity(intent);
+
+                }
+
+
+                break;
+
+            case R.id.cinema_img_position:  //定位点击监听
+
+
+                break;
+
+        }
+
+
     }
 
     @Override

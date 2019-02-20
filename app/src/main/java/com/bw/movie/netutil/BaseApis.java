@@ -1,7 +1,9 @@
 package com.bw.movie.netutil;
 
+import java.io.File;
 import java.util.Map;
 
+import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
 import retrofit2.http.DELETE;
@@ -12,6 +14,7 @@ import retrofit2.http.HeaderMap;
 import retrofit2.http.Multipart;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
+import retrofit2.http.Part;
 import retrofit2.http.PartMap;
 import retrofit2.http.QueryMap;
 import retrofit2.http.Url;
@@ -24,6 +27,11 @@ public interface BaseApis<T> {
     @FormUrlEncoded
     @POST
     Observable<ResponseBody> post(@Url String url, @FieldMap Map<String, String> map);
+
+    //上传头像
+    @POST()
+    @Multipart
+    Observable<ResponseBody> getHead(@Url String url, Map<File, File> map);
 
     @PUT
     Observable<ResponseBody> put(@Url String url, @QueryMap Map<String, String> map);

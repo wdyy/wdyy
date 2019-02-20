@@ -22,6 +22,10 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
+/**
+ * 用户反馈
+ * 郭佳兴
+ */
 public class MyFeedbackActivity extends BaseActivity {
     @BindView(R.id.my_option_tj)
     Button mMyOptionTj;

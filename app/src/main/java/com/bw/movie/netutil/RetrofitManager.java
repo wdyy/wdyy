@@ -6,6 +6,7 @@ import android.text.TextUtils;
 
 import com.bw.movie.application.BaseApplication;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
@@ -54,7 +55,8 @@ public class RetrofitManager {
                 //取出保存的userId,sessionId
                 SharedPreferences swl = BaseApplication.getApplication().getSharedPreferences("swl", Context.MODE_PRIVATE);
                 String sessionId = swl.getString("sessionId", "");
-                String userId = swl.getString("userId", "0");
+                String userId = swl.getString("userId", "");
+                String ak = swl.getString("ak", "");
 
                 //重新构造请求
                 Request.Builder newBuilder = original.newBuilder();
@@ -64,6 +66,7 @@ public class RetrofitManager {
                 if (!TextUtils.isEmpty(userId) && !TextUtils.isEmpty(sessionId)){
                     newBuilder.addHeader("userId",userId);
                     newBuilder.addHeader("sessionId",sessionId);
+                    newBuilder.addHeader("ak",ak);
                 }
                 //打包
                 Request request = newBuilder.build();

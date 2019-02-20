@@ -23,6 +23,7 @@ import com.tencent.mm.opensdk.modelmsg.SendAuth;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.regex.Pattern;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -108,19 +109,26 @@ public class LoginActivity extends BaseActivity{
         return R.layout.activity_login;
     }
 
-    @OnClick({R.id.login_btn_login,R.id.login_img_dsf,R.id.login_text_over})
-    public void onLoginButtonClickListener(View view){
-        switch (view.getId()){
+    @OnClick({R.id.login_btn_login, R.id.login_img_dsf, R.id.login_text_over, R.id.login_text_register})
+    public void onLoginButtonClickListener(View view) {
+        switch (view.getId()) {
             case R.id.login_btn_login:
                 //登录按钮监听
 
                 String phone = mTextView_phone.getText().toString().trim();
                 String pwd = mTextView_pwd.getText().toString().trim();
 
+                String regex = "^(13[0-9]|14[5|7]|15[0|1|2|3|5|6|7|8|9]|16[1|6]|18[0|1|2|3|5|6|7|8|9])\\d{8}$";
+                boolean matches = Pattern.matches(regex, phone);
+
                 if (phone.isEmpty()||pwd.isEmpty()){
 
-                    showShortToast(R.string.login_phone_pwd_isEmpty+"");
-                }else {
+                    Toast.makeText(LoginActivity.this,R.string.login_phone_pwd_isEmpty,Toast.LENGTH_SHORT).show();
+
+                }else if (!matches){
+                    Toast.makeText(LoginActivity.this,R.string.edit_phone_error,Toast.LENGTH_SHORT).show();
+
+                }else{
 
                     String jmPwd = EncryptUtil.encrypt(pwd);
 
@@ -149,8 +157,11 @@ public class LoginActivity extends BaseActivity{
             case R.id.login_text_over:
                 startActivity(new Intent(LoginActivity.this,SuccessActivity.class));
                 break;
-                default:
-                    break;
+            case R.id.login_text_register:
+                startActivity(new Intent(getApplicationContext(), RegisterActivity.class));
+                break;
+            default:
+                break;
         }
     }
 
@@ -208,10 +219,11 @@ public class LoginActivity extends BaseActivity{
 
             SharedPreferences.Editor edit = mPreferences.edit();  //保存用户的sessionId
 
-            edit.putString("sessionId",sessionId);
-            edit.putString("userId",userId+"");
-            edit.putString("headPic",headPic);
-            edit.putString("nickName",nickName);
+            edit.putString("sessionId", sessionId);
+            edit.putString("userId", userId + "");
+            edit.putString("headPic", headPic);
+            edit.putString("nickName", nickName);
+            edit.putString("ak", "0110010010000");
             edit.commit();
 
             //startActivity(new Intent(LoginActivity.this,SuccessActivity.class));

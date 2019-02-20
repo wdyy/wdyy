@@ -1,4 +1,5 @@
 package com.bw.movie.fragment;
+import android.content.Intent;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RadioButton;
@@ -7,12 +8,19 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bw.movie.R;
+import com.bw.movie.apis.Apis;
 import com.bw.movie.base.BaseFragment;
+import com.bw.movie.bean.BuyBean;
+import com.bw.movie.bean.PayBeanTwo;
 import com.bw.movie.bean.PayTranDataBean;
+import com.bw.movie.fragment.activity.WXPayEntryActivity;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -80,6 +88,11 @@ public class PayFragment extends BaseFragment {
                 //Toast.makeText(getActivity(),"ff",Toast.LENGTH_SHORT).show();
                 if (PayButtonWx.isChecked()){
 
+                    Map<String, String> map = new HashMap<>();
+                    map.put("payType",1+"");
+                    map.put("orderId",mOrderId+"");
+                    doNetRequestData(Apis.URL_PAY,map,PayBeanTwo.class,"post");
+
 
                 }else if (PayButtonZfb.isChecked()){
 
@@ -98,6 +111,14 @@ public class PayFragment extends BaseFragment {
     @Override
     public void success(Object data) {
 
+        if (data instanceof PayBeanTwo){
+
+            PayBeanTwo payBeanTwo = (PayBeanTwo) data;
+            Intent intent = new Intent(getActivity(), WXPayEntryActivity.class);
+            intent.putExtra("paybean",payBeanTwo);
+            startActivity(intent);
+
+        }
 
     }
 
