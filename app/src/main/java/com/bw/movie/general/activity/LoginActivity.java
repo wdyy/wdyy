@@ -179,7 +179,11 @@ public class LoginActivity extends BaseActivity{
         }
         return true;
     }
+    @OnClick(R.id.login_text_register)
+    public void onTextRegister(){
 
+        startActivity(new Intent(LoginActivity.this,RegisterActivity.class));
+    }
 
     @Override
     public void success(Object data) {

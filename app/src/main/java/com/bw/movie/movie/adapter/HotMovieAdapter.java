@@ -59,30 +59,27 @@ public class HotMovieAdapter extends RecyclerView.Adapter<HotMovieAdapter.ViewHo
         final int followMovie = mList.get(i).getFollowMovie();
         if (followMovie==1){
             viewHolder.movie_child_item_gz.setImageResource(R.mipmap.com_icon_collection_selected);
-        }else {
+        }else if (followMovie==2){
             viewHolder.movie_child_item_gz.setImageResource(R.mipmap.com_icon_collection_default);
         }
 
         viewHolder.movie_child_item_gz.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (followMovie==1){
+                int followCinema = mList.get(i).getFollowMovie();
 
-                    mList.get(i).setFollowMovie(2);
+                if (followCinema==1){
 
                     if (mOnImgClickListener!=null){
-                        mOnImgClickListener.onImgCancelClick(id);
+                        mOnImgClickListener.onImgCancelClick(id,viewHolder,i);
                     }
-                    viewHolder.movie_child_item_gz.setImageResource(R.mipmap.com_icon_collection_default);
-                    notifyDataSetChanged();
+
                 }else {
-                    mList.get(i).setFollowMovie(1);
 
                     if (mOnImgClickListener!=null){
-                        mOnImgClickListener.onImgClick(id);
+                        mOnImgClickListener.onImgClick(id,viewHolder,i);
                     }
-                    viewHolder.movie_child_item_gz.setImageResource(R.mipmap.com_icon_collection_selected);
-                    notifyDataSetChanged();
+
                 }
             }
         });
@@ -95,6 +92,15 @@ public class HotMovieAdapter extends RecyclerView.Adapter<HotMovieAdapter.ViewHo
                 mContext.startActivity(intent);
             }
         });
+    }
+    public void setImgClick(ViewHolder viewHolder, int position){
+        mList.get(position).setFollowMovie(1);
+        notifyItemChanged(position);
+    }
+
+    public void setImgCancelClick(ViewHolder viewHolder, int position){
+        mList.get(position).setFollowMovie(2);
+        notifyItemChanged(position);
     }
 
     @Override
@@ -117,8 +123,8 @@ public class HotMovieAdapter extends RecyclerView.Adapter<HotMovieAdapter.ViewHo
         }
     }
     public interface OnImgClickListener{
-        void onImgClick(int id);
-        void onImgCancelClick(int id);
+        void onImgClick(int id,ViewHolder holder, int position);
+        void onImgCancelClick(int id,ViewHolder holder, int position);
     }
 
     private OnImgClickListener mOnImgClickListener;
@@ -127,4 +133,5 @@ public class HotMovieAdapter extends RecyclerView.Adapter<HotMovieAdapter.ViewHo
     public void setOnImgClickListener(OnImgClickListener onImgClickListener) {
         mOnImgClickListener = onImgClickListener;
     }
+
 }

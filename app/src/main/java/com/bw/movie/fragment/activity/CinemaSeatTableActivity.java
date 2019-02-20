@@ -168,9 +168,9 @@ public class CinemaSeatTableActivity extends BaseActivity {
 
         mHall = detailsBean.getHall();
         mTextView_hall.setText(mHall);
+
         mPrice =  detailsBean.getPrice();
         mScheduleId = detailsBean.getScheduleId();
-
     }
 
     @Override

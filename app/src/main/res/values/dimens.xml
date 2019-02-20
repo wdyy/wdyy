@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resources>
+    <dimen name="dp_m_195">-195dp</dimen>
+    <dimen name="dp_m_192">-192dp</dimen>
+    <dimen name="dp_m_190">-190dp</dimen>
+    <dimen name="dp_m_185">-185dp</dimen>
+    <dimen name="dp_m_180">-180dp</dimen>
+    <dimen name="dp_m_175">-175dp</dimen>
     <dimen name="dp_m_172">-172dp</dimen>
     <dimen name="dp_0_5">0.5dp</dimen>
     <dimen name="dp_1">1dp</dimen>

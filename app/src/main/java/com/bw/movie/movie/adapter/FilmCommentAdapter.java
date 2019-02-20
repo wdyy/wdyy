@@ -34,10 +34,12 @@ public class FilmCommentAdapter extends XRecyclerView.Adapter<FilmCommentAdapter
     private Context mContext;
     private List<MovieCommentDetailsBean.ResultBean> mList;
     private int mIndex;
+    private int movieid;
 
-    public FilmCommentAdapter(Context context, List<MovieCommentDetailsBean.ResultBean> list) {
+    public FilmCommentAdapter(Context context, List<MovieCommentDetailsBean.ResultBean> list, int movieid) {
         mContext = context;
         mList = list;
+        this.movieid = movieid;
     }
 
     @NonNull
@@ -63,7 +65,7 @@ public class FilmCommentAdapter extends XRecyclerView.Adapter<FilmCommentAdapter
         SimpleDateFormat time = new SimpleDateFormat("MM-dd HH:mm");
         String format = time.format(date);
         viewHolder.film_comment_button_time.setText(format);
-
+        final int commentId = mList.get(i).getCommentId();
 
 
         viewHolder.film_comment_button_comment_num.setText(mList.get(i).getReplyNum()+"");
@@ -80,22 +82,46 @@ public class FilmCommentAdapter extends XRecyclerView.Adapter<FilmCommentAdapter
         viewHolder.film_comment_button_prise.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (isGreat==0){
-                    if (mOnImageClickListener != null){
-                        mOnImageClickListener.onImageClick(mList.get(i).getCommentId());
-                    }
-                    viewHolder.film_comment_button_prise.setImageResource(R.mipmap.com_icon_praise_selected);
+                int isGreat1 = mList.get(i).getIsGreat();
 
-                }else {
-                    if (mOnImageClickListener != null){
-                        mOnImageClickListener.onImageClickAgain(mList.get(i).getCommentId());
+                if (isGreat1==1){
+                    if (mOnImageClickListener!=null){
+                        mOnImageClickListener.onImgClick(commentId,viewHolder,i);
                     }
-                    Toast.makeText(mContext,"不能重复点赞",Toast.LENGTH_SHORT).show();
+
+                }else if(isGreat1==0) {
+                    mList.get(i).setIsGreat(1);
+
+
+                    if (mOnImageClickListener!=null){
+                        mOnImageClickListener.onImgClick(commentId,viewHolder,i);
+                    }
+//                    mList.get(i).setGreatNum(mList.get(i).getGreatNum()+1);
+//                    viewHolder.film_comment_button_prise_num.setText(mList.get(i).getGreatNum()+"");
+//                    viewHolder.film_comment_button_prise.setImageResource(R.mipmap.com_icon_praise_selected);
+
                 }
 
             }
         });
+        viewHolder.film_comment_button_comment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (mOnImageClickListener != null){
+                    mOnImageClickListener.onImgCommentClick(mList.get(i).getCommentId());
+                }
+            }
+        });
 
+    }
+    public void setImgClick(ViewHolder viewHolder, int position){
+        mList.get(position).setIsGreat(1);
+        notifyItemChanged(position);
+    }
+
+    public void setImgCancelClick(ViewHolder viewHolder, int position){
+
+        notifyItemChanged(position);
     }
 
     private onImageClickListener mOnImageClickListener;
@@ -105,8 +131,9 @@ public class FilmCommentAdapter extends XRecyclerView.Adapter<FilmCommentAdapter
     }
 
     public interface onImageClickListener{
-        void onImageClick(int commentId);
-        void onImageClickAgain(int commentId);
+        void onImgClick(int commentId,ViewHolder holder, int position);
+        void onImgCancelClick(int commentId,ViewHolder holder, int position);
+        void onImgCommentClick(int movied);
     }
     @Override
     public int getItemCount() {
