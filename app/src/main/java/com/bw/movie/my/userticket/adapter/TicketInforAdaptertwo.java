@@ -38,7 +38,7 @@ public class TicketInforAdaptertwo extends RecyclerView.Adapter<TicketInforAdapt
 
     @Override
     public void onBindViewHolder(@NonNull MyTicketViewHolder myTicketViewHolder, int i) {
-        if (result.get(i).getStatus() != 2) {
+        if (result.get(i).getStatus() == 2) {
             //填充布局
             myTicketViewHolder.addresstext.setText(result.get(i).getCinemaName());
             myTicketViewHolder.datetext.setText(result.get(i).getBeginTime() + "");
@@ -52,16 +52,8 @@ public class TicketInforAdaptertwo extends RecyclerView.Adapter<TicketInforAdapt
             gc.setTimeInMillis(Long.parseLong(createTime));
             SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm");
             myTicketViewHolder.longText.setText(df.format(gc.getTime()));
-            if (result.get(i).getStatus() == 1) {
-                myTicketViewHolder.nopay.setText("待付款");
-            } else if (result.get(i).getStatus() == 2) {
-                myTicketViewHolder.nopay.setText("已付款");
-            }
         }
-
     }
-
-
     @Override
     public int getItemCount() {
         return result == null ? 0 : result.size();
@@ -76,7 +68,6 @@ public class TicketInforAdaptertwo extends RecyclerView.Adapter<TicketInforAdapt
         private final TextView moneytext;
         private final TextView datetext;
         private final TextView numtext, longText;
-        private Button nopay;
 
         public MyTicketViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -89,8 +80,6 @@ public class TicketInforAdaptertwo extends RecyclerView.Adapter<TicketInforAdapt
             moneytext = itemView.findViewById(R.id.user_shop_token_adapter_money_text);
             numtext = itemView.findViewById(R.id.user_shop_token_adapter_num_text);
             longText = itemView.findViewById(R.id.longText);
-            nopay = itemView.findViewById(R.id.user_shop_token_adapter_nopay);
-
 
         }
     }

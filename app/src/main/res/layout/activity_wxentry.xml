@@ -5,5 +5,48 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".wxapi.WXEntryActivity">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/dp_30"
+        android:onClick="shareWXSceneSession"
+        android:orientation="vertical">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal">
+            <ImageView
+                android:layout_width="@dimen/dp_50"
+                android:layout_height="@dimen/dp_50"
+                android:src="@mipmap/pay_icon_weixin_default_hdpi"
+                android:text="分享给微信好友" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dp_10"
+                android:text="分享给微信好友"/>
+        </LinearLayout>
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:onClick="shareWXSceneTimeline"
+            android:layout_marginTop="@dimen/dp_20"
+            android:orientation="horizontal">
+            <ImageView
+                android:layout_width="@dimen/dp_50"
+                android:layout_height="@dimen/dp_50"
+                android:layout_gravity="center"
+                android:src="@mipmap/pay_icon_weixin_default_hdpi"
+                android:text="分享到朋友圈"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dp_10"
+                android:text="分享到朋友圈"/>
+        </LinearLayout>
+    </LinearLayout>
 </android.support.constraint.ConstraintLayout>
