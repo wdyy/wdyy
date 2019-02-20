@@ -5,7 +5,7 @@
     <color name="colorAccent">#D81B60</color>
     <color name="white">#fff</color>
     <color name="White">#FFF</color>
-
+    <color name="RED">#f00</color>
 
     <!--文字颜色-->
 </resources>

@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -24,6 +25,7 @@ import butterknife.Unbinder;
 
 /**
  * 郭佳兴
+ * 关注的影片
  **/
 public class AtterionFilmFragment extends BaseFragment {
 
@@ -32,7 +34,7 @@ public class AtterionFilmFragment extends BaseFragment {
     Unbinder mUnbinder;
     @BindView(R.id.attenSwipeRefreshLayout2)
     SwipeRefreshLayout mSwipeRefreshLayout;
-    private List<ResultBean> mList;
+    private int page = 1;
 
     @Override
     public void initView(View view) {
@@ -43,8 +45,15 @@ public class AtterionFilmFragment extends BaseFragment {
     @Override
     public void initData(View view) {
 
-        Map<String, String> map = new HashMap<>();
-        doNetRequestData(MineUrlConstant.ATTENTIONFILM, map, MyAttFilmUser.class, "get");
+
+        doNetRequestData(MineUrlConstant.ATTENTIONFILM, null, MyAttFilmUser.class, "get");
+
+        mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                doNetRequestData(MineUrlConstant.ATTENTIONFILM + page++, null, MyAttFilmUser.class, "get");
+            }
+        });
     }
 
     @Override
@@ -56,8 +65,8 @@ public class AtterionFilmFragment extends BaseFragment {
     public void success(Object data) {
 
         if (data instanceof MyAttFilmUser) {
-            MyAttFilmUser attFilmUser = new MyAttFilmUser();
-            mList = attFilmUser.getResult();
+            MyAttFilmUser attFilmUser = (MyAttFilmUser) data;
+            List<ResultBean> mList = attFilmUser.getResult();
             mSwipeRefreshLayout.setRefreshing(false);
             if (mList != null && mList.size() > 0) {
                 LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
@@ -73,7 +82,7 @@ public class AtterionFilmFragment extends BaseFragment {
                 });
                 mAttenrecycle2.setAdapter(attFilmAdapter);
             } else {
-                Toast.makeText(getActivity(), "sorry,没有更多数据了", Toast.LENGTH_LONG).show();
+                Toast.makeText(getActivity(), "sorry,没有更多数据了", Toast.LENGTH_SHORT).show();
             }
 
             mSwipeRefreshLayout.setRefreshing(false);

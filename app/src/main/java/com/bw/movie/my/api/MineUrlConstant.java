@@ -13,19 +13,26 @@ public interface MineUrlConstant {
     ///上传头像
     String UPLOADHEAD = "user/v1/verify/uploadHeadPic";
     //查询用户关注的影院信息
-    String ATTENTIONCINEMA = "cinema/v1/verify/findCinemaPageList";
+    String ATTENTIONCINEMA = "cinema/v1/verify/findCinemaPageList?page=1&count=5";
     //查询用户关注的影片信息
-    String ATTENTIONFILM = "movie/v1/verify/findMoviePageList";
+    String ATTENTIONFILM = "movie/v1/verify/findMoviePageList?page=1&count=5";
+    //用户签到
+    String QIAAAAN = "user/v1/verify/userSignIn";
     //查询用户购票记录
-    String QUERYPENDING = "user/v1/verify/findUserBuyTicketRecordList";
+    //待付款
+    String QUERYPENDING1 = "user/v1/verify/findUserBuyTicketRecordList?page=1&count=5&status=1";
+    //已付款
+    String QUERYPENDING2 = "user/v1/verify/findUserBuyTicketRecordList?page=1&count=5&status=2";
     //意见反馈
     String FEEDBACK = "tool/v1/verify/recordFeedBack";
     //检测更新
-    String DETECTIONUPDATE = "tool/v1/findNewVersion";
+    String DETECTIONUPDATE = "tool/v1/findNewVersion?ak=0110010010000";
     //查询未读消息条数
     String WEIMESSAGE = "tool/v1/verify/findUnreadMessageCount";
     ///上传飞鸽令牌
     String FEIGELINGPAI = "tool/v1/verify/uploadPushToken";
     //系统消息状态修改
-    String MESSAGEUPDATE = "tool/v1/verify/changeSysMsgStatus";
+    String MESSAGEUPDATE = "tool/v1/verify/changeSysMsgStatus?id=0";
+    //查询系统消息
+    String XITONGMESSAGE = "tool/v1/verify/findAllSysMsgList?page=1&count=5";
 }

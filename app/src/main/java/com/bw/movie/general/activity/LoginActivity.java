@@ -104,20 +104,14 @@ public class LoginActivity extends BaseActivity{
         }
     }
 
-    @OnClick(R.id.login_text_register)
-    public void onTextRegister(){
-
-        startActivity(new Intent(LoginActivity.this,RegisterActivity.class));
-    }
-
     @Override
     public int getContent() {
         return R.layout.activity_login;
     }
 
-    @OnClick({R.id.login_btn_login,R.id.login_img_dsf,R.id.login_text_over})
-    public void onLoginButtonClickListener(View view){
-        switch (view.getId()){
+    @OnClick({R.id.login_btn_login, R.id.login_img_dsf, R.id.login_text_over, R.id.login_text_register})
+    public void onLoginButtonClickListener(View view) {
+        switch (view.getId()) {
             case R.id.login_btn_login:
                 //登录按钮监听
 
@@ -163,8 +157,11 @@ public class LoginActivity extends BaseActivity{
             case R.id.login_text_over:
                 startActivity(new Intent(LoginActivity.this,SuccessActivity.class));
                 break;
-                default:
-                    break;
+            case R.id.login_text_register:
+                startActivity(new Intent(getApplicationContext(), RegisterActivity.class));
+                break;
+            default:
+                break;
         }
     }
 
@@ -218,10 +215,11 @@ public class LoginActivity extends BaseActivity{
 
             SharedPreferences.Editor edit = mPreferences.edit();  //保存用户的sessionId
 
-            edit.putString("sessionId",sessionId);
-            edit.putString("userId",userId+"");
-            edit.putString("headPic",headPic);
-            edit.putString("nickName",nickName);
+            edit.putString("sessionId", sessionId);
+            edit.putString("userId", userId + "");
+            edit.putString("headPic", headPic);
+            edit.putString("nickName", nickName);
+            edit.putString("ak", "0110010010000");
             edit.commit();
 
             //startActivity(new Intent(LoginActivity.this,SuccessActivity.class));
