@@ -46,19 +46,19 @@ public class MineFragment extends BaseFragment {
     @BindView(R.id.liner)
     LinearLayout mLiner;
     @BindView(R.id.my_message)
-    LinearLayout mMyMessage;
+    ImageView mMyMessage;
     @BindView(R.id.my_follow)
-    LinearLayout mMyFollow;
+    ImageView mMyFollow;
     @BindView(R.id.my_tickets)
-    LinearLayout mMyTickets;
+    ImageView mMyTickets;
     @BindView(R.id.liner2)
     LinearLayout mLiner2;
     @BindView(R.id.my_fankui)
-    LinearLayout mMyFankui;
+    ImageView mMyFankui;
     @BindView(R.id.my_geng)
-    LinearLayout mMyGeng;
+    ImageView mMyGeng;
     @BindView(R.id.login_edit)
-    LinearLayout mLoginEdit;
+    ImageView mLoginEdit;
     private SharedPreferences mSwl;
     private SharedPreferences.Editor mEdit;
 

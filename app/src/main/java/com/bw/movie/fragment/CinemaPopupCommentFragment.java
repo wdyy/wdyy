@@ -11,6 +11,7 @@ import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
@@ -65,6 +66,7 @@ public class CinemaPopupCommentFragment extends BaseFragment {
     public void initData(View view) {
         ButterKnife.bind(this,view);
         EventBus.getDefault().register(this);
+        getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
 
         doNetRequestData(String.format(Apis.URL_CINEMA_All_COMMENT,mCinemaId),null,CinemaCommentBean.class,"get");
 

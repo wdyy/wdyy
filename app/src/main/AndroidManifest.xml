@@ -7,6 +7,8 @@
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <!-- 【必须】 信鸽SDK所需权限 -->
     <uses-permission android:name="android.permission.WAKE_LOCK" />
@@ -32,9 +34,9 @@
         <activity android:name=".general.activity.LoginActivity" />
         <activity android:name=".general.activity.SuccessActivity" />
         <activity android:name=".movie.activity.MovieDetailsActivity" />
-        <activity android:name=".movie.activity.FilmDetailsActivity"/>
-        <activity android:name=".fragment.activity.CinemaDetailActivity"/>
-        <activity android:name=".fragment.activity.CinemaSeatTableActivity"/>
+        <activity android:name=".movie.activity.FilmDetailsActivity" />
+        <activity android:name=".fragment.activity.CinemaDetailActivity" />
+        <activity android:name=".fragment.activity.CinemaSeatTableActivity" />
         <activity android:name=".my.userInfo.MyInfoActivity" />
         <activity android:name=".my.userfollow.MyFollowActivity" />
         <activity android:name=".my.userticket.MyTicketActivity" />
@@ -45,14 +47,14 @@
         <activity android:name=".my.mysound.MySoundActivity" />
 
 
-        <activity android:name=".general.activity.RegisterActivity"/>
+       <activity android:name=".general.activity.RegisterActivity"/>
         <activity android:name=".wxapi.WXEntryActivity"
-            android:exported="true"></activity>
+            android:exported="true"/>
 
-        <activity android:name=".my.latest.MyLatestVersionActivity"></activity>
+        <activity android:name=".my.latest.MyLatestVersionActivity"/>
         <!-- 想兼容Android N或者以上的设备 -->
         <!-- 7.0以上摄像头调取 -->
-        <provider
+       <!-- <provider
             android:name="android.support.v4.content.FileProvider"
             android:authorities="com.wd.tech.fileprovider"
             android:exported="false"
@@ -60,7 +62,7 @@
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/provider_paths" />
-        </provider>
+        </provider>-->
 
 
 
@@ -70,6 +72,19 @@
         <activity android:name=".general.activity.NotNetActivity" />
         <activity android:name=".movie.activity.BuyCinemaActivity" />
         <activity android:name=".movie.activity.BuyTimeActivity" />
+        <activity android:name=".fragment.activity.CinemaSearchActivity"/>
+        <activity
+            android:name=".fragment.activity.WXPayEntryActivity"
+            android:exported="true"
+            android:launchMode="singleTop">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <data android:scheme="wxb3852e6a6b7d9516"/>
+            </intent-filter>
+        </activity>
+
+
 
     </application>
 
