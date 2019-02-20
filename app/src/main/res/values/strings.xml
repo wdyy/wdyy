@@ -5,10 +5,8 @@
     <string name="not_NetWork">请检查网络设备!</string>
     <string name="login_phone_pwd_isEmpty">输入不能为空!</string>
 
-    <string name="reg_fail_toast">注册失败!</string>
     <string name="reg_success_toast">注册成功!</string>
     <string name="text_no">xxx</string>
 
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -14,14 +13,12 @@ import com.bw.movie.my.api.MineUrlConstant;
 import com.bw.movie.my.userfollow.film.adapter.MyAtteretionfilmAdapter;
 import com.bw.movie.my.userfollow.film.bean.MyAttFilmUser;
 import com.bw.movie.my.userfollow.film.bean.ResultBean;
+import com.bw.movie.wxapi.WXEntryActivity;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.Unbinder;
 
 /**
  * 郭佳兴
@@ -31,10 +28,10 @@ public class AtterionFilmFragment extends BaseFragment {
 
     @BindView(R.id.attenrecycle2)
     RecyclerView mAttenrecycle2;
-    Unbinder mUnbinder;
     @BindView(R.id.attenSwipeRefreshLayout2)
     SwipeRefreshLayout mSwipeRefreshLayout;
     private int page = 1;
+    private MyAtteretionfilmAdapter mAttFilmAdapter;
 
     @Override
     public void initView(View view) {
@@ -72,19 +69,19 @@ public class AtterionFilmFragment extends BaseFragment {
                 LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
                 mAttenrecycle2.setLayoutManager(linearLayoutManager);
 
-                MyAtteretionfilmAdapter attFilmAdapter = new MyAtteretionfilmAdapter(getActivity(), mList);
-                attFilmAdapter.setHttpClick(new MyAtteretionfilmAdapter.HttpClick() {
+                mAttFilmAdapter = new MyAtteretionfilmAdapter(getActivity(), mList);
+                mAttFilmAdapter.setHttpClick(new MyAtteretionfilmAdapter.HttpClick() {
                     @Override
                     public void getClick(View view, int position) {
-                        //  startActivity(new Intent(getActivity(),WXEntryActivity.class));
+                        startActivity(new Intent(getActivity(), WXEntryActivity.class));
                         getActivity().finish();
                     }
                 });
-                mAttenrecycle2.setAdapter(attFilmAdapter);
+                mAttenrecycle2.setAdapter(mAttFilmAdapter);
             } else {
                 Toast.makeText(getActivity(), "sorry,没有更多数据了", Toast.LENGTH_SHORT).show();
             }
-
+            mAttFilmAdapter.notifyDataSetChanged();
             mSwipeRefreshLayout.setRefreshing(false);
         }
     }
