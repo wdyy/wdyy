@@ -108,16 +108,7 @@ public class LoginActivity extends BaseActivity{
         return R.layout.activity_login;
     }
 
-
     @OnClick({R.id.login_btn_login,R.id.login_img_dsf,R.id.login_text_over})
-
-    public void onTextRegister(){
-
-        startActivity(new Intent(LoginActivity.this,RegisterActivity.class));
-    }
-
-    @OnClick({R.id.login_btn_login,R.id.login_img_dsf})
-
     public void onLoginButtonClickListener(View view){
         switch (view.getId()){
             case R.id.login_btn_login:
@@ -177,9 +168,11 @@ public class LoginActivity extends BaseActivity{
         }
         return true;
     }
+    @OnClick(R.id.login_text_register)
+    public void onTextRegister(){
 
-
-
+        startActivity(new Intent(LoginActivity.this,RegisterActivity.class));
+    }
 
     @Override
     public void success(Object data) {

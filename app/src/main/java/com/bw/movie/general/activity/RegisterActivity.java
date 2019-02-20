@@ -5,6 +5,7 @@ import android.app.DatePickerDialog;
 import android.content.Intent;
 
 import android.content.SharedPreferences;
+import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -65,6 +66,28 @@ public class RegisterActivity extends BaseActivity {
 
         mIPrecenter = new IPrecenterImpl(this);
         mPreferences = getSharedPreferences("swl", MODE_PRIVATE);
+
+        mTextView_data.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean b) {
+                if (b) {
+                    // 此处为得到焦点时的处理内容
+                    DatePickerDialog datePicker=new DatePickerDialog(RegisterActivity.this, new DatePickerDialog.OnDateSetListener() {
+                        @Override
+                        public void onDateSet(DatePicker datePicker, int i, int i1, int i2) {
+
+                            String date=i+"-"+i1+"-"+i2;
+                            mTextView_data.setText(date);
+                        }
+                    }, 2013, 7, 20);
+                    datePicker.show();
+
+
+                } else {
+                    // 此处为失去焦点时的处理内容
+                }
+            }
+        });
 
 
     }

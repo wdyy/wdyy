@@ -21,6 +21,8 @@ import com.bw.movie.movie.adapter.FilmCosplayAdapter;
 import com.bw.movie.movie.adapter.FilmNoticeAdapter;
 import com.facebook.drawee.view.SimpleDraweeView;
 
+import fm.jiecao.jcvideoplayer_lib.JCVideoPlayer;
+
 
 /**
  * Author: 邵文龙
@@ -58,6 +60,13 @@ public class PopuWindowNotice {
         popupWindow.showAtLocation(view, Gravity.LEFT | Gravity.BOTTOM, 0, -location[1]);
         //添加按键事件监听
         setButtonListeners(inflate);
+
+        popupWindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
+            @Override
+            public void onDismiss() {
+                JCVideoPlayer.releaseAllVideos();
+            }
+        });
     }
 
     private void setButtonListeners(RelativeLayout inflate) {
@@ -77,5 +86,6 @@ public class PopuWindowNotice {
         film_notice_recycle.setLayoutManager(new LinearLayoutManager(context,LinearLayoutManager.VERTICAL,false));
         film_notice_recycle.setAdapter(filmNoticeAdapter);
     }
+
 
 }

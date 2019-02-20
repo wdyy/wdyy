@@ -59,13 +59,11 @@ public class CinemaSeatTableActivity extends BaseActivity {
     public SeatTable seatTableView;
     @BindView(R.id.item_cinema_detail_img_x)
     ImageView mImageView_x;
-
-
     double totalPrice=0;
-    int num;
     private String mHall;
     private double mPrice;
-    private String mScheduleId;
+    int num;
+    int mScheduleId;
 
 
     @Override
@@ -103,6 +101,7 @@ public class CinemaSeatTableActivity extends BaseActivity {
             @Override
             public void checked(int row, int column) {
 
+                num++;
                 totalPrice+=mPrice;
 
 
@@ -113,6 +112,7 @@ public class CinemaSeatTableActivity extends BaseActivity {
             @Override
             public void unCheck(int row, int column) {
 
+                num--;
                 totalPrice-=mPrice;
 
 
@@ -168,6 +168,8 @@ public class CinemaSeatTableActivity extends BaseActivity {
         mTextView_hall.setText(mHall);
         mPrice = detailsBean.getPrice();
 
+        mScheduleId = detailsBean.getScheduleId();
+
 
     }
 
@@ -187,7 +189,7 @@ public class CinemaSeatTableActivity extends BaseActivity {
             if (message.equals("下单成功")) {  //下单成功则弹出支付
 
                 String orderId = buyBean.getOrderId();
-                PayTranDataBean dataBean = new PayTranDataBean(orderId, totalPrice);
+                PayTranDataBean dataBean = new PayTranDataBean(orderId,totalPrice);
 
                 EventBus.getDefault().postSticky(dataBean);
 
