@@ -8,11 +8,6 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
-    <style name="MyEditText" parent="Theme.AppCompat.Light">
-        <item name="colorControlNormal">@color/RED</item>
-        <item name="colorControlActivated">@color/RED</item>
-    </style>
-
 
     <style name="MyCheckBox" parent="Base.Widget.AppCompat.CompoundButton.CheckBox">
         <item name="colorControlNormal">@color/white</item>

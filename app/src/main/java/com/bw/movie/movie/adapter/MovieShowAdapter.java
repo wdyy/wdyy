@@ -18,6 +18,7 @@ import com.bw.movie.R;
 import com.bw.movie.bean.moviebean.HotMovieBean;
 import com.bw.movie.bean.moviebean.LoadingMovieBean;
 import com.bw.movie.bean.moviebean.WaitMovieBean;
+import com.bw.movie.fragment.adapter.RecommendAdapter;
 import com.bw.movie.movie.activity.FilmDetailsActivity;
 import com.facebook.drawee.view.SimpleDraweeView;
 
@@ -139,6 +140,15 @@ public class MovieShowAdapter extends RecyclerView.Adapter<MovieShowAdapter.View
         return 0;
     }
 
+//    public void setImgClick(ViewHolder viewHolder, int position){
+//       // list.get(position).setFollowCinema(1);
+//        notifyItemChanged(position);
+//    }
+//
+//    public void setImgCancelClick(ViewHolder viewHolder, int position){
+//      //  list.get(position).setFollowCinema(2);
+//        notifyItemChanged(position);
+//    }
     public class ViewHolder extends RecyclerView.ViewHolder {
 
         @BindView(R.id.movie_item_image)

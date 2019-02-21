@@ -36,6 +36,49 @@
                     android:layout_marginLeft="@dimen/dp_10"
                     android:layout_alignBottom="@id/movie_image_local"
                     />
+                <LinearLayout
+                    android:id="@+id/cinema_linearLayout_search"
+                    android:layout_width="@dimen/dp_220"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginRight="@dimen/dp_193"
+                    android:layout_alignParentRight="true"
+                    android:gravity="center_vertical"
+                    android:layout_marginTop="@dimen/dp_24"
+                    android:background="@drawable/shape_edit_search">
+
+                    <ImageView
+                        android:id="@+id/cinema_search_img"
+                        android:layout_width="@dimen/dp_24"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="@dimen/dp_6"
+                        android:layout_marginTop="@dimen/dp_2"
+                        android:src="@mipmap/com_icon_search_default"/>
+
+                    <EditText
+                        android:id="@+id/cinema_search_edit"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="@dimen/dp_10"
+                        android:textSize="@dimen/sp_12"
+                        android:textColor="#333333"
+                        android:hint="XX影院"
+                        android:textColorHint="#fff"
+                        android:background="@null"
+                        />
+
+                    <TextView
+                        android:id="@+id/cinema_search_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:text="搜索"
+                        android:textSize="@dimen/sp_12"
+                        android:layout_marginRight="@dimen/dp_15"
+                        android:layout_marginLeft="@dimen/dp_10"
+                        android:layout_marginTop="@dimen/dp_2"
+                        android:textColor="#fff"/>
+                </LinearLayout>
             </RelativeLayout>
             <recycler.coverflow.RecyclerCoverFlow
                 android:id="@+id/success_movie_banner"
@@ -46,6 +89,27 @@
                 android:layout_marginRight="@dimen/dp_24"
                 />
         </RelativeLayout>
+        <LinearLayout
+            android:id="@+id/parent_layout"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_3"
+            android:background="@drawable/bg_line_while"
+            android:orientation="horizontal"
+            android:layout_marginTop="@dimen/dp_10"
+            android:layout_below="@+id/success_movie_banner"
+            android:layout_marginLeft="@dimen/dp_24"
+            android:layout_marginRight="@dimen/dp_24">
+            <LinearLayout
+                android:id="@+id/checked_layout"
+                android:layout_width="@dimen/dp_21"
+                android:layout_height="@dimen/dp_3"
+                android:background="@drawable/bg_dividing_line_title"
+                android:gravity="center"
+                android:orientation="horizontal"
+                ></LinearLayout>
+
+        </LinearLayout>
+
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

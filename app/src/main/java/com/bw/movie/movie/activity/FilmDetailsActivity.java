@@ -1,5 +1,7 @@
 package com.bw.movie.movie.activity;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -14,6 +16,7 @@ import com.bw.movie.base.BaseActivity;
 import com.bw.movie.bean.RegisterBean;
 import com.bw.movie.bean.moviebean.MovieCommentDetailsBean;
 import com.bw.movie.bean.moviebean.MovieDetailsBean;
+import com.bw.movie.general.activity.LoginActivity;
 import com.bw.movie.movie.popupwindow.PopuWindowComment;
 import com.bw.movie.movie.popupwindow.PopuWindowDetails;
 import com.bw.movie.movie.popupwindow.PopuWindowNotice;
@@ -88,7 +91,7 @@ public class FilmDetailsActivity extends BaseActivity {
                 windowStills.bottomwindow(film_button_stills);
                 break;
             case R.id.film_button_comment:
-                PopuWindowComment windowComment = new PopuWindowComment(this, mCommentDetailsBean);
+                PopuWindowComment windowComment = new PopuWindowComment(this, mCommentDetailsBean,mId);
                 windowComment.bottomwindow(film_button_comment);
                 break;
             case R.id.film_button_return:
@@ -101,20 +104,16 @@ public class FilmDetailsActivity extends BaseActivity {
                 startActivity(intent);
                 break;
             case R.id.film_details_image_gz:
-                Xin();
+                if (mFollowMovie == 2) {
+                    doNetRequestData(String.format(Apis.URL_FOLLOW_MOVIE, mId),null,RegisterBean.class,"get");
+
+                } else if (mFollowMovie==1){
+                    doNetRequestData(String.format(Apis.URL_CANCLE_FLLOW_MOVIE, mId),null,RegisterBean.class,"get");
+                }
                 break;
         }
     }
 
-    public void Xin() {
-        if (mFollowMovie == 1) {
-            doNetRequestData(String.format(Apis.URL_CANCLE_FLLOW_MOVIE, mId), null, RegisterBean.class, "get");
-            film_details_image_gz.setImageResource(R.mipmap.com_icon_collection_default);
-        } else {
-            doNetRequestData(String.format(Apis.URL_FOLLOW_MOVIE, mId), null, RegisterBean.class, "get");
-            film_details_image_gz.setImageResource(R.mipmap.com_icon_collection_selected);
-        }
-    }
 
     @Override
     public int getContent() {
@@ -124,27 +123,76 @@ public class FilmDetailsActivity extends BaseActivity {
     @Override
     public void success(Object data) {
         if (data instanceof MovieDetailsBean) {
+
             mBean = (MovieDetailsBean) data;
             film_details_title.setText(mBean.getResult().getName());
             film_details_image.setImageURI(mBean.getResult().getImageUrl());
             film_details_image_bg.setImageURI(mBean.getResult().getImageUrl());
             mFollowMovie = mBean.getResult().getFollowMovie();
-            if (mFollowMovie == 1) {
+
+            if (mFollowMovie==1){
                 film_details_image_gz.setImageResource(R.mipmap.com_icon_collection_selected);
-            } else {
+            }else if (mFollowMovie==2){
                 film_details_image_gz.setImageResource(R.mipmap.com_icon_collection_default);
             }
-
 
             Map<String, String> map1 = new HashMap<>();
             doNetRequestData(String.format(Apis.URL_QUERY_COMMENT, mId), map1, MovieCommentDetailsBean.class, "get");
 
         } else if (data instanceof MovieCommentDetailsBean) {
             mCommentDetailsBean = (MovieCommentDetailsBean) data;
+
         } else if (data instanceof RegisterBean) {
 
             RegisterBean registerBean = (RegisterBean) data;
-            Toast.makeText(this, registerBean.getMessage(), Toast.LENGTH_SHORT).show();
+
+            if (registerBean.getMessage().equals("请先登陆")){
+
+                /*LoginAlertDialog dialog = new LoginAlertDialog(getActivity());
+                dialog.alert();*/
+                //LoginAlertDialog.alert(getActivity());
+                android.support.v7.app.AlertDialog.Builder builder = new android.support.v7.app.AlertDialog.Builder(FilmDetailsActivity.this);
+                builder.setTitle("提示：");
+                builder.setMessage("请先登录！");
+                builder.setIcon(R.mipmap.ic_launcher_round);
+                //点击对话框以外的区域是否让对话框消失
+                builder.setCancelable(true);
+                //设置正面按钮
+                builder.setPositiveButton("取消", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                    }
+                });
+                //设置反面按钮
+                builder.setNegativeButton("确定", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                        startActivity(new Intent(FilmDetailsActivity.this,LoginActivity.class));
+                        //startActivityS();
+                    }
+                });
+                android.support.v7.app.AlertDialog dialog = builder.create();
+                //显示对话框
+                dialog.show();
+
+            }else if (registerBean.getMessage().equals("关注成功")){
+
+                mFollowMovie=1;
+                film_details_image_gz.setImageResource(R.mipmap.com_icon_collection_selected);
+
+                Toast.makeText(FilmDetailsActivity.this,registerBean.getMessage(),Toast.LENGTH_SHORT).show();
+            }else if (registerBean.getMessage().equals("取消关注成功")){
+
+                mFollowMovie=2;
+                film_details_image_gz.setImageResource(R.mipmap.com_icon_collection_default);
+
+                Toast.makeText(FilmDetailsActivity.this,registerBean.getMessage(),Toast.LENGTH_SHORT).show();
+            }else {
+                Toast.makeText(FilmDetailsActivity.this,registerBean.getMessage(),Toast.LENGTH_SHORT).show();
+            }
+
 
         }
     }

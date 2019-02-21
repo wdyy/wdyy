@@ -156,6 +156,7 @@ public class MyInfoActivity extends BaseActivity {
                 break;
             case R.id.my_myback:
                 startActivity(new Intent(this, LoginActivity.class));
+                finish();
                 break;
             case R.id.myinfo_back:
                 finish();

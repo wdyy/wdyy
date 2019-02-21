@@ -31,15 +31,15 @@ public class Apis {
     //取消关注电影
     public static final String URL_CANCLE_FLLOW_MOVIE="movie/v1/verify/cancelFollowMovie?movieId=%s";
     //查询影片评论
-    public static final String URL_QUERY_COMMENT="movie/v1/findAllMovieComment?movieId=%s&page=1&count=10";
+    public static final String URL_QUERY_COMMENT="movie/v1/findAllMovieComment?movieId=%s&page=1&count=500";
     //添加用户对影片的评论
-    public static final String URL_INSERT_COMMENT="movie/v1/verify/movieComment?id=%s&commentContent=%s";
+    public static final String URL_INSERT_COMMENT="movie/v1/verify/movieComment";
     //查询影片评论回复
     public static final String URL_QUERY_COMMENT_REPLAY="movie/v1/findCommentReply?commentId=%s&page=%s&count=%s";
     //添加用户对评论的回复
-    public static final String URL_INSERT_COMMENT_REPLAY="movie/v1/verify/commentReply?commentId=%s&replyContent=%s";
+    public static final String URL_INSERT_COMMENT_REPLAY="movie/v1/verify/commentReply";
     //电影评论点赞
-    public static final String URL_MOVIE_COMMENT_PRISE="movie/v1/verify/movieCommentGreat?commentId=%s";
+    public static final String URL_MOVIE_COMMENT_PRISE="movie/v1/verify/movieCommentGreat";
 
 
     //根据影院ID查询该影院当前排期的电影列表
