@@ -97,12 +97,12 @@
             android:background="@drawable/bg_line_while"
             android:orientation="horizontal"
             android:layout_marginTop="@dimen/dp_10"
-            android:layout_below="@+id/recyc_flow"
+            android:layout_below="@+id/success_movie_banner"
             android:layout_marginLeft="@dimen/dp_24"
             android:layout_marginRight="@dimen/dp_24">
             <LinearLayout
                 android:id="@+id/checked_layout"
-                android:layout_width="@dimen/dp_21"
+                android:layout_width="@dimen/dp_20"
                 android:layout_height="@dimen/dp_3"
                 android:background="@drawable/bg_dividing_line_title"
                 android:gravity="center"

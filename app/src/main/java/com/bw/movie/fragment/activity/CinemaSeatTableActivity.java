@@ -1,9 +1,12 @@
 package com.bw.movie.fragment.activity;
 
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.AlertDialog;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -16,6 +19,7 @@ import com.bw.movie.bean.CinemaSeatTableDetailBean;
 import com.bw.movie.bean.PayTranDataBean;
 import com.bw.movie.custom.SeatTable;
 import com.bw.movie.fragment.PayFragment;
+import com.bw.movie.general.activity.LoginActivity;
 import com.bw.movie.util.EncryptUtil;
 import com.tencent.mm.opensdk.modelpay.PayReq;
 
@@ -63,7 +67,7 @@ public class CinemaSeatTableActivity extends BaseActivity {
     private String mHall;
     private double mPrice;
     int num;
-    int mScheduleId;
+    private int mScheduleId;
 
 
     @Override
@@ -166,10 +170,8 @@ public class CinemaSeatTableActivity extends BaseActivity {
 
         mHall = detailsBean.getHall();
         mTextView_hall.setText(mHall);
-        mPrice = detailsBean.getPrice();
-
+        mPrice =  detailsBean.getPrice();
         mScheduleId = detailsBean.getScheduleId();
-
 
     }
 
@@ -199,6 +201,38 @@ public class CinemaSeatTableActivity extends BaseActivity {
                 transaction.add(R.id.seat_fragment, payFragment);
                 transaction.commit();
 
+
+
+            }else if (message.equals("请先登陆")){
+
+                /*LoginAlertDialog dialog = new LoginAlertDialog(getActivity());
+                dialog.alert();*/
+                //LoginAlertDialog.alert(getActivity());
+                AlertDialog.Builder builder = new AlertDialog.Builder(CinemaSeatTableActivity.this);
+                builder.setTitle("提示：");
+                builder.setMessage("请先登录！");
+                builder.setIcon(R.mipmap.ic_launcher_round);
+                //点击对话框以外的区域是否让对话框消失
+                builder.setCancelable(true);
+                //设置正面按钮
+                builder.setPositiveButton("取消", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                    }
+                });
+                //设置反面按钮
+                builder.setNegativeButton("确定", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                        startActivity(new Intent(CinemaSeatTableActivity.this,LoginActivity.class));
+                        //startActivityS();
+                    }
+                });
+                AlertDialog dialog = builder.create();
+                //显示对话框
+                dialog.show();
 
             }
         }

@@ -35,7 +35,7 @@ public class Apis {
     //添加用户对影片的评论
     public static final String URL_INSERT_COMMENT="movie/v1/verify/movieComment";
     //查询影片评论回复
-    public static final String URL_QUERY_COMMENT_REPLAY="movie/v1/findCommentReply?commentId=%s&page=%s&count=%s";
+    public static final String URL_QUERY_COMMENT_REPLAY="movie/v1/findCommentReply?commentId=%s&page=1&count=10";
     //添加用户对评论的回复
     public static final String URL_INSERT_COMMENT_REPLAY="movie/v1/verify/commentReply";
     //电影评论点赞
@@ -51,7 +51,7 @@ public class Apis {
     //购票下单
     public static final String URL_BUY="movie/v1/verify/buyMovieTicket";
     //支付
-    public static final String URL_PAY="movie/v1/verify/movieComment?payType=%s&orderId=%s";
+    public static final String URL_PAY="movie/v1/verify/pay";
     //根据影院ID查询该影院下即将上映的电影列表
     public static final String URL_QUERY_BYCINEMAID_WILL="movie/v1/findCommentReply?cinemaId=%s";
 
@@ -74,6 +74,8 @@ public class Apis {
     public static final String URL_CINEMA_COMMENT="cinema/v1/verify/cinemaComment";
     //查询影院用户评论列表
     public static final String URL_CINEMA_All_COMMENT="cinema/v1/findAllCinemaComment?cinemaId=%s&page=1&count=10";
+    //根据电影名称模糊查询电影院
+    public static final String URL_FIND_ALL_CINEMA="cinema/v1/findAllCinemas?page=1&count=10&cinemaName=%s";
 
 
 }

@@ -21,6 +21,7 @@ import com.bw.movie.util.EncryptUtil;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.regex.Pattern;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -90,6 +91,27 @@ public class RegisterActivity extends BaseActivity {
         });
 
 
+        mTextView_data.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean b) {
+                if (b) {
+                    // 此处为得到焦点时的处理内容
+                    DatePickerDialog datePicker=new DatePickerDialog(RegisterActivity.this, new DatePickerDialog.OnDateSetListener() {
+                        @Override
+                        public void onDateSet(DatePicker datePicker, int i, int i1, int i2) {
+
+                            String date=i+"-"+i1+"-"+i2;
+                            mTextView_data.setText(date);
+                        }
+                    }, 2013, 7, 20);
+                    datePicker.show();
+
+
+                } else {
+                    // 此处为失去焦点时的处理内容
+                }
+            }
+        });
     }
 
     @Override
@@ -115,10 +137,15 @@ public class RegisterActivity extends BaseActivity {
         String email = mTextView_email.getText().toString().trim();
         String phone = mTextView_phone.getText().toString().trim();
 
+        String regex = "^(13[0-9]|14[5|7]|15[0|1|2|3|5|6|7|8|9]|16[1|6]|18[0|1|2|3|5|6|7|8|9])\\d{8}$";
+        boolean matches = Pattern.matches(regex, phone);
 
         if (phone.isEmpty()||pwd.isEmpty()||name.isEmpty()||date.isEmpty()||email.isEmpty()){
 
             Toast.makeText(RegisterActivity.this,R.string.login_phone_pwd_isEmpty,Toast.LENGTH_SHORT).show();
+
+        }else if (!matches){
+            Toast.makeText(RegisterActivity.this,R.string.edit_phone_error,Toast.LENGTH_SHORT).show();
 
         }else {
 
@@ -139,7 +166,7 @@ public class RegisterActivity extends BaseActivity {
     }
 
     @OnClick(R.id.reg_edit_data)
-    public void onEditClickListener() {  //登录按钮监听
+    public void onEditClickListener() {  //日期输入框监听
 
         DatePickerDialog datePicker=new DatePickerDialog(RegisterActivity.this, new DatePickerDialog.OnDateSetListener() {
             @Override
@@ -152,6 +179,7 @@ public class RegisterActivity extends BaseActivity {
         datePicker.show();
 
     }
+
 
 
     @Override

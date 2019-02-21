@@ -1,14 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.bw.movie.my.ScrollooView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:orientation="vertical"
-    android:layout_height="match_parent">
-    <LinearLayout
-        android:id="@+id/liner"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_220"
-        android:background="@mipmap/iconbeijing"
-        android:orientation="vertical">
+    android:layout_height="match_parent"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
+    android:orientation="vertical">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:id="@+id/liner"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_220"
+                android:background="@mipmap/iconbeijing"
+                android:orientation="vertical">
 
         <ImageView
             android:id="@+id/laba"
@@ -18,12 +26,13 @@
             android:layout_marginTop="@dimen/dp_30"
             android:src="@mipmap/my_icon_laba_default_hdpi" />
 
-        <ImageView
-            android:id="@+id/myicon"
-            android:layout_width="@dimen/dp_72"
-            android:layout_height="@dimen/dp_72"
-            android:layout_gravity="center_horizontal"
-            android:src="@mipmap/icon_hdpi" />
+                <com.facebook.drawee.view.SimpleDraweeView
+                    android:id="@+id/myicon"
+                    android:layout_width="@dimen/dp_72"
+                    android:layout_height="@dimen/dp_72"
+                    android:layout_gravity="center_horizontal"
+                    app:placeholderImage="@mipmap/icon_hdpi"
+                    app:roundAsCircle="true" />
 
         <TextView
             android:id="@+id/nickname"
@@ -211,3 +220,5 @@
         </LinearLayout>
     </LinearLayout>
 </LinearLayout>
+
+</com.bw.movie.my.ScrollooView>

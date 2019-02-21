@@ -67,7 +67,10 @@ public class PopuWindowNotice {
                 JCVideoPlayer.releaseAllVideos();
             }
         });
+
     }
+
+
 
     private void setButtonListeners(RelativeLayout inflate) {
         RecyclerView film_notice_recycle = inflate.findViewById(R.id.film_notice_recycle);
