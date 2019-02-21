@@ -67,7 +67,11 @@ public class CinemaSeatTableActivity extends BaseActivity {
     private String mHall;
     private double mPrice;
     int num;
+
     private int mScheduleId;
+
+
+
 
 
     @Override
@@ -108,7 +112,6 @@ public class CinemaSeatTableActivity extends BaseActivity {
                 num++;
                 totalPrice+=mPrice;
 
-
                 mTextView_price.setText(totalPrice + "");
 
             }
@@ -118,7 +121,6 @@ public class CinemaSeatTableActivity extends BaseActivity {
 
                 num--;
                 totalPrice-=mPrice;
-
 
                 mTextView_price.setText(totalPrice + "");
             }
@@ -170,8 +172,15 @@ public class CinemaSeatTableActivity extends BaseActivity {
 
         mHall = detailsBean.getHall();
         mTextView_hall.setText(mHall);
+
         mPrice =  detailsBean.getPrice();
         mScheduleId = detailsBean.getScheduleId();
+
+        mPrice = detailsBean.getPrice();
+
+        mScheduleId = detailsBean.getScheduleId();
+
+
 
     }
 
