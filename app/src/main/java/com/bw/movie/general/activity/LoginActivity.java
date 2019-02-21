@@ -19,6 +19,7 @@ import com.bw.movie.R;
 import com.bw.movie.apis.Apis;
 import com.bw.movie.base.BaseActivity;
 import com.bw.movie.bean.LoginBean;
+import com.bw.movie.bean.RefreshBean;
 import com.bw.movie.my.XinUser;
 import com.bw.movie.my.api.MineUrlConstant;
 import com.bw.movie.precenter.IPrecenterImpl;
@@ -27,9 +28,11 @@ import com.bw.movie.util.NotifyUtil;
 import com.bw.movie.util.ToastUtil;
 import com.bw.movie.util.WeiXinUtil;
 import com.bw.movie.view.IView;
-import com.tencent.android.tpush.XGIOperateCallback;
-import com.tencent.android.tpush.XGPushManager;
+/*import com.tencent.android.tpush.XGIOperateCallback;
+import com.tencent.android.tpush.XGPushManager;*/
 import com.tencent.mm.opensdk.modelmsg.SendAuth;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -46,7 +49,7 @@ import butterknife.OnTouch;
  * Date: 2019/1/23 16:08
  * Description: 登录页
  */
-public class LoginActivity extends BaseActivity {
+public class LoginActivity extends BaseActivity{
 
     @BindView(R.id.login_edit_phone)   //手机号
             TextView mTextView_phone;
@@ -67,8 +70,8 @@ public class LoginActivity extends BaseActivity {
             Button mButton_login;
 
     @BindView(R.id.login_img_dsf)
-    ImageView mImageView;
-    private boolean b = true;
+            ImageView mImageView;
+    private boolean b=true;
     private IPrecenterImpl mIPrecenter;
     private SharedPreferences mPreferences;
     private boolean mCheck;
@@ -89,17 +92,19 @@ public class LoginActivity extends BaseActivity {
 
         mPreferences = getSharedPreferences("swl", MODE_PRIVATE);
 
+
         mCheck = mPreferences.getBoolean("check", false);
+
         boolean auto = mPreferences.getBoolean("auto", false);
         String String_phone = mPreferences.getString("phone", null);
         String String_pwd = mPreferences.getString("pwd", null);
-        if (mCheck) {
+        if (mCheck){
             mTextView_phone.setText(String_phone);
             mTextView_pwd.setText(String_pwd);
             mCheckBox_rememberPwd.setChecked(true);
         }
-        if (auto) {
-            startActivity(new Intent(LoginActivity.this, SuccessActivity.class));
+        if (auto){
+            startActivity(new Intent(LoginActivity.this,SuccessActivity.class));
         }
 
     }
@@ -107,7 +112,7 @@ public class LoginActivity extends BaseActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        if (mCheck) {
+        if (mCheck){
             String String_phone = mPreferences.getString("phone", null);
             String String_pwd = mPreferences.getString("pwd", null);
             mTextView_phone.setText(String_phone);
@@ -152,7 +157,7 @@ public class LoginActivity extends BaseActivity {
                     map.put("pwd", jmPwd);
                     doNetRequestData(Apis.URL_LOGIN, map, LoginBean.class, "post");
                 }
-                XGPushManager.registerPush(this, new XGIOperateCallback() {
+                /*XGPushManager.registerPush(this, new XGIOperateCallback() {
                     @Override
                     public void onSuccess(Object o, int i) {
                         final String da = String.valueOf(o);
@@ -182,7 +187,7 @@ public class LoginActivity extends BaseActivity {
                     public void onFail(Object o, int i, String s) {
                         Log.d("TPush", "注册失败，错误码：" + i + ",错误信息：" + s);
                     }
-                });
+                });*/
                 break;
             case R.id.login_img_dsf:
                 //微信登录
@@ -198,7 +203,7 @@ public class LoginActivity extends BaseActivity {
                 break;
 
             case R.id.login_text_over:
-                startActivity(new Intent(LoginActivity.this, SuccessActivity.class));
+                startActivity(new Intent(LoginActivity.this,SuccessActivity.class));
                 break;
             case R.id.login_text_register:
                 startActivity(new Intent(getApplicationContext(), RegisterActivity.class));
@@ -209,9 +214,9 @@ public class LoginActivity extends BaseActivity {
     }
 
     @OnTouch(R.id.login_img_show)            //明文密文
-    public boolean onTouch(View v, MotionEvent event) {
+    public boolean onTouch(View v, MotionEvent event){
 
-        switch (event.getAction()) {
+        switch (event.getAction()){
             case MotionEvent.ACTION_DOWN:
                 mTextView_pwd.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
                 break;
@@ -222,11 +227,7 @@ public class LoginActivity extends BaseActivity {
         }
         return true;
     }
-    @OnClick(R.id.login_text_register)
-    public void onTextRegister(){
 
-        startActivity(new Intent(LoginActivity.this,RegisterActivity.class));
-    }
 
     @Override
     public void success(Object data) {
@@ -289,21 +290,18 @@ public class LoginActivity extends BaseActivity {
             currentNotify = notify1;
         } else {
             Toast.makeText(LoginActivity.this, R.string.login_fail_toast, Toast.LENGTH_SHORT).show();
-        }
-        //startActivity(new Intent(LoginActivity.this,SuccessActivity.class));
-        Toast.makeText(LoginActivity.this, R.string.login_success_toast, Toast.LENGTH_SHORT).show();
-        finish();
-            //startActivity(new Intent(LoginActivity.this,SuccessActivity.class));
-            Toast.makeText(LoginActivity.this,R.string.login_success_toast,Toast.LENGTH_SHORT).show();
+            String ff = "ff";
+            EventBus.getDefault().postSticky(new RefreshBean(ff));
             finish();
         }
 
+    }
 
     @Override
     public void fail(String error) {
-        //    Toast.makeText(LoginActivity.this,"fa",Toast.LENGTH_SHORT).show();
+    //    Toast.makeText(LoginActivity.this,"fa",Toast.LENGTH_SHORT).show();
         //showShortToast(R.string.not_NetWork+"");
-        Toast.makeText(LoginActivity.this, error, Toast.LENGTH_SHORT).show();
+        Toast.makeText(LoginActivity.this,error,Toast.LENGTH_SHORT).show();
     }
 
     @Override

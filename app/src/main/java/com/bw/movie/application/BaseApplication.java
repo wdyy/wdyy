@@ -4,7 +4,7 @@ import android.app.Application;
 import android.content.Context;
 
 import com.facebook.drawee.backends.pipeline.Fresco;
-import com.tencent.android.tpush.XGPushConfig;
+//import com.tencent.android.tpush.XGPushConfig;
 
 
 public class BaseApplication extends Application {
@@ -15,14 +15,14 @@ public class BaseApplication extends Application {
         super.onCreate();
         Fresco.initialize(this);
         context = getApplicationContext();
-        initXG();
+        //initXG();
     }
 
     public static Context getApplication() {
         return context;
     }
 
-    //初始化信鸽
+   /* //初始化信鸽
     private void initXG() {
         XGPushConfig.enableDebug(this, true);
         XGPushConfig.enableOtherPush(getApplicationContext(), true);
@@ -31,5 +31,5 @@ public class BaseApplication extends Application {
         XGPushConfig.setMiPushAppKey(getApplicationContext(), "A44FJ9N7N9EY");
         XGPushConfig.setMzPushAppId(this, "d71d384497c51");
         XGPushConfig.setMzPushAppKey(this, "A44FJ9N7N9EY");
-    }
+    }*/
 }

@@ -11,11 +11,16 @@ import com.bw.movie.R;
 import com.bw.movie.apis.Apis;
 import com.bw.movie.base.BaseFragment;
 import com.bw.movie.bean.RecommendCinemaBean;
+import com.bw.movie.bean.RefreshBean;
 import com.bw.movie.bean.RegisterBean;
 import com.bw.movie.fragment.activity.CinemaDetailActivity;
 import com.bw.movie.fragment.adapter.RecommendAdapter;
 import com.bw.movie.general.activity.LoginActivity;
 import com.bw.movie.util.SpaceItemDecoration;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.List;
 
@@ -54,55 +59,19 @@ public class NearCinemaFragment extends BaseFragment {
         return R.layout.fragment_cinema_near;
     }
 
+    @Subscribe(threadMode = ThreadMode.MAIN,sticky = true)
+    public void sjx(RefreshBean ff){
+
+        Toast.makeText(getActivity(),ff.getString(),Toast.LENGTH_SHORT).show();
+
+        doNetRequestData(Apis.UEL_FIND_RECOMMEND_CINEMAS,null,RecommendCinemaBean.class,"get");
+
+    }
+
     @Override
     public void success(Object data) {
 
         if (data instanceof RecommendCinemaBean){
-            /*RecommendCinemaBean recommendBean = (RecommendCinemaBean) data;
-            List<RecommendCinemaBean.ResultBean> result = recommendBean.getResult();
-
-            final RecommendAdapter adapter = new RecommendAdapter(getActivity(), result);
-            recyclerView.setAdapter(adapter);
-            if (bo){
-                recyclerView.addItemDecoration(new SpaceItemDecoration(14));
-                bo=false;
-            }
-
-            recyclerView.setLayoutManager(new LinearLayoutManager(getActivity(),LinearLayoutManager.VERTICAL,false));
-
-            adapter.setOnImgClickListener(new RecommendAdapter.OnImgClickListener() {
-                @Override
-                public void onImgClick(int id, RecommendAdapter.ViewHolder holder ,int position) {  //关注
-                    //Toast.makeText(getActivity(),id+"关注",Toast.LENGTH_SHORT).show();
-                    doNetRequestData(String.format(Apis.UEL_FOLLOW_CINEMA,id),null,RegisterBean.class,"get");
-
-
-                    if (p==1){
-                        p=0;
-                        adapter.setImgClick(holder,position);
-                    }
-                }
-
-                @Override
-                public void onImgCancelClick(int id, RecommendAdapter.ViewHolder holder ,int position) {  //取消关注
-                    //Toast.makeText(getActivity(),id+"取消",Toast.LENGTH_SHORT).show();
-                    doNetRequestData(String.format(Apis.UEL_CANCEL_FOLLOW_CINEMA,id),null,RegisterBean.class,"get");
-                    if (p==1){
-                        p=0;
-                        adapter.setImgCancelClick(holder,position);
-                    }
-                }
-
-                @Override
-                public void onItemClick(int id) {
-
-                    Intent intent = new Intent(getActivity(),CinemaDetailActivity.class);
-                    intent.putExtra("Id",id);
-
-                    startActivity(intent);
-
-                }
-            });*/
 
             RecommendCinema(data);
         }else if (data instanceof RegisterBean){
@@ -205,5 +174,11 @@ public class NearCinemaFragment extends BaseFragment {
             }
         });
 
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        EventBus.getDefault().unregister(this);
     }
 }

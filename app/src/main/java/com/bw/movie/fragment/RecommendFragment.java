@@ -16,6 +16,7 @@ import com.bw.movie.R;
 import com.bw.movie.apis.Apis;
 import com.bw.movie.base.BaseFragment;
 import com.bw.movie.bean.RecommendCinemaBean;
+import com.bw.movie.bean.RefreshBean;
 import com.bw.movie.bean.RegisterBean;
 import com.bw.movie.fragment.activity.CinemaDetailActivity;
 import com.bw.movie.fragment.adapter.RecommendAdapter;
@@ -24,6 +25,10 @@ import com.bw.movie.util.FileUtils;
 import com.bw.movie.util.LoginAlertDialog;
 import com.bw.movie.util.SpaceItemDecoration;
 import com.google.gson.Gson;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.List;
 
@@ -65,6 +70,16 @@ public class RecommendFragment extends BaseFragment {
 
         }
 
+
+    }
+
+
+    @Subscribe(threadMode = ThreadMode.MAIN,sticky = true)
+    public void sjx(RefreshBean ff){
+
+        Toast.makeText(getActivity(),ff.getString(),Toast.LENGTH_SHORT).show();
+
+        doNetRequestData(Apis.UEL_FIND_RECOMMEND_CINEMAS,null,RecommendCinemaBean.class,"get");
 
     }
 
@@ -195,5 +210,11 @@ public class RecommendFragment extends BaseFragment {
             }
         });
 
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        EventBus.getDefault().unregister(this);
     }
 }
