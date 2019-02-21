@@ -16,10 +16,13 @@ import com.bw.movie.R;
 import com.bw.movie.apis.Apis;
 import com.bw.movie.base.BaseActivity;
 import com.bw.movie.bean.LoginBean;
+import com.bw.movie.bean.RefreshBean;
 import com.bw.movie.precenter.IPrecenterImpl;
 import com.bw.movie.util.EncryptUtil;
 import com.bw.movie.util.WeiXinUtil;
 import com.tencent.mm.opensdk.modelmsg.SendAuth;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -224,6 +227,8 @@ public class LoginActivity extends BaseActivity{
 
             //startActivity(new Intent(LoginActivity.this,SuccessActivity.class));
             Toast.makeText(LoginActivity.this,R.string.login_success_toast,Toast.LENGTH_SHORT).show();
+            String ff="ff";
+            EventBus.getDefault().postSticky(new RefreshBean(ff));
             finish();
         }else {
             Toast.makeText(LoginActivity.this,R.string.login_fail_toast,Toast.LENGTH_SHORT).show();

@@ -84,8 +84,13 @@
             </intent-filter>
         </activity>
 
+        <activity android:name=".fragment.activity.CityPickerActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar"/>
 
-
+        <meta-data android:name="com.amap.api.v2.apikey" android:value="ef51e2273179fa81062af9d7073405bb">
+            <!--开发者申请的key-->
+        </meta-data>
     </application>
 
 </manifest>
