@@ -29,6 +29,7 @@ import java.util.Map;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import fm.jiecao.jcvideoplayer_lib.JCVideoPlayer;
 
 public class FilmDetailsActivity extends BaseActivity {
 
@@ -203,4 +204,9 @@ public class FilmDetailsActivity extends BaseActivity {
     }
 
 
+    @Override
+    protected void onPause() {
+        super.onPause();
+        JCVideoPlayer.releaseAllVideos();
+    }
 }

@@ -81,10 +81,26 @@
         />
 
     <TextView
+        android:id="@+id/tttt"
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_2"
         android:background="#ccc"
         android:layout_marginTop="@dimen/dp_10"
         android:layout_below="@id/film_comment_button_time"
         />
+    <TextView
+        android:layout_marginTop="@dimen/dp_5"
+        android:id="@+id/replay_num"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="啦啦啦"
+        android:layout_below="@+id/tttt"
+        />
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/replay_recycle"
+        android:layout_below="@id/replay_num"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_5"
+        ></android.support.v7.widget.RecyclerView>
 </RelativeLayout>

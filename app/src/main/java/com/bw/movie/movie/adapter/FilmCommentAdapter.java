@@ -1,15 +1,16 @@
 package com.bw.movie.movie.adapter;
 
 import android.content.Context;
-import android.graphics.Color;
+
 import android.support.annotation.NonNull;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
+
 
 import com.bw.movie.R;
 import com.bw.movie.bean.moviebean.MovieCommentDetailsBean;
@@ -17,6 +18,7 @@ import com.facebook.drawee.view.SimpleDraweeView;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
 
 import java.text.SimpleDateFormat;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -33,13 +35,10 @@ public class FilmCommentAdapter extends XRecyclerView.Adapter<FilmCommentAdapter
 
     private Context mContext;
     private List<MovieCommentDetailsBean.ResultBean> mList;
-    private int mIndex;
-    private int movieid;
 
-    public FilmCommentAdapter(Context context, List<MovieCommentDetailsBean.ResultBean> list, int movieid) {
+    public FilmCommentAdapter(Context context, List<MovieCommentDetailsBean.ResultBean> list) {
         mContext = context;
         mList = list;
-        this.movieid = movieid;
     }
 
     @NonNull
@@ -52,8 +51,6 @@ public class FilmCommentAdapter extends XRecyclerView.Adapter<FilmCommentAdapter
 
     @Override
     public void onBindViewHolder(@NonNull final ViewHolder viewHolder, final int i) {
-
-        mIndex = i;
 
         viewHolder.film_comment_button_image.setImageURI(mList.get(i).getCommentHeadPic());
         viewHolder.film_comment_button_name.setText(mList.get(i).getCommentUserName());
@@ -70,6 +67,7 @@ public class FilmCommentAdapter extends XRecyclerView.Adapter<FilmCommentAdapter
 
         viewHolder.film_comment_button_comment_num.setText(mList.get(i).getReplyNum()+"");
         viewHolder.film_comment_button_prise_num.setText(mList.get(i).getGreatNum()+"");
+
 
         final int isGreat = mList.get(i).getIsGreat();
         if (isGreat==1){
@@ -96,22 +94,32 @@ public class FilmCommentAdapter extends XRecyclerView.Adapter<FilmCommentAdapter
                     if (mOnImageClickListener!=null){
                         mOnImageClickListener.onImgClick(commentId,viewHolder,i);
                     }
-//                    mList.get(i).setGreatNum(mList.get(i).getGreatNum()+1);
-//                    viewHolder.film_comment_button_prise_num.setText(mList.get(i).getGreatNum()+"");
-//                    viewHolder.film_comment_button_prise.setImageResource(R.mipmap.com_icon_praise_selected);
+
 
                 }
 
             }
         });
-        viewHolder.film_comment_button_comment.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (mOnImageClickListener != null){
-                    mOnImageClickListener.onImgCommentClick(mList.get(i).getCommentId());
-                }
-            }
-        });
+
+
+
+
+//        viewHolder.film_comment_button_comment.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                if (mOnImageClickListener != null){
+//                    mOnImageClickListener.onImgCommentClick(mList.get(i).getCommentId());
+//                }
+//                if (mList.get(i).getReplyNum()!=0){
+//                    MovieCommentDetailsBean.ReplayBean replayBean = new MovieCommentDetailsBean.ReplayBean();
+//                    List<MovieCommentDetailsBean.ReplayBean.ResultBean> result = replayBean.getResult();
+//                    ReplayAdapter replayAdapter = new ReplayAdapter(mContext,result);
+//                    viewHolder.replay_recycle.setLayoutManager(new LinearLayoutManager(mContext,LinearLayoutManager.VERTICAL,false));
+//                    viewHolder.replay_recycle.setAdapter(replayAdapter);
+//                }
+//
+//            }
+//        });
 
     }
     public void setImgClick(ViewHolder viewHolder, int position){
@@ -130,10 +138,12 @@ public class FilmCommentAdapter extends XRecyclerView.Adapter<FilmCommentAdapter
         mOnImageClickListener = onImageClickListener;
     }
 
+
+
     public interface onImageClickListener{
         void onImgClick(int commentId,ViewHolder holder, int position);
         void onImgCancelClick(int commentId,ViewHolder holder, int position);
-        void onImgCommentClick(int movied);
+        void onImgCommentClick(int commentId);
     }
     @Override
     public int getItemCount() {
@@ -157,6 +167,10 @@ public class FilmCommentAdapter extends XRecyclerView.Adapter<FilmCommentAdapter
         ImageView film_comment_button_prise;
         @BindView(R.id.film_comment_button_comment)
         ImageView film_comment_button_comment;
+        @BindView(R.id.replay_num)
+        TextView replay_num;
+        @BindView(R.id.replay_recycle)
+        RecyclerView replay_recycle;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             ButterKnife.bind(this,itemView);

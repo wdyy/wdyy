@@ -41,7 +41,7 @@
                     android:layout_width="@dimen/dp_220"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:layout_marginRight="@dimen/dp_193"
+                    android:layout_marginRight="@dimen/dp_m_193"
                     android:layout_alignParentRight="true"
                     android:gravity="center_vertical"
                     android:layout_marginTop="@dimen/dp_24"
@@ -101,7 +101,7 @@
             android:layout_marginRight="@dimen/dp_24">
             <LinearLayout
                 android:id="@+id/checked_layout"
-                android:layout_width="@dimen/dp_21"
+                android:layout_width="@dimen/dp_20"
                 android:layout_height="@dimen/dp_3"
                 android:background="@drawable/bg_dividing_line_title"
                 android:gravity="center"

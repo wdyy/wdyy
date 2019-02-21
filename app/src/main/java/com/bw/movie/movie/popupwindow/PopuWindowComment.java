@@ -46,11 +46,12 @@ import java.util.Map;
 public class PopuWindowComment implements IView {
     private PopupWindow popupWindow;
     private Context context;
-    private MovieCommentDetailsBean mDetailsBean;
+    private MovieCommentDetailsBean.ReplayBean mResultBeanTwo;
     private int p=0;
     private int movieId;
     private FilmCommentAdapter mCommentAdapter;
     private IPrecenterImpl mIPrecenter;
+    MovieCommentDetailsBean mDetailsBean;
 
     public PopuWindowComment(Context context, MovieCommentDetailsBean detailsBean, int movieid) {
         this.context = context;
@@ -94,7 +95,7 @@ public class PopuWindowComment implements IView {
                 popupWindow.dismiss();
             }
         });
-        mCommentAdapter = new FilmCommentAdapter(context,mDetailsBean.getResult(),movieId);
+        mCommentAdapter = new FilmCommentAdapter(context,mDetailsBean.getResult());
         film_comment_recycle.setLayoutManager(new LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false));
         film_comment_recycle.setAdapter(mCommentAdapter);
         mCommentAdapter.setImageClick(new FilmCommentAdapter.onImageClickListener() {
@@ -111,44 +112,15 @@ public class PopuWindowComment implements IView {
                 Map<String,String> map = new HashMap<>();
                 map.put("commentId",commentId+"");
                 mIPrecenter.startRequestData(Apis.URL_MOVIE_COMMENT_PRISE,map,RegisterBean.class,"post");
-
                 p=position;
             }
 
             @Override
-            public void onImgCommentClick(final int movied) {
-                LayoutInflater li = LayoutInflater.from(context);
-                View comment_edit_show = li.inflate(R.layout.comment_edit_show, null);
-                android.support.v7.app.AlertDialog.Builder builder = new android.support.v7.app.AlertDialog.Builder(context);
-                builder.setView(comment_edit_show);
-
-                final EditText comment_edit = comment_edit_show.findViewById(R.id.editTextDialogUserInput);
-
-                //点击对话框以外的区域是否让对话框消失
-                builder.setCancelable(true);
-                //设置正面按钮
-                builder.setPositiveButton("取消", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-
-                    }
-                });
-                //设置反面按钮
-                builder.setNegativeButton("确定", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        Map<String,String> map = new HashMap<>();
-                        map.put("movieId",movied+"");
-                        map.put("commentContent",comment_edit.getText().toString());
-                        mIPrecenter.startRequestData(Apis.URL_INSERT_COMMENT_REPLAY,map,RegisterBean.class,"post");
-
-
-                    }
-                });
-                android.support.v7.app.AlertDialog dialog = builder.create();
-                //显示对话框
-                dialog.show();
+            public void onImgCommentClick(int commentId) {
+                mIPrecenter.startRequestData(String.format(Apis.URL_QUERY_COMMENT_REPLAY,commentId),null,MovieCommentDetailsBean.ReplayBean.class,"get");
             }
+
+
         });
 
         comment_image.setOnClickListener(new View.OnClickListener() {
@@ -192,9 +164,10 @@ public class PopuWindowComment implements IView {
 
     @Override
     public void onSuccess(Object data) {
-            if (data instanceof MovieCommentDetailsBean){
-                mDetailsBean = (MovieCommentDetailsBean) data;
-
+            if (data instanceof MovieCommentDetailsBean.ReplayBean){
+                mResultBeanTwo = (MovieCommentDetailsBean.ReplayBean) data;
+//                FilmCommentAdapter commentAdapter = new FilmCommentAdapter(context,MovieCommentDetailsBean.ReplayBean.class);
+//                commentAdapter.setData(mResultBeanTwo.getResult());
             }else if (data instanceof RegisterBean){
                 RegisterBean registerBean = (RegisterBean) data;
                 if (registerBean.getMessage().equals("请先登陆")){
@@ -237,8 +210,8 @@ public class PopuWindowComment implements IView {
                     mCommentAdapter.setImgCancelClick(null,p);
 
                     Toast.makeText(context,registerBean.getMessage(),Toast.LENGTH_SHORT).show();
-                }else if (registerBean.getMessage().equals("回复成功")){
-                    mIPrecenter.startRequestData(String.format(Apis.URL_QUERY_COMMENT,mDetailsBean.getResult().get(p).getCommentId()),null,MovieCommentDetailsBean.class,"get");
+                }else if (registerBean.getMessage().equals("请求成功")){
+
                     Toast.makeText(context,registerBean.getMessage(),Toast.LENGTH_SHORT).show();
                 }else if (registerBean.getMessage().equals("评论成功")){
                     mIPrecenter.startRequestData(String.format(Apis.URL_QUERY_COMMENT,mDetailsBean.getResult().get(p).getCommentId()),null,MovieCommentDetailsBean.class,"get");
