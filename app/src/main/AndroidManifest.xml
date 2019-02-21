@@ -47,6 +47,7 @@
         <activity android:name=".my.mysound.MySoundActivity" />
 
 
+
        <activity android:name=".general.activity.RegisterActivity"/>
         <activity android:name=".wxapi.WXEntryActivity"
             android:exported="true"/>
@@ -54,7 +55,7 @@
         <activity android:name=".my.latest.MyLatestVersionActivity"/>
         <!-- 想兼容Android N或者以上的设备 -->
         <!-- 7.0以上摄像头调取 -->
-       <!-- <provider
+        <provider
             android:name="android.support.v4.content.FileProvider"
             android:authorities="com.wd.tech.fileprovider"
             android:exported="false"
@@ -62,13 +63,7 @@
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/provider_paths" />
-        </provider>-->
-
-
-
-
-
-
+        </provider>
         <activity android:name=".general.activity.NotNetActivity" />
         <activity android:name=".movie.activity.BuyCinemaActivity" />
         <activity android:name=".movie.activity.BuyTimeActivity" />
@@ -84,8 +79,13 @@
             </intent-filter>
         </activity>
 
+        <activity android:name=".fragment.activity.CityPickerActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar"/>
 
-
+        <meta-data android:name="com.amap.api.v2.apikey" android:value="ef51e2273179fa81062af9d7073405bb">
+            <!--开发者申请的key-->
+        </meta-data>
     </application>
 
 </manifest>

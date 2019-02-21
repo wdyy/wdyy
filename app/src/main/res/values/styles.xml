@@ -8,11 +8,6 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
-    <style name="MyEditText" parent="Theme.AppCompat.Light">
-        <item name="colorControlNormal">@color/RED</item>
-        <item name="colorControlActivated">@color/RED</item>
-    </style>
-
 
     <style name="MyCheckBox" parent="Base.Widget.AppCompat.CompoundButton.CheckBox">
         <item name="colorControlNormal">@color/white</item>
@@ -30,6 +25,11 @@
     <style name="Popupwindow">
         <item name="android:windowEnterAnimation">@anim/window_out</item>
         <item name="android:windowExitAnimation">@anim/window_back</item>
+    </style>
+
+    <style name="AppTheme.NoActionBar">
+        <item name="colorPrimary">@color/black</item>
+        <item name="colorPrimaryDark">@color/gray3</item>
     </style>
 
 </resources>

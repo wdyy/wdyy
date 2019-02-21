@@ -55,6 +55,7 @@ public class CinemaPopupCommentFragment extends BaseFragment {
 
     private int mCinemaId;
     private String mCommentContent;
+    PopupWindow window;
 
     @Override
     public void initView(View view) {
@@ -88,11 +89,12 @@ public class CinemaPopupCommentFragment extends BaseFragment {
         //mRelativeLayout.setVisibility(View.VISIBLE);
         View inflate= View.inflate(getActivity(), R.layout.item_cinema_comment, null);
 
-        PopupWindow window = new PopupWindow(inflate, ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT, true);
+        window = new PopupWindow(inflate, ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT, true);
         window.setBackgroundDrawable(new ColorDrawable(0));
         window.setFocusable(true);
         window.setTouchable(true);
-        window.showAsDropDown(inflate);
+        window.showAsDropDown(inflate,100,600);
+
 
         final EditText textView_content = inflate.findViewById(R.id.comment_content);
         Button button = inflate.findViewById(R.id.comment_send);
@@ -142,6 +144,9 @@ public class CinemaPopupCommentFragment extends BaseFragment {
 
             RegisterBean registerBean = (RegisterBean) data;
             Toast.makeText(getActivity(),registerBean.getMessage(),Toast.LENGTH_SHORT).show();
+            if (registerBean.getMessage().equals("评论成功")){
+                window.dismiss();
+            }
 
             doNetRequestData(String.format(Apis.URL_CINEMA_All_COMMENT,mCinemaId),null,CinemaCommentBean.class,"get");
 

@@ -46,21 +46,22 @@ public class MineFragment extends BaseFragment {
     @BindView(R.id.liner)
     LinearLayout mLiner;
     @BindView(R.id.my_message)
-    ImageView mMyMessage;
+    LinearLayout mMyMessage;
     @BindView(R.id.my_follow)
-    ImageView mMyFollow;
+    LinearLayout mMyFollow;
     @BindView(R.id.my_tickets)
-    ImageView mMyTickets;
+    LinearLayout mMyTickets;
     @BindView(R.id.liner2)
     LinearLayout mLiner2;
     @BindView(R.id.my_fankui)
-    ImageView mMyFankui;
+    LinearLayout mMyFankui;
     @BindView(R.id.my_geng)
-    ImageView mMyGeng;
+    LinearLayout mMyGeng;
     @BindView(R.id.login_edit)
-    ImageView mLoginEdit;
+    LinearLayout mLoginEdit;
     private SharedPreferences mSwl;
     private SharedPreferences.Editor mEdit;
+    private RegisterBean mRegisterBean;
 
     @Override
     public void initView(View view) {
@@ -92,8 +93,8 @@ public class MineFragment extends BaseFragment {
     @Override
     public void success(Object data) {
         if (data instanceof RegisterBean) {
-            RegisterBean registerBean = (RegisterBean) data;
-            String status = registerBean.getStatus();
+            mRegisterBean = (RegisterBean) data;
+            String status = mRegisterBean.getStatus();
             if (status.equals("0000")) {
                 ToastUtil.Toast("签到成功");
             }
@@ -116,9 +117,9 @@ public class MineFragment extends BaseFragment {
                 break;
             case R.id.myicon:
                 String sessionId = mSwl.getString("sessionId", "");
-                if (sessionId.equals("")) {
+                if (sessionId.isEmpty()) {
                     ToastUtil.Toast("系统检测到您未登录,请先登录");
-                    startActivity(new Intent(getActivity(),LoginActivity.class));
+                    startActivity(new Intent(getActivity(), LoginActivity.class));
                 } else {
                     Intent intent = new Intent(getContext(), ScaleImageActivity.class);
                     //创建一个Rect,报错当前imageview的位置信息
@@ -160,6 +161,7 @@ public class MineFragment extends BaseFragment {
                 mEdit.clear();
                 mEdit.commit();
                 startActivity(new Intent(getActivity(), LoginActivity.class));
+                getActivity().onBackPressed();
                 break;
         }
     }
